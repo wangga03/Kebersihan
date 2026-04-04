@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Ploting Tugas WGG - Final Edition</title>
+    <title>Aplikasi Ploting Tugas WGG - Firestore Edition</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
     <style>
-        /* Standar box-sizing agar padding tidak merusak layout responsif */
         * { box-sizing: border-box; }
-        
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 20px; }
         .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;}
         h1, h2 { text-align: center; color: #2c3e50; }
@@ -18,9 +20,10 @@
         .box h3 { margin-top: 0; text-align: center; color: #444; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
         textarea { width: 100%; height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; font-size: 14px; resize: vertical;}
         
-        /* Database Section */
-        .db-section { background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #ffeeba; margin-bottom: 20px; text-align: center;}
-        .db-info { font-weight: bold; color: #856404; margin-bottom: 10px; font-size: 1.1em;}
+        /* Database Section (Firestore) */
+        .db-section { background: #f3e5f5; padding: 15px; border-radius: 8px; border: 1px solid #ce93d8; margin-bottom: 20px; text-align: center;}
+        .db-info { font-weight: bold; color: #6a1b9a; margin-bottom: 10px; font-size: 1.1em;}
+        .cloud-badge { background: #6a1b9a; color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8em; margin-left: 10px; vertical-align: middle;}
         
         /* Universal Quota Section */
         .kuota-section { background: #e8f8f5; padding: 15px; border-radius: 8px; border: 1px solid #1abc9c; margin-bottom: 25px; }
@@ -39,8 +42,7 @@
         .btn-utama { background-color: #27ae60; box-shadow: 0 4px 10px rgba(39, 174, 96, 0.4); font-size: 18px; padding: 15px 30px;}
         .btn-utama:hover { background-color: #2ecc71; transform: translateY(-2px); }
         .btn-pdf { background-color: #e74c3c; } .btn-pdf:hover { background-color: #c0392b; }
-        .btn-db { background-color: #f39c12; color: #fff;} .btn-db:hover { background-color: #d35400; }
-        .btn-db-load { background-color: #8e44ad; } .btn-db-load:hover { background-color: #732d91; }
+        .btn-db { background-color: #8e44ad; color: #fff;} .btn-db:hover { background-color: #732d91; }
         .btn-history { background-color: #34495e; } .btn-history:hover { background-color: #2c3e50; }
 
         /* Dynamic Task Setup */
@@ -55,7 +57,6 @@
         .list-title { font-weight: bold; font-size: 1.1em; margin-bottom: 8px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
         .item-list { margin: 0; padding-left: 0; list-style: none; }
         
-        /* ITEM ROW DEFAULT (DEKTOP) */
         .item-row { display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; border-bottom: 1px solid #eee; background: #fff; margin-bottom: 4px; border-radius: 4px; gap: 10px;}
         .person-info { flex:1; display: flex; align-items: center; gap: 10px; min-width: 150px;}
         .person-name { font-weight: bold; width: 130px; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
@@ -64,7 +65,6 @@
         .lorong-tag { font-size: 0.8em; padding: 2px 6px; border-radius: 4px; color: white; background: #95a5a6; white-space: nowrap;}
         .warning-tag { font-size: 0.75em; padding: 2px 4px; border-radius: 4px; color: white; background: #e74c3c; margin-left: 5px; font-weight: bold;}
         .task-select { padding: 4px 8px; border-radius: 4px; border: 1px solid #bdc3c7; background: #ecf0f1; font-weight: bold; cursor: pointer; outline: none; max-width: 100%;}
-
         .no-data { text-align: center; font-style: italic; color: #888; margin-top: 20px; }
 
         /* Modal (Popup) Styles untuk History */
@@ -73,56 +73,24 @@
         .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
         .close-btn:hover { color: #333; }
         details.history-month { background: #fdfdfd; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; padding: 10px; }
-        details.history-month summary { font-size: 1.2em; font-weight: bold; color: #2980b9; cursor: pointer; outline: none; }
+        details.history-month summary { font-size: 1.2em; font-weight: bold; color: #2980b9; cursor: pointer; outline: none; display: flex; justify-content: space-between; align-items: center;}
         .history-data { display: flex; gap: 20px; margin-top: 15px; flex-wrap: wrap;}
         .history-col { flex: 1; min-width: 250px; font-size: 0.9em; }
         .history-task-title { color: #e67e22; border-bottom: 1px solid #ccc; margin-top: 10px; margin-bottom: 5px; font-weight: bold; }
         .history-person { padding: 2px 0; border-bottom: 1px dashed #eee; display: flex; justify-content: space-between; }
+        .btn-del-doc { background: #e74c3c; padding: 4px 8px; font-size: 0.8em; }
 
-        /* ========================================= */
-        /* RESPONSIVE DESIGN (UNTUK LAYAR HP / KECIL)*/
-        /* ========================================= */
         @media (max-width: 600px) {
-            body { padding: 10px; }
-            .container { padding: 15px; }
-            .box { min-width: 100%; } /* Kotak input jadi full width */
-            
-            /* Ubah layout baris nama dan dropdown */
-            .item-row {
-                flex-direction: column; /* Tumpuk ke bawah */
-                align-items: stretch;
-                gap: 8px;
-                padding: 10px;
-            }
-            .person-info {
-                width: 100%;
-                justify-content: space-between; /* Nama di kiri, tag di kanan */
-            }
-            .person-name {
-                width: auto;
-                flex: 1;
-            }
-            .action-edit {
-                width: 100%;
-            }
-            .task-select {
-                width: 100%; /* Dropdown menjadi full width */
-                text-align: center;
-                padding: 8px;
-            }
-            
-            /* Penyesuaian tombol di layar kecil */
-            .btn-container button, .db-section button {
-                width: 100%;
-                margin-bottom: 5px;
-            }
-            .dinamis-setup input, .dinamis-setup select, .btn-add {
-                max-width: 100%;
-                width: 100%;
-            }
+            body { padding: 10px; } .container { padding: 15px; } .box { min-width: 100%; } 
+            .item-row { flex-direction: column; align-items: stretch; gap: 8px; padding: 10px; }
+            .person-info { width: 100%; justify-content: space-between; }
+            .person-name { width: auto; flex: 1; }
+            .action-edit { width: 100%; }
+            .task-select { width: 100%; text-align: center; padding: 8px; }
+            .btn-container button, .db-section button { width: 100%; margin-bottom: 5px; }
+            .dinamis-setup input, .dinamis-setup select, .btn-add { max-width: 100%; width: 100%; }
         }
 
-        /* PRINT STYLES */
         @media print {
             body { background: white; padding: 0; margin: 0; font-size: 11pt; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
             .container { box-shadow: none; max-width: 100%; border: none; padding: 0; }
@@ -130,11 +98,8 @@
             .flex-row { display: flex; flex-direction: row; width: 100%; gap: 15px; page-break-inside: avoid; flex-wrap: nowrap;}
             .box { padding: 10px; border: 1px solid #ccc !important; background: transparent; }
             .list-group { page-break-inside: avoid; break-inside: avoid; border: 1px solid #ddd; margin-bottom: 10px; background: transparent;}
-            
-            /* Kembalikan item-row ke baris saat di print agar hemat kertas */
             .item-row { flex-direction: row; border-bottom: 1px solid #ddd; background: transparent; padding: 4px 5px;}
             .person-info { justify-content: flex-start; }
-            
             .task-select { border: none !important; background: transparent !important; appearance: none !important; -webkit-appearance: none !important; font-size: 1em; padding: 0; color: #2c3e50 !important; text-align: right;}
             select::-ms-expand { display: none; }
             .warning-tag { display: none !important; }
@@ -145,20 +110,16 @@
 
 <div class="container">
     <div class="no-print">
-        <h1>Sistem Ploting WGG (Final Master Edition)</h1>
+        <h1>Sistem Ploting WGG (Firestore Edition)</h1>
         
         <div class="db-section">
-            <h3>💾 Database Riwayat Plotingan</h3>
-            <div class="db-info" id="dbStatus">Riwayat Tersimpan: 0 Bulan</div>
+            <h3>🔥 Firestore Database</h3>
+            <div class="db-info" id="dbStatus">Memuat Dokumen dari Firestore... ⏳</div>
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <button class="btn-db" onclick="simpanKeRiwayat()">📌 Simpan Hasil Ini ke Riwayat</button>
+                <button class="btn-db" onclick="simpanKeFirestore()">🔥 Simpan Hasil Ini ke Firestore</button>
                 <button class="btn-history" onclick="bukaRiwayatModal()">📖 Lihat Riwayat Bulanan</button>
-                <button class="btn-db" onclick="downloadDatabase()">⬇️ Download Database (JSON)</button>
-                <button class="btn-db-load" onclick="document.getElementById('fileUpload').click()">⬆️ Upload Database</button>
-                <input type="file" id="fileUpload" style="display:none;" accept=".json" onchange="uploadDatabase(event)">
-                <button class="btn-pdf" onclick="resetDatabase()" style="background:#7f8c8d;">🗑️ Hapus Riwayat</button>
             </div>
-            <p style="font-size: 0.85em; color: #666; margin-top: 10px;">*Sistem otomatis membaca Database: Cowok tidak akan mengulang tugas yang sama dalam 5 bulan terakhir, dan Cewek 3 bulan terakhir.</p>
+            <p style="font-size: 0.85em; color: #666; margin-top: 10px;">*Setiap bulan disimpan sebagai Dokumen terpisah (Sangat Aman). Sistem otomatis membaca Cooldown dari Firestore.</p>
         </div>
 
         <div class="flex-row">
@@ -272,117 +233,142 @@ Lorong 3, Najwa</textarea>
 <div id="historyModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="tutupRiwayatModal()">&times;</span>
-        <h2 style="margin-top: 0; color:#2c3e50;">📖 Riwayat Plotingan Bulanan</h2>
-        <div id="historyContainer">
-            </div>
+        <h2 style="margin-top: 0; color:#2c3e50;">📖 Riwayat Plotingan (Firestore)</h2>
+        <div id="historyContainer"></div>
     </div>
 </div>
 
 <script>
-    // --- DATABASE & STATE ---
-    let appHistory = []; 
+    // =======================================================
+    // KONFIGURASI FIREBASE FIRESTORE (Wajib Diisi!)
+    // =======================================================
+    const firebaseConfig = {
+        /* --- MASUKKAN CONFIG FIREBASE KAMU DI SINI --- */
+        apiKey: "AIzaSyB9d5uK44dBsEmEsmtT5zHOA5NaPbNFiLY",
+        authDomain: "project-iot2-a1c92.firebaseapp.com",
+        projectId: "project-iot2-a1c92",
+        storageBucket: "project-iot2-a1c92.firebasestorage.app",
+        messagingSenderId: "674902263928",
+        appId: "1:674902263928:web:1b961b9a6d4641d366458d"
+    };
+    
+    // Inisialisasi Firebase & Firestore
+    firebase.initializeApp(firebaseConfig);
+    const dbFirestore = firebase.firestore();
+    // =======================================================
+
+    // --- STATE APLIKASI ---
+    let appHistory = []; // Menyimpan array dokumen dari Firestore
     let state = {
         cowok: [], cewek: [],
         tasksCowok: ['Membersihkan Lorong', 'Kamar Mandi', 'Tangga Cowok', 'Balkon', 'Dapur', 'Ruang Wifi', 'Mesin Cuci'],
         tasksCewek: ['Tangga Cewek', 'Masjid Lantai 1', 'Masjid Lantai 2', 'Dapur Cewek', 'Ruang Wifi Cewek']
     };
 
-    let defaultQuotas = {
-        'Membersihkan Lorong': 1,
-        'Kamar Mandi': 8,
-        'Tangga Cewek': 1
-    };
+    let defaultQuotas = { 'Membersihkan Lorong': 1, 'Kamar Mandi': 8, 'Tangga Cewek': 1 };
 
     window.onload = function() {
-        muatDatabaseLokal();
+        muatDariFirestore();
         renderKuotaInputs();
     };
 
-    // --- MANAJEMEN DATABASE ---
-    function muatDatabaseLokal() {
-        let saved = localStorage.getItem('wgg_database');
-        if(saved) appHistory = JSON.parse(saved);
-        updateDbStatus();
-    }
-    function simpanDatabaseLokal() {
-        localStorage.setItem('wgg_database', JSON.stringify(appHistory));
-        updateDbStatus();
-    }
-    function updateDbStatus() {
-        document.getElementById('dbStatus').innerText = `Riwayat Tersimpan: ${appHistory.length} Bulan`;
-    }
-    function simpanKeRiwayat() {
-        if(state.cowok.length === 0 && state.cewek.length === 0) return alert("Belum ada hasil plotingan!");
-        let label = prompt("Masukkan nama bulan/periode (Contoh: April 2026):");
-        if(!label) return;
-        appHistory.push({
-            id: new Date().getTime(), label: label,
-            cowok: JSON.parse(JSON.stringify(state.cowok)), cewek: JSON.parse(JSON.stringify(state.cewek))
+    // --- MANAJEMEN FIRESTORE ---
+    function muatDariFirestore() {
+        // Membaca koleksi 'wgg_riwayat' dan mengurutkannya berdasarkan timestamp (id)
+        dbFirestore.collection("wgg_riwayat").orderBy("id", "asc").onSnapshot((querySnapshot) => {
+            appHistory = [];
+            querySnapshot.forEach((doc) => {
+                let data = doc.data();
+                data.docId = doc.id; // Menyimpan ID dokumen asli dari Firestore untuk keperluan Hapus
+                appHistory.push(data);
+            });
+            updateDbStatus();
+        }, (error) => {
+            console.error("Error Firestore:", error);
+            document.getElementById('dbStatus').innerHTML = `⚠️ Gagal Konek Firestore. Cek Config/Rules!`;
+            document.getElementById('dbStatus').style.color = "red";
         });
-        simpanDatabaseLokal();
-        alert("Berhasil disimpan ke database!");
-    }
-    function downloadDatabase() {
-        if(appHistory.length === 0) return alert("Database kosong!");
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appHistory));
-        const dl = document.createElement('a');
-        dl.setAttribute("href", dataStr); dl.setAttribute("download", "WGG_Database_Backup.json");
-        document.body.appendChild(dl); dl.click(); dl.remove();
-    }
-    function uploadDatabase(event) {
-        const file = event.target.files[0];
-        if(!file) return;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            try {
-                let imported = JSON.parse(e.target.result);
-                if(Array.isArray(imported)) { appHistory = imported; simpanDatabaseLokal(); alert("Database berhasil dimuat!"); }
-            } catch(err) { alert("File JSON tidak valid!"); }
-        };
-        reader.readAsText(file);
-    }
-    function resetDatabase() {
-        if(confirm("Yakin hapus seluruh riwayat database?")) { appHistory = []; simpanDatabaseLokal(); }
     }
 
-    // --- FITUR MODAL RIWAYAT ---
+    function updateDbStatus() {
+        document.getElementById('dbStatus').innerHTML = `Tersinkronisasi 🔥 | Dokumen: ${appHistory.length} Bulan <span class="cloud-badge">Firestore Aktif</span>`;
+        document.getElementById('dbStatus').style.color = "#6a1b9a";
+    }
+
+    function simpanKeFirestore() {
+        if(state.cowok.length === 0 && state.cewek.length === 0) return alert("Belum ada hasil plotingan yang diacak!");
+        let label = prompt("Masukkan nama bulan/periode untuk dokumen ini (Contoh: April 2026):");
+        if(!label) return;
+        
+        let newRecord = {
+            id: new Date().getTime(), // Digunakan untuk sorting berurutan
+            label: label,
+            cowok: JSON.parse(JSON.stringify(state.cowok)), 
+            cewek: JSON.parse(JSON.stringify(state.cewek))
+        };
+        
+        // Menambahkan sebagai DOKUMEN BARU di Firestore (Sangat Aman)
+        dbFirestore.collection("wgg_riwayat").add(newRecord)
+            .then((docRef) => alert(`Berhasil disimpan sebagai Dokumen Baru di Firestore! (ID: ${docRef.id})`))
+            .catch((error) => alert("Gagal menyimpan ke Firestore: " + error.message));
+    }
+
+    function hapusDokumenFirestore(docId, labelName) {
+        if(confirm(`YAKIN ingin menghapus riwayat bulan "${labelName}" dari Firestore secara permanen?`)) {
+            dbFirestore.collection("wgg_riwayat").doc(docId).delete()
+                .then(() => {
+                    alert("Dokumen berhasil dihapus!");
+                    bukaRiwayatModal(); // Refresh modal
+                })
+                .catch((error) => alert("Gagal menghapus: " + error.message));
+        }
+    }
+
+    // --- FITUR MODAL RIWAYAT (DENGAN TOMBOL HAPUS PER BULAN) ---
     function bukaRiwayatModal() {
         let container = document.getElementById('historyContainer');
         container.innerHTML = '';
 
         if(appHistory.length === 0) {
-            container.innerHTML = '<p style="text-align:center; color:#888;">Belum ada riwayat yang disimpan.</p>';
+            container.innerHTML = '<p style="text-align:center; color:#888;">Belum ada dokumen riwayat di Firestore.</p>';
         } else {
+            // Tampilkan dari yang paling baru di atas
             let reversedHistory = [...appHistory].reverse();
             reversedHistory.forEach(record => {
                 let html = `<details class="history-month">
-                                <summary>${record.label}</summary>
+                                <summary>
+                                    <span>${record.label}</span>
+                                    <button class="btn-del-doc" onclick="hapusDokumenFirestore('${record.docId}', '${record.label}')">🗑️ Hapus Bulan Ini</button>
+                                </summary>
                                 <div class="history-data">`;
                 
                 // Cowok
                 html += `<div class="history-col"><h3 style="color:#2980b9; margin-bottom:5px;">Cowok</h3>`;
                 let groupedCowok = {};
-                record.cowok.forEach(p => { if(!groupedCowok[p.tugas]) groupedCowok[p.tugas] = []; groupedCowok[p.tugas].push(p); });
-                Object.keys(groupedCowok).forEach(tugas => {
-                    html += `<div class="history-task-title">${tugas}</div>`;
-                    groupedCowok[tugas].forEach(p => {
-                        html += `<div class="history-person"><span><b>${p.nama}</b></span> <span class="lorong-tag">${p.lorong}</span></div>`;
+                if(record.cowok) {
+                    record.cowok.forEach(p => { if(!groupedCowok[p.tugas]) groupedCowok[p.tugas] = []; groupedCowok[p.tugas].push(p); });
+                    Object.keys(groupedCowok).forEach(tugas => {
+                        html += `<div class="history-task-title">${tugas}</div>`;
+                        groupedCowok[tugas].forEach(p => {
+                            html += `<div class="history-person"><span><b>${p.nama}</b></span> <span class="lorong-tag">${p.lorong}</span></div>`;
+                        });
                     });
-                });
+                }
                 html += `</div>`;
 
                 // Cewek
                 html += `<div class="history-col"><h3 style="color:#e91e63; margin-bottom:5px;">Cewek</h3>`;
                 let groupedCewek = {};
-                record.cewek.forEach(p => { if(!groupedCewek[p.tugas]) groupedCewek[p.tugas] = []; groupedCewek[p.tugas].push(p); });
-                Object.keys(groupedCewek).forEach(tugas => {
-                    html += `<div class="history-task-title">${tugas}</div>`;
-                    groupedCewek[tugas].forEach(p => {
-                        html += `<div class="history-person"><span><b>${p.nama}</b></span> <span class="lorong-tag">${p.lorong}</span></div>`;
+                if(record.cewek) {
+                    record.cewek.forEach(p => { if(!groupedCewek[p.tugas]) groupedCewek[p.tugas] = []; groupedCewek[p.tugas].push(p); });
+                    Object.keys(groupedCewek).forEach(tugas => {
+                        html += `<div class="history-task-title">${tugas}</div>`;
+                        groupedCewek[tugas].forEach(p => {
+                            html += `<div class="history-person"><span><b>${p.nama}</b></span> <span class="lorong-tag">${p.lorong}</span></div>`;
+                        });
                     });
-                });
+                }
                 html += `</div>`;
-                
                 html += `</div></details>`;
                 container.innerHTML += html;
             });
@@ -464,7 +450,7 @@ Lorong 3, Najwa</textarea>
         return el ? (parseInt(el.value) || 0) : 99;
     }
 
-    // --- LOGIKA COOLDOWN ---
+    // --- LOGIKA COOLDOWN (Membaca Array dari Firestore) ---
     function cekCooldown(nama, tugas, gender) {
         let maxLookback = (gender === 'cowok') ? 5 : 3;
         let historyToCheck = appHistory.slice(-maxLookback);
