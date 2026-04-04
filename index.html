@@ -13,13 +13,13 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 10px; }
         .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;}
         
-        .admin-controls { position: absolute; top: 20px; right: 20px; z-index: 100; }
+        .admin-controls { position: absolute; top: 20px; right: 20px; z-index: 1000; }
         #btnLogin { background: #34495e; padding: 8px 15px; border-radius: 6px; cursor: pointer; color: white; border:none; }
         #btnLogout { background: #e74c3c; padding: 8px 15px; border-radius: 6px; cursor: pointer; display: none; color: white; border:none; }
         .admin-only { display: none; }
 
         .ppm-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; background: #eee; padding: 10px; border-radius: 50px; }
-        .nav-btn { background: #95a5a6; border-radius: 25px; padding: 10px 30px; font-size: 1.1em; color: white; cursor: pointer; transition: 0.3s; border: none; }
+        .nav-btn { background: #adb5bd; border-radius: 25px; padding: 10px 30px; font-size: 1.1em; color: white; cursor: pointer; transition: 0.3s; border: none; }
         .nav-btn.active { background: #3498db; box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4); transform: scale(1.05); }
 
         h1, h2, h3 { text-align: center; color: #2c3e50; margin-bottom: 20px;}
@@ -32,22 +32,30 @@
 
         .lorong-card { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 10px; text-align: left; }
         .member-chip { display: inline-flex; align-items: center; background: #eef2f3; padding: 5px 12px; border-radius: 20px; margin: 3px; font-size: 0.85em; border: 1px solid #ccc; }
-        .btn-del-mini { background: none; color: #e74c3c; padding: 0 0 0 8px; font-size: 16px; cursor: pointer; border: none; font-weight: bold;}
+        .btn-del-mini { background: none; color: red; padding: 0 0 0 5px; font-size: 12px; cursor: pointer; border: none;}
 
         .db-section { background: #f3e5f5; border: 1px solid #ce93d8; text-align: center; margin-bottom: 20px; padding: 15px; border-radius: 8px; }
         .kuota-section { background: #e8f8f5; border: 1px solid #1abc9c; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .kuota-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin: 10px 0; }
+        .kuota-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin: 10px 0; }
         .kuota-item { background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #bdc3c7; text-align: center; position: relative;}
-        
-        /* Interactive UI */
-        .list-group { margin-bottom: 15px; background: rgba(255,255,255,0.8); padding: 10px; border-radius: 6px; border: 1px solid #ddd; text-align: left; transition: 0.3s; }
-        .list-title { font-weight: bold; border-bottom: 1px dashed #ccc; padding-bottom: 5px; margin-bottom: 10px; display: block; color: #2c3e50; cursor: pointer; }
-        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-bottom: 1px solid #eee; background: #fff; margin-bottom: 4px; border-radius: 4px; transition: 0.3s; }
+        .btn-del-task { position: absolute; top: 2px; right: 2px; color: red; cursor: pointer; background:none; border:none; font-size: 10px;}
+
+        /* INDIKATOR WARNA PRIORITAS */
+        .prio-indicator { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+        .prio-tinggi { background-color: #e74c3c; } /* Merah */
+        .prio-sedang { background-color: #f1c40f; } /* Kuning */
+        .prio-rendah { background-color: #2ecc71; } /* Hijau */
+
+        /* Interactive Results UI */
+        .list-group { margin-bottom: 15px; background: rgba(255,255,255,0.8); padding: 10px; border-radius: 6px; border: 1px solid #ddd; text-align: left; transition: all 0.3s ease; }
+        .list-title { font-weight: bold; border-bottom: 1px dashed #ccc; padding-bottom: 5px; margin-bottom: 10px; display: block; color: #2c3e50; cursor: pointer; transition: 0.2s; }
+        .list-title:hover { color: #3498db; }
+        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-bottom: 1px solid #eee; background: #fff; margin-bottom: 4px; border-radius: 4px; flex-wrap: wrap; gap: 10px; transition: 0.3s; }
         
         .clickable-name { cursor: pointer; padding: 2px 5px; border-radius: 4px; transition: 0.2s; }
+        .clickable-name:hover { background: #3498db; color: white; }
         .selected-person { background: #2c3e50; color: #fff; font-weight: bold; }
 
-        /* Highlight States */
         .recommend-safe { background-color: #d4edda !important; border: 2px solid #28a745 !important; }
         .recommend-danger { background-color: #f8d7da !important; border: 1px solid #dc3545 !important; opacity: 0.8; }
         .highlight-safe { background-color: #d4edda !important; border-left: 5px solid #28a745 !important; }
@@ -62,7 +70,7 @@
         .badge-presensi { font-size: 0.75em; padding: 4px 10px; border-radius: 12px; font-weight: bold; color: white; min-width: 85px; text-align: center; display: inline-block;}
         .badge-hadir { background-color: #27ae60; } .badge-alfa { background-color: #e74c3c; } .badge-izin { background-color: #f1c40f; color: #333; } .badge-absen { background-color: #636e72; font-style: italic; opacity: 0.8; }
 
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
         .modal-content { background: #fff; margin: 2% auto; padding: 20px; border-radius: 8px; width: 95%; max-width: 1000px; max-height: 90vh; overflow-y: auto; position: relative;}
         details.history-month { background: #fdfdfd; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; padding: 15px; }
         details.history-month summary { font-size: 1.1em; font-weight: bold; color: #2980b9; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none;}
@@ -73,21 +81,43 @@
         #printHeader { display: none; text-align: center; }
 
         @media print { 
-            @page { margin: 1cm !important; }
-            body { margin: 1.5cm !important; background: white; overflow: visible !important; }
-            .no-print, .admin-controls, button, select, .sync-status, .warning-overlap, #viewModeNotice, .quota-warning, .ppm-nav, .db-section, .flex-row:not(.history-data), h1, h2:not(#historyTitle) { display: none !important; } 
-            details.history-month:not(.printing) { display: none !important; }
-            body * { visibility: hidden; } 
-            #historyModal, #historyModal * { visibility: visible; } 
-            #historyModal { position: relative !important; display: block !important; width: 100% !important; height: auto !important; overflow: visible !important; } 
-            .modal-content { max-height: none !important; overflow: visible !important; border: none !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
-            #printHeader { display: block !important; margin-bottom: 20px; border-bottom: 2px solid black; }
-            #printHeader h1 { display: block !important; text-align: center; border:none; padding:0; font-size: 1.5rem; color: black; }
-            .history-data { display: flex !important; flex-wrap: nowrap !important; gap: 20px; align-items: flex-start; }
-            .history-task-group { page-break-inside: avoid; border: 1px solid #eee; }
-            .badge-presensi { border: 1px solid #000; color: #000 !important; background: none !important; } 
-            .badge-absen { border: 1px dashed #777; }
-        }
+    @page { margin: 1cm !important; }
+    body { margin: 1.5cm !important; background: white !important; overflow: visible !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    
+    /* Sembunyikan elemen navigasi dan admin */
+    .no-print, .admin-controls, button, select, .sync-status, .warning-overlap, #viewModeNotice, .quota-warning, .ppm-nav, .db-section, .flex-row:not(.history-data), h1, h2:not(#historyTitle) { 
+        display: none !important; 
+    } 
+
+    /* Pengaturan Modal Riwayat */
+    details.history-month:not(.printing) { display: none !important; }
+    body * { visibility: hidden; } 
+    #historyModal, #historyModal * { visibility: visible; } 
+    #historyModal { position: relative !important; display: block !important; width: 100% !important; height: auto !important; overflow: visible !important; } 
+    .modal-content { max-height: none !important; overflow: visible !important; border: none !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+    
+    /* Judul Laporan */
+    #printHeader { display: block !important; margin-bottom: 20px; border-bottom: 2px solid black; text-align: center; }
+    #printHeader h1 { display: block !important; text-align: center; border:none; padding:0; font-size: 1.5rem; color: black !important; }
+    
+    .history-data { display: flex !important; flex-wrap: nowrap !important; gap: 20px; align-items: flex-start; }
+    .history-task-group { page-break-inside: avoid; border: 1px solid #eee; margin-bottom: 10px; padding: 10px; }
+
+    /* FIX WARNA PRESENSI SAAT PRINT */
+    .badge-presensi { 
+        border: 1px solid #000 !important; 
+        print-color-adjust: exact !important; 
+        -webkit-print-color-adjust: exact !important; 
+        color: white !important; /* Paksa teks warna putih agar kontras dengan background */
+        padding: 4px 10px !important;
+        font-weight: bold !important;
+    } 
+
+    .badge-hadir { background-color: #27ae60 !important; color: white !important; } 
+    .badge-alfa { background-color: #e74c3c !important; color: white !important; } 
+    .badge-izin { background-color: #f1c40f !important; color: #333 !important; } /* Izin teks gelap karena background kuning terang */
+    .badge-absen { border: 1px dashed #777 !important; color: #555 !important; background: #f8f9fa !important; }
+}
     </style>
 </head>
 <body>
@@ -118,19 +148,19 @@
         
         <div class="admin-only">
             <div class="flex-row">
-                <div class="box manage-section" style="border: 1px solid #3498db; background: #f8fbff;">
+                <div class="box manage-section" style="background: #f8fbff; border: 1px solid #3498db;">
                     <h3>Kelola Anggota Cowok (PPM <span class="labelNav">1</span>)</h3>
                     <div id="manageCowok"></div>
                     <div style="display:flex; gap:5px; margin-top:10px;"><input type="text" id="newLorongCowok" placeholder="Lorong..."><button style="background:#2980b9;" onclick="addLorong('cowok')">+</button></div>
                 </div>
-                <div class="box manage-section" style="border: 1px solid #e91e63; background: #fdf2f9;">
+                <div class="box manage-section" style="background: #fdf2f9; border: 1px solid #e91e63;">
                     <h3>Kelola Anggota Cewek (PPM <span class="labelNav">1</span>)</h3>
                     <div id="manageCewek"></div>
                     <div style="display:flex; gap:5px; margin-top:10px;"><input type="text" id="newLorongCewek" placeholder="Lorong..."><button style="background:#e91e63;" onclick="addLorong('cewek')">+</button></div>
                 </div>
             </div>
             <div class="kuota-section">
-                <h3>⚙️ Edit Kuota & Spot (PPM <span class="labelNav">1</span>)</h3>
+                <h3>⚙️ Edit Kuota & Prioritas (PPM <span class="labelNav">1</span>)</h3>
                 <div class="kuota-grid" id="kuotaCowok"></div>
                 <div class="kuota-grid" id="kuotaCewek"></div>
                 <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
@@ -145,7 +175,7 @@
 
 <div id="historyModal" class="modal">
     <div class="modal-content">
-        <div id="printHeader"><h1>PEMBAGIAN MIMBER PPMRJ</h1></div>
+        <div id="printHeader" style="display:none;"><h1>PEMBAGIAN MIMBER PPMRJ</h1></div>
         <span class="no-print" style="float:right; cursor:pointer; font-size:28px; font-weight:bold; color: #aaa;" onclick="tutupRiwayatModal()">&times;</span>
         <h2 id="historyTitle" class="no-print">📖 Riwayat & Presensi</h2>
         <div id="historyContainer"></div>
@@ -157,18 +187,19 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    let currentPPM = 1, appHistory = [], memberData = {}, tasks = {}, quotas = {}, state = { cowok: [], cewek: [] };
-    let isAdmin = localStorage.getItem('ppm_admin') === 'true';
-    let selectedPersonId = null; // ID orang yang diklik
-    let currentGuidanceTask = null; // Nama tugas yang diklik
-    let openedDetails = new Set();
+    let currentPPM = 1, appHistory = [], memberData = {}, tasks = {}, quotas = {}, priorities = {}, state = { cowok: [], cewek: [] };
+    let isAdmin = localStorage.getItem('ppm_admin') === 'true', selectedPersonId = null, currentGuidanceTask = null, openedDetails = new Set();
 
     window.onload = () => { checkAdminStatus(); switchPPM(1); };
 
     function startRealtimeSync() {
         db.collection("wgg_settings").doc(`config_ppm${currentPPM}`).onSnapshot(doc => {
             if(doc.exists) {
-                const d = doc.data(); memberData = d.memberData; tasks = d.tasks; quotas = d.quotas;
+                const d = doc.data(); 
+                memberData = d.memberData || {cowok:{}, cewek:{}}; 
+                tasks = d.tasks || {cowok:[], cewek:[]}; 
+                quotas = d.quotas || {};
+                priorities = d.priorities || {};
                 renderManage(); renderKuota();
                 if(state.cowok.length) { renderResult('cowok'); renderResult('cewek'); }
             }
@@ -180,15 +211,9 @@
     }
 
     async function loginAdmin() {
-        let inputPass = prompt("Masukkan Password Admin:");
-        if(!inputPass) return;
-        try {
-            const authDoc = await db.collection("wgg_auth").doc("admin_pass").get();
-            if(authDoc.exists && inputPass === authDoc.data().password) {
-                isAdmin = true; localStorage.setItem('ppm_admin', 'true'); checkAdminStatus();
-                alert("Login Berhasil!");
-            } else { alert("Password Salah!"); }
-        } catch(e) { alert("Error verifikasi Cloud."); }
+        let inputPass = prompt("Password Admin:"); if(!inputPass) return;
+        const auth = await db.collection("wgg_auth").doc("admin_pass").get();
+        if(auth.exists && inputPass === auth.data().password) { isAdmin = true; localStorage.setItem('ppm_admin', 'true'); checkAdminStatus(); } else alert("Salah!");
     }
     function logoutAdmin() { isAdmin = false; localStorage.setItem('ppm_admin', 'false'); checkAdminStatus(); }
     function checkAdminStatus() {
@@ -198,29 +223,15 @@
         document.getElementById('viewModeNotice').style.display = isAdmin ? 'none' : 'block';
     }
 
-    async function switchPPM(num) {
-        currentPPM = num;
-        document.querySelectorAll('.labelNav').forEach(el => el.innerText = num);
-        document.getElementById('btnPpm1').classList.toggle('active', num === 1);
-        document.getElementById('btnPpm2').classList.toggle('active', num === 2);
-        document.getElementById('dbStatus').innerText = `Mode: PPM ${num} ${isAdmin?'(Admin)':'(View)'}`;
-        startRealtimeSync();
-    }
-
-    async function saveToCloud() {
-        if(!isAdmin) return;
-        document.getElementById('autoSyncMsg').style.display = 'block';
-        await db.collection("wgg_settings").doc(`config_ppm${currentPPM}`).set({ memberData, tasks, quotas });
-        setTimeout(() => document.getElementById('autoSyncMsg').style.display = 'none', 2000);
-    }
+    async function switchPPM(num) { currentPPM = num; document.querySelectorAll('.labelNav').forEach(el => el.innerText = num); document.getElementById('btnPpm1').classList.toggle('active', num === 1); document.getElementById('btnPpm2').classList.toggle('active', num === 2); startRealtimeSync(); }
+    async function saveToCloud() { if(!isAdmin) return; document.getElementById('autoSyncMsg').style.display = 'block'; await db.collection("wgg_settings").doc(`config_ppm${currentPPM}`).set({ memberData, tasks, quotas, priorities }); setTimeout(() => document.getElementById('autoSyncMsg').style.display = 'none', 2000); }
 
     function renderManage() {
         ['cowok', 'cewek'].forEach(g => {
             const container = document.getElementById('manage' + g.charAt(0).toUpperCase() + g.slice(1));
             if(!container) return; container.innerHTML = '';
-            const sorted = Object.keys(memberData[g] || {}).sort((a,b) => a.localeCompare(b, undefined, {numeric: true}));
-            sorted.forEach(l => {
-                let html = `<div class="lorong-card"><div style="display:flex; justify-content:space-between;"><b>${l}</b>${isAdmin?`<button class="btn-del-mini" onclick="delLorong('${g}','${l}')">🗑️</button>`:''}</div><div>`;
+            Object.keys(memberData[g]).sort((a,b) => a.localeCompare(b, undefined, {numeric: true})).forEach(l => {
+                let html = `<div class="lorong-card"><div style="display:flex; justify-content:space-between; margin-bottom:8px;"><b>🏠 ${l}</b>${isAdmin?`<button onclick="delLorong('${g}','${l}')" style="background:none; border:none; cursor:pointer;">🗑️</button>`:''}</div><div>`;
                 (memberData[g][l] || []).forEach((n, idx) => { html += `<span class="member-chip">${n}${isAdmin?`<button class="btn-del-mini" onclick="delMember('${g}','${l}',${idx})">×</button>`:''}</span>`; });
                 html += `</div>${isAdmin?`<div style="margin-top:8px; display:flex; gap:5px;"><input type="text" id="in-${g}-${l}" placeholder="Nama..."><button style="background:#27ae60;" onclick="addMember('${g}','${l}')">+</button></div>`:''}</div>`;
                 container.innerHTML += html;
@@ -231,20 +242,32 @@
     function renderKuota() {
         ['cowok','cewek'].forEach(g => {
             let cont = document.getElementById('kuota'+g.charAt(0).toUpperCase()+g.slice(1));
-            if(!cont) return; cont.innerHTML = ''; (tasks[g] || []).forEach(t => {
-                let key = `${g}_${t}`, val = quotas[key] || 5;
-                cont.innerHTML += `<div class="kuota-item"><button class="btn-del-task" onclick="delTask('${g}','${t}')" style="position:absolute; top:2px; right:2px; color:red; cursor:pointer; background:none; border:none; font-size:10px;">×</button><label style="font-size:0.7em; display:block;">${t}</label><input type="number" ${!isAdmin?'disabled':''} onchange="updateQuota('${key}', this.value)" value="${val}" style="width:50px;"></div>`;
+            if(!cont) return; cont.innerHTML = ''; 
+            (tasks[g] || []).forEach(t => {
+                let key = `${g}_${t}`, val = quotas[key] || 1, prio = priorities[key] || 'Sedang';
+                let indicator = prio==='Tinggi'?'prio-tinggi':prio==='Rendah'?'prio-rendah':'prio-sedang';
+                cont.innerHTML += `<div class="kuota-item">
+                    ${isAdmin?`<button class="btn-del-task" onclick="delTask('${g}','${t}')">×</button>`:''}
+                    <label style="font-size:0.75em; font-weight:bold; color:#2c3e50;"><span class="prio-indicator ${indicator}"></span>${t}</label>
+                    <input type="number" onchange="updateQuota('${key}', this.value)" value="${val}" style="width:100%;">
+                    <select onchange="updatePriority('${key}', this.value)" style="font-size:0.7em;">
+                        <option value="Tinggi" ${prio==='Tinggi'?'selected':''}>Tinggi</option>
+                        <option value="Sedang" ${prio==='Sedang'?'selected':''}>Sedang</option>
+                        <option value="Rendah" ${prio==='Rendah'?'selected':''}>Rendah</option>
+                    </select>
+                </div>`;
             });
         });
     }
 
+    function updateQuota(k, v) { quotas[k] = parseInt(v); saveToCloud(); }
+    function updatePriority(k, v) { priorities[k] = v; saveToCloud(); }
     function addLorong(g) { let i = document.getElementById('newLorong'+g.charAt(0).toUpperCase()+g.slice(1)); if(i.value.trim()){ memberData[g][i.value.trim()] = []; saveToCloud(); i.value=''; } }
     function delLorong(g, l) { if(confirm('Hapus?')) { delete memberData[g][l]; saveToCloud(); } }
     function addMember(g, l) { let i = document.getElementById(`in-${g}-${l}`); if(i.value.trim()){ memberData[g][l].push(i.value.trim()); saveToCloud(); i.value = ''; } }
     function delMember(g, l, idx) { memberData[g][l].splice(idx, 1); saveToCloud(); }
-    function updateQuota(k, v) { quotas[k] = parseInt(v); saveToCloud(); }
-    function addCustomTask() { let v = document.getElementById('customTask').value.trim(), g = document.getElementById('customGender').value; if(v){ tasks[g].push(v); quotas[`${g}_${v}`] = 5; saveToCloud(); document.getElementById('customTask').value=''; } }
-    function delTask(g, t) { if(confirm('Hapus?')) { tasks[g] = tasks[g].filter(x => x!==t); delete quotas[`${g}_${t}`]; saveToCloud(); } }
+    function addCustomTask() { let v = document.getElementById('customTask').value.trim(), gen = document.getElementById('customGender').value; if(v){ tasks[gen].push(v); quotas[`${gen}_${v}`] = 1; priorities[`${gen}_${v}`] = 'Sedang'; saveToCloud(); document.getElementById('customTask').value=''; } }
+    function delTask(g, t) { if(confirm('Hapus?')) { tasks[g] = tasks[g].filter(x => x!==t); delete quotas[`${g}_${t}`]; delete priorities[`${g}_${t}`]; saveToCloud(); } }
 
     function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
@@ -252,133 +275,116 @@
         if (!memberData.cowok || Object.keys(memberData.cowok).length === 0) return alert("Isi data dulu!");
         ['cowok', 'cewek'].forEach(g => {
             let pool = []; for (let l in memberData[g]) { memberData[g][l].forEach(n => pool.push({ nama: n, lorong: l })); }
-            const limit = (g === 'cowok') ? 5 : 3;
-            const recent = appHistory.slice(0, limit);
-            let bestPlot = []; let minOverlap = 999;
-            for (let attempt = 0; attempt < 500; attempt++) {
-                shuffle(pool); let currentPlot = [], counts = {}; tasks[g].forEach(t => counts[t] = 0);
-                pool.forEach(orang => {
-                    let chosen = "Belum dapat";
-                    for (let t of tasks[g]) { if (counts[t] < (quotas[`${g}_${t}`] || 5)) { chosen = t; counts[t]++; break; } }
-                    currentPlot.push({ ...orang, tugas: chosen });
+            shuffle(pool);
+            let assignedIds = new Set(), currentPlot = [], counts = {}, prioOrder = ['Tinggi', 'Sedang', 'Rendah'];
+            prioOrder.forEach(prioLevel => {
+                const tasksInLevel = tasks[g].filter(t => t !== "-" && (priorities[`${g}_${t}`] || 'Sedang') === prioLevel);
+                tasksInLevel.forEach(t => {
+                    let max = quotas[`${g}_${t}`] || 1; counts[t] = 0; let lorongsInTask = new Set();
+                    for (let i = 0; i < pool.length; i++) {
+                        if (assignedIds.has(i) || counts[t] >= max) continue;
+                        if (!lorongsInTask.has(pool[i].lorong)) { currentPlot.push({ ...pool[i], tugas: t }); lorongsInTask.add(pool[i].lorong); assignedIds.add(i); counts[t]++; }
+                    }
+                    if (counts[t] < max) {
+                        for (let i = 0; i < pool.length; i++) { if (assignedIds.has(i) || counts[t] >= max) continue; currentPlot.push({ ...pool[i], tugas: t }); assignedIds.add(i); counts[t]++; }
+                    }
                 });
-                let overlap = 0;
-                currentPlot.forEach(p => { recent.forEach(h => { let prev = (h[g] || []).find(old => old.nama === p.nama); if (prev && prev.tugas === p.tugas) overlap++; }); });
-                if (overlap < minOverlap) { minOverlap = overlap; bestPlot = currentPlot; if (overlap === 0) break; }
-            }
-            state[g] = bestPlot.map((p, idx) => {
-                let found = ""; recent.forEach(h => { let prev = (h[g] || []).find(old => old.nama === p.nama); if (prev && prev.tugas === p.tugas) found = h.label; });
+            });
+            pool.forEach((p, idx) => { if (!assignedIds.has(idx)) currentPlot.push({ ...p, tugas: "-" }); });
+            state[g] = currentPlot.map((p, idx) => {
+                let found = ""; appHistory.slice(0, (g==='cowok'?5:3)).forEach(h => { let prev = (h[g]||[]).find(old => old.nama === p.nama); if (prev && prev.tugas === p.tugas && p.tugas !== "-") found = h.label; });
                 return { ...p, id: idx, overlapWith: found };
             });
             renderResult(g);
         });
     }
 
-    // --- LOGIKA PANDUAN GABUNGAN ---
-    function triggerGuidanceName(gender, id) {
-        if (selectedPersonId === id) { selectedPersonId = null; } 
+    function triggerGuidanceName(gender, id) { 
+        if (selectedPersonId === id) selectedPersonId = null; 
         else { selectedPersonId = id; currentGuidanceTask = null; }
-        renderResult(gender);
+        renderResult(gender); 
     }
-
-    function triggerGuidanceTask(gender, taskName) {
-        if (currentGuidanceTask === taskName) { currentGuidanceTask = null; } 
-        else { currentGuidanceTask = taskName; selectedPersonId = null; }
-        renderResult(gender);
+    function triggerGuidanceTask(gender, task) { 
+        if (currentGuidanceTask === task) currentGuidanceTask = null; 
+        else { currentGuidanceTask = task; selectedPersonId = null; }
+        renderResult(gender); 
     }
 
     function renderResult(g) {
         let cont = document.getElementById('out' + g.charAt(0).toUpperCase() + g.slice(1));
         if(!cont) return; cont.innerHTML = `<h3>TUGAS ${g.toUpperCase()}</h3>`;
-        let grouped = {}; tasks[g].forEach(t => grouped[t] = []); grouped["Belum dapat"] = [];
+        let sortedTasks = tasks[g].filter(t => t !== "-"); if (tasks[g].includes("-")) sortedTasks.push("-");
+        let grouped = {}; sortedTasks.forEach(t => grouped[t] = []);
         state[g].forEach(p => { if(!grouped[p.tugas]) grouped[p.tugas] = []; grouped[p.tugas].push(p); });
 
-        const limit = (g === 'cowok') ? 5 : 3;
-        const recent = appHistory.slice(0, limit);
-
-        for (let t in grouped) {
-            let members = grouped[t]; if (members.length === 0 && t === "Belum dapat") continue;
-            let max = quotas[`${g}_${t}`] || 5; let selisih = members.length - max;
-            let warning = (t !== "Belum dapat") ? (selisih < 0 ? `<span class="quota-warning quota-kurang">(Kurang ${Math.abs(selisih)})</span>` : (selisih > 0 ? `<span class="quota-warning quota-kelebihan">(Kelebihan ${selisih})</span>` : "")) : "";
+        sortedTasks.forEach(t => {
+            let members = grouped[t]; if (members.length === 0 && t === "Belum dapat") return;
+            let max = quotas[`${g}_${t}`] || 0, selisih = members.length - max;
+            let warning = (t !== "-") ? (selisih < 0 ? `<span class="quota-warning quota-kurang">Kurang ${Math.abs(selisih)}</span>` : (selisih > 0 ? `<span class="quota-warning quota-kelebihan">Lebih ${selisih}</span>` : "")) : "";
             
-            // HIGHLIGHT KOTAK (Jika klik nama)
+            // HIGHLIGHT KOTAK (Klik Nama)
             let boxClass = "list-group";
             if (selectedPersonId !== null) {
-                const selectedP = state[g][selectedPersonId];
-                let everBeenHere = false;
-                recent.forEach(h => { if((h[g]||[]).find(old => old.nama === selectedP.nama && old.tugas === t)) everBeenHere = true; });
-                boxClass += everBeenHere ? " recommend-danger" : " recommend-safe";
+                const selP = state[g].find(p => p.id === selectedPersonId);
+                let history = false;
+                appHistory.slice(0, (g === 'cowok' ? 5 : 3)).forEach(h => { if((h[g]||[]).find(old => old.nama === selP.nama && old.tugas === t)) history = true; });
+                boxClass += (t !== "-" && history) ? " recommend-danger" : " recommend-safe";
             }
 
-            let html = `<div class="${boxClass}" id="group-${g}-${t.replace(/\s/g, '')}"><b class="list-title" onclick="triggerGuidanceTask('${g}', '${t}')">${t} (${members.length}) ${warning}</b>`;
-            
+            let html = `<div class="${boxClass}"><b class="list-title" onclick="triggerGuidanceTask('${g}', '${t}')">${t} (${members.length}) ${warning}</b>`;
             members.forEach(p => {
-                let isSelected = (selectedPersonId === p.id);
                 let rowClass = "item-row";
-                let historyMsg = "";
-
-                // HIGHLIGHT BARIS (Jika klik judul tugas)
-                if (currentGuidanceTask) {
-                    let monthFound = "";
-                    recent.forEach(h => {
-                        let prev = (h[g] || []).find(old => old.nama === p.nama);
-                        if (prev && prev.tugas === currentGuidanceTask) monthFound = h.label;
-                    });
-                    if (monthFound) {
-                        rowClass += " highlight-danger";
-                        historyMsg = `<span class="overlap-info">Pernah di ${currentGuidanceTask} pada ${monthFound}</span>`;
-                    } else {
-                        rowClass += " highlight-safe";
-                    }
+                let histMsg = "";
+                if (currentGuidanceTask && currentGuidanceTask !== "-") {
+                    let hist = false, month = "";
+                    appHistory.slice(0, (g==='cowok'?5:3)).forEach(h => { if((h[g]||[]).find(old => old.nama === p.nama && old.tugas === currentGuidanceTask)) { hist = true; month = h.label; } });
+                    rowClass += hist ? " highlight-danger" : " highlight-safe";
+                    if(hist) histMsg = `<span class="overlap-info">Pernah di sini bln ${month}</span>`;
                 }
-
                 html += `<div class="${rowClass}">
-                    <span class="clickable-name ${isSelected?'selected-person':''}" onclick="triggerGuidanceName('${g}', ${p.id})">
-                        <b>${p.nama}</b> <small class="lorong-tag">${p.lorong}</small>${p.overlapWith ? `<span class="warning-overlap">Bulan lalu di ${p.tugas}</span>` : ''} ${historyMsg}
+                    <span class="clickable-name ${selectedPersonId===p.id?'selected-person':''}" onclick="triggerGuidanceName('${g}', ${p.id})">
+                        <b>${p.nama}</b> <small class="lorong-tag">${p.lorong}</small>
+                        ${p.overlapWith?`<br><small style="color:red; font-weight:bold;">Sama dgn ${p.overlapWith}</small>`:''}
+                        ${histMsg}
                     </span>`;
-                if (isAdmin) { html += `<select onchange="manualMove('${g}', ${p.id}, this.value)">${tasks[g].map(opt => `<option value="${opt}" ${opt===p.tugas?'selected':''}>${opt}</option>`).join('')}<option value="Belum dapat" ${p.tugas==='Belum dapat'?'selected':''}>Belum dapat</option></select>`; }
+                if (isAdmin) { html += `<select onchange="manualMove('${g}', ${p.id}, this.value)">${tasks[g].map(opt => `<option value="${opt}" ${opt===p.tugas?'selected':''}>${opt}</option>`).join('')}</select>`; }
                 html += `</div>`;
             });
             cont.innerHTML += html + `</div>`;
-        }
+        });
     }
 
     function manualMove(gender, id, task) { 
-        state[gender][id].tugas = task; 
-        const limit = (gender === 'cowok') ? 5 : 3;
-        let found = "";
-        appHistory.slice(0, limit).forEach(h => {
-            let prev = (h[gender] || []).find(old => old.nama === state[gender][id].nama);
-            if (prev && prev.tugas === state[gender][id].tugas) found = h.label;
-        });
-        state[gender][id].overlapWith = found;
-        selectedPersonId = null; currentGuidanceTask = null; renderResult(gender); 
+        let person = state[gender].find(p => p.id === id); 
+        if(!person) return; person.tugas = task; 
+        let found = ""; appHistory.slice(0, (gender==='cowok'?5:3)).forEach(h => { let prev = (h[gender]||[]).find(old => old.nama === person.nama); if (prev && prev.tugas === person.tugas && person.tugas !== "-") found = h.label; });
+        person.overlapWith = found; renderResult(gender); 
     }
 
-    // RIWAYAT UI & PRINT
     function bukaRiwayatModal() { document.getElementById('historyModal').style.display = 'block'; renderHistoryUI(); }
     function tutupRiwayatModal() { document.getElementById('historyModal').style.display = 'none'; openedDetails.clear(); }
     function trackToggle(docId, isOpen) { if (isOpen) openedDetails.add(docId); else openedDetails.delete(docId); }
 
     function renderHistoryUI() {
-        let cont = document.getElementById('historyContainer'); cont.innerHTML = appHistory.length ? '' : '<p style="text-align:center;">Belum ada riwayat.</p>';
+        let cont = document.getElementById('historyContainer'); cont.innerHTML = '';
+        if(!appHistory.length) { cont.innerHTML = '<p style="text-align:center;">Belum ada riwayat.</p>'; return; }
         appHistory.forEach(record => {
             let isOpen = openedDetails.has(record.docId) ? 'open' : '';
             let html = `<details class="history-month" id="details-${record.docId}" ${isOpen} ontoggle="trackToggle('${record.docId}', this.open)">
-                <summary><span>${record.label} (PPM ${currentPPM})</span><div class="no-print"><button style="background:#e74c3c; font-size:0.75em; margin-right:5px;" onclick="printSpesifik('${record.docId}')">📄 PDF Laporan</button>${isAdmin?`<button style="background:#7f8c8d; font-size:0.75em;" onclick="hapusDokumen('${record.docId}')">🗑️ Hapus</button>`:''}</div></summary>
+                <summary><span>${record.label} (PPM ${currentPPM})</span><div class="no-print"><button style="background:#e74c3c; font-size:0.75em; margin-right:5px;" onclick="printSpesifik('${record.docId}')">📄 PDF</button>${isAdmin?`<button style="color:red; background:none; border:none;" onclick="hapusDokumen('${record.docId}')">🗑️</button>`:''}</div></summary>
                 <div class="history-data">`;
             ['cowok','cewek'].forEach(g => {
-                html += `<div style="flex:1; min-width:300px;"><h3>${g.toUpperCase()}</h3>`;
+                html += `<div style="flex:1; min-width:280px;"><h3>${g.toUpperCase()}</h3>`;
                 let grp = {}; (record[g]||[]).forEach((p, idx) => { if(!grp[p.tugas]) grp[p.tugas]=[]; grp[p.tugas].push({...p, oIdx: idx}); });
-                (tasks[g] || []).forEach(t => {
+                let sortedH = tasks[g].filter(t => t !== "-"); if (tasks[g].includes("-")) sortedH.push("-");
+                sortedH.forEach(t => {
                     if(!grp[t]) return;
                     html += `<div class="history-task-group"><span class="history-task-title">${t}</span>`;
                     grp[t].forEach(p => {
                         let isNotSet = (!p.presensi || p.presensi === 'absen');
-                        let badgeClass = isNotSet ? 'badge-absen' : `badge-${p.presensi.toLowerCase()}`;
                         html += `<div style="padding:5px 0; border-bottom:1px dashed #eee; display:flex; justify-content:space-between; align-items:center;">
-                            <span><b>${p.nama}</b> <small class="lorong-tag">${p.lorong}</small></span>
-                            <div><span class="badge-presensi ${badgeClass}">${isNotSet ? 'Belum Diinput' : p.presensi}</span>
+                            <span><b>${p.nama}</b> <small>${p.lorong}</small></span>
+                            <div><span class="badge-presensi ${isNotSet?'badge-absen':`badge-${p.presensi.toLowerCase()}`}">${isNotSet ? 'Belum Diinput' : p.presensi}</span>
                             ${isAdmin?`<select class="no-print" style="margin-left:5px;" onchange="updatePresensi('${record.docId}','${g}',${p.oIdx},this.value)">
                                 <option value="" disabled ${isNotSet?'selected':''}>Set...</option><option value="Hadir" ${p.presensi==='Hadir'?'selected':''}>Hadir</option><option value="Alfa" ${p.presensi==='Alfa'?'selected':''}>Alfa</option><option value="Izin" ${p.presensi==='Izin'?'selected':''}>Izin</option></select>`:''}</div></div>`;
                     });
@@ -390,20 +396,11 @@
         });
     }
 
-    function printSpesifik(docId) {
-        const allDetails = document.querySelectorAll('details.history-month');
-        allDetails.forEach(el => el.classList.remove('printing'));
-        const target = document.getElementById(`details-${docId}`);
-        target.classList.add('printing');
-        const oldState = target.open; target.open = true;
-        window.print();
-        target.open = oldState; target.classList.remove('printing');
-    }
-
+    function printSpesifik(id) { document.querySelectorAll('details.history-month').forEach(el => el.classList.remove('printing')); const target = document.getElementById(`details-${id}`); target.classList.add('printing'); target.open = true; window.print(); }
     function updatePresensi(docId, g, idx, val) { if(!isAdmin) return; let doc = appHistory.find(d => d.docId === docId); doc[g][idx].presensi = val; db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
-    function simpanRiwayatPenugasan() { if (!state.cowok.length) return alert("Acak dulu!"); let label = prompt(`Label Riwayat?`); if (!label) return; db.collection(`history_ppm${currentPPM}`).add({ id: Date.now(), label, cowok: state.cowok, cewek: state.cewek }).then(() => alert("Tersimpan!")); }
+    function simpanRiwayatPenugasan() { if (!state.cowok.length) return alert("Acak dulu!"); let l = prompt(`Label?`); if (l) db.collection(`history_ppm${currentPPM}`).add({ id: Date.now(), label: l, cowok: state.cowok, cewek: state.cewek }); }
     function hapusDokumen(id) { if (confirm("Hapus?")) db.collection(`history_ppm${currentPPM}`).doc(id).delete(); }
-    function resetToDefault() { if (confirm(`Reset tab ini?`)) { memberData = { cowok: {}, cewek: {} }; saveToCloud(); } }
+    function resetToDefault() { if (confirm(`Reset?`)) { memberData = { cowok: {}, cewek: {} }; tasks = {cowok:[], cewek:[]}; quotas = {}; priorities = {}; saveToCloud(); } }
 </script>
 </body>
 </html>
