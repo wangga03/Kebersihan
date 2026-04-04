@@ -10,81 +10,65 @@
 
     <style>
         * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;}
-        h1, h2 { text-align: center; color: #2c3e50; }
-        h1 { border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        .section-title { background-color: #2c3e50; color: white; padding: 10px; border-radius: 6px; margin-top: 30px; margin-bottom: 15px; text-align: center; }
-        .flex-row { display: flex; gap: 20px; margin-bottom: 25px; flex-wrap: wrap; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 10px; }
+        .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;}
+        h1, h2, h3 { text-align: center; color: #2c3e50; }
+        h1 { border-bottom: 2px solid #3498db; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; font-size: 1.5rem; margin-top: 0; }
+        .flex-row { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
         .box { flex: 1; min-width: 300px; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; background: #fdfdfd; }
-        .box h3 { margin-top: 0; text-align: center; color: #444; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
-        textarea { width: 100%; height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: monospace; font-size: 14px; resize: vertical;}
-        
-        /* Database Section */
-        .db-section { background: #f3e5f5; padding: 15px; border-radius: 8px; border: 1px solid #ce93d8; margin-bottom: 20px; text-align: center;}
-        .db-info { font-weight: bold; color: #6a1b9a; margin-bottom: 10px; font-size: 1.1em;}
-        
-        /* Universal Quota Section */
-        .kuota-section { background: #e8f8f5; padding: 15px; border-radius: 8px; border: 1px solid #1abc9c; margin-bottom: 25px; }
-        .kuota-title { font-weight: bold; color: #16a085; border-bottom: 2px solid #1abc9c; display: inline-block; margin-bottom: 10px; }
-        .kuota-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-bottom: 15px; }
-        .kuota-item { background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #bdc3c7; text-align: center; display: flex; flex-direction: column; justify-content: space-between; position: relative;}
-        .kuota-item label { font-size: 0.85em; font-weight: bold; color: #2c3e50; margin-bottom: 2px; line-height: 1.2; padding-right: 15px;}
-        .kuota-item small { color: #e67e22; font-size: 0.8em; display: block; margin-bottom: 5px;}
-        .kuota-item input { width: 50px; padding: 4px; text-align: center; font-weight: bold; border: 2px solid #3498db; border-radius: 4px; margin: 0 auto; }
-        .btn-delete-task { position: absolute; top: 4px; right: 4px; background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 12px; padding: 2px; }
+        button { border: none; padding: 10px 15px; font-size: 14px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; color: white; }
+        input, select { padding: 8px; border-radius: 5px; border: 1px solid #ccc; outline: none; }
 
-        /* Buttons */
-        .btn-container { text-align: center; margin: 25px 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;}
-        button { border: none; padding: 10px 16px; font-size: 14px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.2s; color: white; }
-        .btn-utama { background-color: #27ae60; box-shadow: 0 4px 10px rgba(39, 174, 96, 0.4); font-size: 18px; padding: 15px 30px;}
-        .btn-pdf { background-color: #e74c3c; } .btn-pdf:hover { background-color: #c0392b; }
-        .btn-db { background-color: #8e44ad; color: #fff;} .btn-history { background-color: #34495e; }
+        .manage-section { background: #f8fbff; border: 1px solid #3498db; }
+        .lorong-card { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 10px; text-align: left; }
+        .lorong-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 8px; }
+        .member-chip { display: inline-flex; align-items: center; background: #eef2f3; padding: 5px 12px; border-radius: 20px; margin: 3px; font-size: 0.85em; border: 1px solid #ccc; }
+        .btn-del-mini { background: none; color: #e74c3c; padding: 0 0 0 8px; font-size: 16px; cursor: pointer; border: none; font-weight: bold;}
 
-        /* Output Area Items */
-        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; border-bottom: 1px solid #eee; background: #fff; margin-bottom: 4px; border-radius: 4px; gap: 10px;}
-        .person-info { flex:1; display: flex; align-items: center; gap: 10px; }
-        .person-name { font-weight: bold; width: 130px; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-        .lorong-tag { font-size: 0.8em; padding: 2px 6px; border-radius: 4px; color: white; background: #95a5a6; }
-        .task-select { padding: 4px 8px; border-radius: 4px; border: 1px solid #bdc3c7; background: #ecf0f1; font-weight: bold; cursor: pointer; outline: none; }
+        .db-section { background: #f3e5f5; border: 1px solid #ce93d8; text-align: center; margin-bottom: 20px; padding: 15px; border-radius: 8px; }
+        .kuota-section { background: #e8f8f5; border: 1px solid #1abc9c; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .kuota-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin: 10px 0; }
+        .kuota-item { background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #bdc3c7; text-align: center; position: relative;}
+        .btn-del-task { position: absolute; top: 2px; right: 2px; color: red; font-size: 12px; cursor: pointer; background:none; border:none;}
 
-        /* Modal & History */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
-        .modal-content { background-color: #fefefe; margin: 3% auto; padding: 25px; border-radius: 8px; width: 90%; max-width: 1000px; max-height: 90vh; overflow-y: auto; }
-        .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
-        
-        details.history-month { background: #fdfdfd; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; padding: 15px; }
-        details.history-month summary { font-size: 1.2em; font-weight: bold; color: #2980b9; cursor: pointer; outline: none; display: flex; justify-content: space-between; align-items: center; }
-        .history-data { display: flex; gap: 20px; margin-top: 15px; flex-wrap: wrap;}
-        .history-col { flex: 1; min-width: 300px; }
-        .history-task-title { color: #e67e22; border-bottom: 1px solid #ccc; margin-top: 12px; margin-bottom: 6px; font-weight: bold; font-size: 1.1em; }
-        
-        /* Presensi Styles */
-        .history-person { padding: 8px 0; border-bottom: 1px dashed #eee; display: flex; flex-direction: column; gap: 6px;}
-        .person-header { display: flex; justify-content: space-between; align-items: center; }
-        .badge-presensi { font-size: 0.8em; padding: 3px 8px; border-radius: 12px; font-weight: bold; color: white; min-width: 65px; text-align: center;}
+        /* Results Area */
+        .results-cowok { background-color: #e8f4fd; border: 1px solid #3498db; }
+        .results-cewek { background-color: #fdf2f9; border: 1px solid #e91e63; }
+        .list-group { margin-bottom: 15px; background: rgba(255,255,255,0.7); padding: 10px; border-radius: 6px; border: 1px solid #ddd; text-align: left; }
+        .list-title { font-weight: bold; border-bottom: 1px dashed #ccc; padding-bottom: 5px; margin-bottom: 10px; display: block; color: #2c3e50;}
+        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-bottom: 1px solid #eee; background: #fff; margin-bottom: 4px; border-radius: 4px; flex-wrap: wrap; gap: 10px; }
+        .lorong-tag { font-size: 0.75em; padding: 2px 6px; border-radius: 4px; color: white; background: #95a5a6; }
+
+        /* Status Presensi */
+        .badge-presensi { font-size: 0.75em; padding: 4px 10px; border-radius: 12px; font-weight: bold; color: white; min-width: 70px; text-align: center; display: inline-block;}
         .badge-hadir { background-color: #27ae60; }
         .badge-alfa { background-color: #e74c3c; }
         .badge-izin { background-color: #f1c40f; color: #333; }
-        .badge-null { background-color: #95a5a6; }
-        .presensi-select { font-size: 0.85em; padding: 4px; border-radius: 4px; border: 1px solid #ccc; width: 100%; }
+        .badge-absen { background-color: #95a5a6; }
 
-        .btn-del-doc { background: #7f8c8d; font-size: 0.75em; padding: 5px 10px; }
-        .btn-print-history { background: #e74c3c; font-size: 0.75em; padding: 5px 10px; margin-right: 5px; }
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+        .modal-content { background: #fff; margin: 2% auto; padding: 20px; border-radius: 8px; width: 95%; max-width: 1000px; max-height: 90vh; overflow-y: auto; }
+        details.history-month { background: #fdfdfd; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; padding: 15px; }
+        details.history-month summary { font-size: 1.1em; font-weight: bold; color: #2980b9; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none;}
+        .history-data { display: flex; gap: 20px; margin-top: 15px; flex-wrap: wrap;}
+        .history-col { flex: 1; min-width: 300px; }
+        .history-task-group { background: #f9f9f9; padding: 10px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee; text-align: left;}
+        .history-task-title { font-weight: bold; color: #e67e22; border-bottom: 1px solid #ddd; margin-bottom: 8px; display: block; font-size: 0.9em;}
+        .history-person { padding: 5px 0; border-bottom: 1px dashed #eee; display: flex; flex-direction: column; gap: 5px;}
 
+        .sync-status { font-size: 0.8em; font-style: italic; color: #27ae60; margin-top: 5px; display: none;}
+
+        @media (max-width: 600px) { .flex-row { flex-direction: column; } .item-row { flex-direction: column; align-items: stretch; } }
         @media print {
-            body { background: white; padding: 0; margin: 0; }
-            .no-print, .close-btn, .btn-del-doc, .btn-print-history, .presensi-select { display: none !important; }
+            .no-print { display: none !important; }
             .modal { position: relative; display: block; background: none; }
-            .modal-content { box-shadow: none; margin: 0; padding: 0; width: 100%; max-width: 100%; max-height: none; }
-            details.history-month { border: none; padding: 0; display: block !important; }
-            details.history-month summary { display: block; border-bottom: 2px solid #000; margin-bottom: 10px; }
-            details.history-month summary span::after { content: " - LAPORAN KEBERSIHAN"; }
-            .history-data { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 30px; }
-            .history-col { min-width: 0; }
-            .history-person { border-bottom: 1px solid #eee; padding: 4px 0; }
+            .modal-content { box-shadow: none; margin: 0; padding: 0; width: 100%; max-height: none; }
+            details.history-month { border: none; padding: 0; }
+            details.history-month summary { border-bottom: 2px solid #000; padding-bottom: 5px; }
             .badge-presensi { border: 1px solid #000; color: #000 !important; background: none !important; }
-            .warning-tag { display: none; }
+            select { display: none !important; }
+            .history-task-group { border: 1px solid #ccc; background: none; }
         }
     </style>
 </head>
@@ -93,128 +77,58 @@
 <div class="container">
     <div class="no-print">
         <h1>KEBERSIHAN PPMRJ</h1>
-        
         <div class="db-section">
-            <h3>💾 Manajemen Riwayat</h3>
-            <div class="db-info" id="dbStatus">Memuat Database... ⏳</div>
-            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <button class="btn-db" onclick="simpanKeFirestore()">📌 Simpan Riwayat</button>
-                <button class="btn-history" onclick="bukaRiwayatModal()">📖 Lihat Riwayat & Presensi</button>
+            <div id="dbStatus" style="font-weight:bold; margin-bottom:10px; color:#6a1b9a;">Menghubungkan ke Cloud...</div>
+            <div id="autoSyncMsg" class="sync-status">✓ Sinkronisasi Cloud Berhasil</div>
+            <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+                <button style="background:#8e44ad;" onclick="simpanRiwayatPenugasan()">📌 Simpan Riwayat</button>
+                <button style="background:#34495e;" onclick="bukaRiwayatModal()">📖 Lihat Riwayat & Presensi</button>
+                <button style="background:#7f8c8d; font-size: 0.8em;" onclick="resetToDefault()">🔄 Reset ke Default</button>
             </div>
         </div>
 
         <div class="flex-row">
-            <div class="box">
-                <h3>Input Data Cowok</h3>
-                <textarea id="inputCowok">Lorong 1, Faiz
-Lorong 1, Fariz
-Lorong 1, Aris
-Lorong 1, Royan
-Lorong 1, Rasya
-Lorong 2, Zaed
-Lorong 2, Ubay
-Lorong 2, Rizqo
-Lorong 2, Gio
-Lorong 2, Alva
-Lorong 2, Duhan
-Lorong 2, Dito
-Lorong 2, Agoy
-Lorong 3, harsa
-Lorong 3, Danu
-Lorong 3, Alka
-Lorong 3, Fadzlan
-Lorong 3, Ikhwan
-Lorong 3, Adit
-Lorong 4, Syafiq
-Lorong 4, Rio
-Lorong 4, Gifran
-Lorong 4, Radit
-Lorong 4, Affan
-Lorong 4, Movic
-Lorong 4, Kenzi
-Lorong 5, c
-Lorong 5, Reza
-Lorong 5, Malvin
-Lorong 5, Dika
-Lorong 5, Fandi
-Lorong 5, Ibam
-Lorong 5, Ipul
-Lorong 5, Denu</textarea>
+            <div class="box manage-section">
+                <h3>Kelola Anggota Cowok</h3>
+                <div id="manageCowok"></div>
+                <div style="display:flex; gap:5px; margin-top:10px;"><input type="text" id="newLorongCowok" placeholder="Lorong Baru..." style="flex:1;"><button style="background:#2980b9;" onclick="addLorong('cowok')">+</button></div>
             </div>
-            <div class="box">
-                <h3>Input Data Cewek</h3>
-                <textarea id="inputCewek">Lorong 1, Insyal
-Lorong 1, Caca
-Lorong 1, Febi
-Lorong 1, Dila
-Lorong 1, Nisna
-Lorong 1, Alya
-Lorong 1, Agnia
-Lorong 1, Ifra
-Lorong 1, Dilan
-Lorong 1, Mimin
-Lorong 2, Nayla
-Lorong 2, Dea
-Lorong 2, Dini
-Lorong 2, Putri
-Lorong 2, Damai
-Lorong 2, Chelsea
-Lorong 2, Ayu
-Lorong 2, Kania
-Lorong 2, Askia
-Lorong 2, Aurel
-Lorong 3, Ara
-Lorong 3, Una
-Lorong 3, Yuta
-Lorong 3, Yaya
-Lorong 3, Najwa</textarea>
+            <div class="box manage-section" style="border-color: #e91e63;">
+                <h3>Kelola Anggota Cewek</h3>
+                <div id="manageCewek"></div>
+                <div style="display:flex; gap:5px; margin-top:10px;"><input type="text" id="newLorongCewek" placeholder="Lorong Baru..." style="flex:1;"><button style="background:#e91e63;" onclick="addLorong('cewek')">+</button></div>
             </div>
         </div>
 
         <div class="kuota-section">
-            <h3 style="margin-top: 0; text-align: center; color: #16a085;">⚙️ Edit Kuota Maksimal</h3>
-            <div class="kuota-title">👨 Cowok</div>
-            <div class="kuota-grid" id="kuotaContainerCowok"></div>
-            <div class="kuota-title">👩 Cewek</div>
-            <div class="kuota-grid" id="kuotaContainerCewek"></div>
-            <div class="dinamis-setup">
-                <input type="text" id="customTaskName" placeholder="Tugas Baru...">
-                <select id="customTaskGender">
-                    <option value="cowok">Cowok</option>
-                    <option value="cewek">Cewek</option>
-                </select>
-                <button class="btn-db" style="background:#3498db;" onclick="tambahTugasDinamis()">+ Tambah</button>
+            <h3 style="margin-top:0; color:#16a085;">⚙️ Edit Kuota & Spot</h3>
+            <div class="kuota-grid" id="kuotaCowok"></div>
+            <div class="kuota-grid" id="kuotaCewek"></div>
+            <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+                <input type="text" id="customTask" placeholder="Nama Spot Baru..."><select id="customGender"><option value="cowok">Cowok</option><option value="cewek">Cewek</option></select><button style="background:#3498db;" onclick="addCustomTask()">+ Spot</button>
             </div>
         </div>
 
-        <div class="btn-container">
-            <button class="btn-utama" onclick="prosesSemua()">🎲 Acak & Plot Sekarang</button>
-            <button class="btn-pdf" onclick="window.print()">📄 Simpan Halaman Ini (PDF)</button>
-        </div>
-    </div> 
-    
-    <h2 class="section-title" id="judulHasil" style="display:none; background:#34495e;">Hasil Ploting Bulan Ini</h2>
+        <div class="btn-container"><button class="btn-utama" style="background:#27ae60; font-size:18px; padding:15px 30px; width:100%;" onclick="prosesSemua()">🎲 Acak & Plot Sekarang</button></div>
+    </div>
+
+    <h2 id="judulHasil" style="display:none; margin-top:30px;">Hasil Ploting Bulan Ini</h2>
     <div class="flex-row">
-        <div class="box results-cowok" id="panelCowok">
-            <h3>Tugas Cowok</h3>
-            <div id="outputCowok"></div>
-        </div>
-        <div class="box results-cewek" id="panelCewek">
-            <h3>Tugas Cewek</h3>
-            <div id="outputCewek"></div>
-        </div>
+        <div class="box results-cowok" id="outCowok"></div>
+        <div class="box results-cewek" id="outCewek"></div>
     </div>
 </div>
 
 <div id="historyModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn no-print" onclick="tutupRiwayatModal()">&times;</span>
-        <h2 style="margin-top: 0; color:#2c3e50;" class="no-print">📖 Riwayat & Presensi Bulanan</h2>
+        <span class="no-print" style="float:right; cursor:pointer; font-size:28px; font-weight:bold;" onclick="tutupRiwayatModal()">&times;</span>
+        <h2>📖 Riwayat & Presensi Bulanan</h2>
         <div id="historyContainer"></div>
     </div>
 </div>
 
 <script>
+    // --- FIREBASE CONFIG (DIBUAT OLEH USER) ---
     const firebaseConfig = {
         apiKey: "AIzaSyB9d5uK44dBsEmEsmtT5zHOA5NaPbNFiLY",
         authDomain: "project-iot2-a1c92.firebaseapp.com",
@@ -223,215 +137,167 @@ Lorong 3, Najwa</textarea>
         messagingSenderId: "674902263928",
         appId: "1:674902263928:web:1b961b9a6d4641d366458d"
     };
-    
     firebase.initializeApp(firebaseConfig);
-    const dbFirestore = firebase.firestore();
+    const db = firebase.firestore();
 
-    let appHistory = []; 
-    let state = {
-        cowok: [], cewek: [],
-        tasksCowok: ['Membersihkan Lorong', 'Kamar Mandi', 'Tangga Cowok', 'Balkon', 'Dapur', 'Ruang Wifi', 'Mesin Cuci'],
-        tasksCewek: ['Tangga Cewek', 'Masjid Lantai 1', 'Masjid Lantai 2', 'Dapur Cewek', 'Ruang Wifi Cewek']
+    // --- INITIAL DATA ---
+    const initialMembers = {
+        cowok: {
+            "Lorong 1": ["Faiz", "Fariz", "Aris", "Royan", "Rasya"],
+            "Lorong 2": ["Zaed", "Ubay", "Rizqo", "Gio", "Alva", "Duhan", "Dito", "Agoy"],
+            "Lorong 3": ["harsa", "Danu", "Alka", "Fadzlan", "Ikhwan", "Adit"],
+            "Lorong 4": ["Syafiq", "Rio", "Gifran", "Radit", "Affan", "Movic", "Kenzi"],
+            "Lorong 5": ["c", "Reza", "Malvin", "Dika", "Fandi", "Ibam", "Ipul", "Denu"]
+        },
+        cewek: {
+            "Lorong 1": ["Insyal", "Caca", "Febi", "Dila", "Nisna", "Alya", "Agnia", "Ifra", "Dilan", "Mimin"],
+            "Lorong 2": ["Nayla", "Dea", "Dini", "Putri", "Damai", "Chelsea", "Ayu", "Kania", "Askia", "Aurel"],
+            "Lorong 3": ["Ara", "Una", "Yuta", "Yaya", "Najwa"]
+        }
+    };
+    const initialTasks = {
+        cowok: ['Membersihkan Lorong', 'Kamar Mandi', 'Tangga Cowok', 'Balkon', 'Dapur', 'Ruang Wifi', 'Mesin Cuci'],
+        cewek: ['Tangga Cewek', 'Masjid Lantai 1', 'Masjid Lantai 2', 'Dapur Cewek', 'Ruang Wifi Cewek']
     };
 
-    let defaultQuotas = { 'Membersihkan Lorong': 1, 'Kamar Mandi': 8, 'Tangga Cewek': 1 };
+    let appHistory = [], memberData = {}, tasks = {}, quotas = {}, state = { cowok: [], cewek: [] };
 
-    window.onload = function() { muatDariFirestore(); renderKuotaInputs(); };
+    window.onload = () => { loadAllFromCloud(); muatHistory(); };
 
-    function muatDariFirestore() {
-        dbFirestore.collection("wgg_riwayat").orderBy("id", "asc").onSnapshot((querySnapshot) => {
-            appHistory = [];
-            querySnapshot.forEach((doc) => {
-                let data = doc.data(); data.docId = doc.id;
-                appHistory.push(data);
-            });
-            updateDbStatus();
+    async function loadAllFromCloud() {
+        try {
+            const doc = await db.collection("wgg_settings").doc("main_config").get();
+            if (doc.exists) {
+                const cloud = doc.data();
+                memberData = cloud.memberData; tasks = cloud.tasks; quotas = cloud.quotas;
+                document.getElementById('dbStatus').innerText = "Cloud Aktif ☁️";
+            } else {
+                memberData = initialMembers; tasks = initialTasks;
+                tasks.cowok.forEach(t => quotas[`cowok_${t}`] = 99);
+                tasks.cewek.forEach(t => quotas[`cewek_${t}`] = 99);
+                await saveToCloud();
+            }
+            renderManage(); renderKuota();
+        } catch (e) {
+            memberData = initialMembers; tasks = initialTasks; renderManage(); renderKuota();
+        }
+    }
+
+    async function saveToCloud() {
+        document.getElementById('autoSyncMsg').style.display = 'block';
+        await db.collection("wgg_settings").doc("main_config").set({ memberData, tasks, quotas });
+        setTimeout(() => document.getElementById('autoSyncMsg').style.display = 'none', 2000);
+    }
+
+    function resetToDefault() {
+        if(confirm("Reset semua anggota ke data awal?")) {
+            memberData = JSON.parse(JSON.stringify(initialMembers));
+            tasks = JSON.parse(JSON.stringify(initialTasks));
+            saveToCloud().then(() => { renderManage(); renderKuota(); });
+        }
+    }
+
+    function renderManage() {
+        ['cowok', 'cewek'].forEach(g => {
+            const container = document.getElementById('manage' + g.charAt(0).toUpperCase() + g.slice(1));
+            container.innerHTML = '';
+            for (let lorong in memberData[g]) {
+                let html = `<div class="lorong-card"><div class="lorong-header"><b>${lorong}</b><button class="btn-del-mini" onclick="delLorong('${g}','${lorong}')">🗑️</button></div><div>`;
+                memberData[g][lorong].forEach((name, idx) => { html += `<span class="member-chip">${name}<button class="btn-del-mini" onclick="delMember('${g}','${lorong}',${idx})">×</button></span>`; });
+                html += `</div><div style="margin-top:8px; display:flex; gap:5px;"><input type="text" id="in-${g}-${lorong}" placeholder="Nama baru..." style="flex:1; font-size:0.8em;"><button style="background:#27ae60; padding:2px 8px;" onclick="addMember('${g}','${lorong}')">+</button></div></div>`;
+                container.innerHTML += html;
+            }
         });
     }
 
-    function updateDbStatus() {
-        document.getElementById('dbStatus').innerHTML = `Tersinkronisasi ☁️ | Riwayat: ${appHistory.length} Bulan`;
+    function addLorong(g) { let input = document.getElementById('newLorong'+g.charAt(0).toUpperCase()+g.slice(1)); if(input.value.trim()) { memberData[g][input.value.trim()] = []; renderManage(); input.value=''; saveToCloud(); } }
+    function delLorong(g, l) { if(confirm('Hapus '+l+'?')) { delete memberData[g][l]; renderManage(); saveToCloud(); } }
+    function addMember(g, l) { let input = document.getElementById(`in-${g}-${l}`); if(input.value.trim()) { memberData[g][l].push(input.value.trim()); renderManage(); input.value=''; saveToCloud(); } }
+    function delMember(g, l, idx) { memberData[g][l].splice(idx, 1); renderManage(); saveToCloud(); }
+
+    function renderKuota() {
+        ['cowok','cewek'].forEach(g => {
+            let cont = document.getElementById('kuota'+g.charAt(0).toUpperCase()+g.slice(1));
+            cont.innerHTML = '';
+            tasks[g].forEach(t => {
+                let key = `${g}_${t}`, val = quotas[key] || 99;
+                cont.innerHTML += `<div class="kuota-item"><button class="btn-del-task" onclick="delTask('${g}','${t}')">×</button><label style="font-size:0.7em; display:block;">${t}</label><input type="number" onchange="updateQuota('${key}', this.value)" value="${val}" style="width:50px;"></div>`;
+            });
+        });
+    }
+    function updateQuota(key, val) { quotas[key] = parseInt(val); saveToCloud(); }
+    function addCustomTask() { let val = document.getElementById('customTask').value.trim(), g = document.getElementById('customGender').value; if(val) { tasks[g].push(val); quotas[`${g}_${val}`] = 99; renderKuota(); document.getElementById('customTask').value=''; saveToCloud(); } }
+    function delTask(g, t) { if(confirm('Hapus spot '+t+'?')) { tasks[g] = tasks[g].filter(x => x!==t); delete quotas[`${g}_${t}`]; renderKuota(); saveToCloud(); } }
+
+    function muatHistory() { db.collection("wgg_riwayat").orderBy("id", "asc").onSnapshot(snap => { appHistory = snap.docs.map(doc => ({ docId: doc.id, ...doc.data() })); document.getElementById('dbStatus').innerText = `Cloud Aktif ☁️ | Riwayat: ${appHistory.length} Bulan`; }); }
+    
+    function simpanRiwayatPenugasan() {
+        if(!state.cowok.length) return alert("Acak plotingan dulu!");
+        let label = prompt("Nama periode (Misal: Mei 2026):"); if(!label) return;
+        db.collection("wgg_riwayat").add({ id: Date.now(), label, cowok: state.cowok.map(p => ({...p, presensi: null})), cewek: state.cewek.map(p => ({...p, presensi: null})) }).then(() => alert("Riwayat Tersimpan!"));
     }
 
-    function simpanKeFirestore() {
-        if(state.cowok.length === 0 && state.cewek.length === 0) return alert("Acak dulu sebelum simpan!");
-        let label = prompt("Nama bulan (Contoh: Mei 2026):");
-        if(!label) return;
-        
-        let cowokAbs = state.cowok.map(p => ({...p, presensi: null}));
-        let cewekAbs = state.cewek.map(p => ({...p, presensi: null}));
-
-        dbFirestore.collection("wgg_riwayat").add({
-            id: new Date().getTime(), label: label,
-            cowok: cowokAbs, cewek: cewekAbs
-        }).then(() => alert(`Tersimpan!`));
+    function updatePresensi(docId, gender, personIdx, val) {
+        let doc = appHistory.find(d => d.docId === docId); doc[gender][personIdx].presensi = val;
+        const badge = document.getElementById(`badge-${docId}-${gender}-${personIdx}`);
+        if(badge) { badge.className = `badge-presensi badge-${val.toLowerCase()}`; badge.innerText = val; }
+        db.collection("wgg_riwayat").doc(docId).update({ [gender]: doc[gender] });
     }
-
-    function updatePresensi(docId, gender, personIdx, value) {
-        let doc = appHistory.find(d => d.docId === docId);
-        if(!doc) return;
-        doc[gender][personIdx].presensi = value;
-        dbFirestore.collection("wgg_riwayat").doc(docId).update({ [gender]: doc[gender] });
-    }
-
-    function cetakRiwayat() { window.print(); }
 
     function bukaRiwayatModal() {
-        let container = document.getElementById('historyContainer');
-        container.innerHTML = '';
-        if(appHistory.length === 0) {
-            container.innerHTML = '<p style="text-align:center; color:#888;">Kosong.</p>';
-        } else {
-            [...appHistory].reverse().forEach(record => {
-                let html = `<details class="history-month" open>
-                                <summary>
-                                    <span>${record.label}</span>
-                                    <div class="no-print">
-                                        <button class="btn-print-history" onclick="cetakRiwayat()">📄 Cetak Riwayat (PDF)</button>
-                                        <button class="btn-del-doc" onclick="hapusDokumen('${record.docId}')">🗑️ Hapus</button>
-                                    </div>
-                                </summary>
-                                <div class="history-data">`;
+        let cont = document.getElementById('historyContainer'); cont.innerHTML = appHistory.length ? '' : '<p>Kosong.</p>';
+        [...appHistory].reverse().forEach(record => {
+            let html = `<details class="history-month" open><summary><span>${record.label}</span><div class="no-print"><button style="background:#e74c3c; font-size:0.75em; margin-right:5px;" onclick="window.print()">📄 PDF</button><button style="background:#7f8c8d; font-size:0.75em;" onclick="hapusDokumen('${record.docId}')">🗑️ Hapus</button></div></summary><div class="history-data">`;
+            
+            ['cowok','cewek'].forEach(g => {
+                html += `<div class="history-col"><h3>${g.toUpperCase()}</h3>`;
                 
-                ['cowok', 'cewek'].forEach(gender => {
-                    html += `<div class="history-col"><h3 style="color:${gender==='cowok'?'#2980b9':'#e91e63'};">${gender.toUpperCase()}</h3>`;
-                    let grouped = {};
-                    record[gender].forEach((p, idx) => { 
-                        if(!grouped[p.tugas]) grouped[p.tugas] = []; 
-                        grouped[p.tugas].push({...p, oIdx: idx}); 
-                    });
-                    
-                    Object.keys(grouped).forEach(tugas => {
-                        html += `<div class="history-task-title">${tugas}</div>`;
-                        grouped[tugas].forEach(p => {
-                            let pClass = p.presensi ? `badge-${p.presensi.toLowerCase()}` : 'badge-null';
-                            let pText = p.presensi || 'Pilih...';
-                            html += `
-                                <div class="history-person">
-                                    <div class="person-header">
-                                        <span><b>${p.nama}</b> <small class="lorong-tag">${p.lorong}</small></span>
-                                        <span class="badge-presensi ${pClass}">${p.presensi || '-'}</span>
-                                    </div>
-                                    <select class="presensi-select no-print" onchange="updatePresensi('${record.docId}', '${gender}', ${p.oIdx}, this.value)">
-                                        <option value="" disabled ${!p.presensi?'selected':''}>Set Presensi...</option>
-                                        <option value="Hadir" ${p.presensi==='Hadir'?'selected':''}>Hadir</option>
-                                        <option value="Alfa" ${p.presensi==='Alfa'?'selected':''}>Alfa</option>
-                                        <option value="Izin" ${p.presensi==='Izin'?'selected':''}>Izin</option>
-                                    </select>
-                                </div>`;
-                        });
+                // PENGELOMPOKAN PER PLOTINGAN (TUGAS)
+                let grouped = {};
+                (record[g] || []).forEach((p, idx) => {
+                    if(!grouped[p.tugas]) grouped[p.tugas] = [];
+                    grouped[p.tugas].push({...p, originalIdx: idx});
+                });
+
+                Object.keys(grouped).forEach(tugas => {
+                    html += `<div class="history-task-group"><span class="history-task-title">${tugas}</span>`;
+                    grouped[tugas].forEach(p => {
+                        let pres = p.presensi || 'absen';
+                        html += `<div class="history-person"><div style="display:flex; justify-content:space-between; align-items:center;"><span><b>${p.nama}</b> <small class="lorong-tag">${p.lorong}</small></span><span id="badge-${record.docId}-${g}-${p.originalIdx}" class="badge-presensi badge-${pres.toLowerCase()}">${p.presensi || 'Belum Absen'}</span></div><select class="no-print" style="margin-top:5px;" onchange="updatePresensi('${record.docId}','${g}',${p.originalIdx},this.value)"><option value="" disabled ${!p.presensi?'selected':''}>Set Presensi...</option><option value="Hadir" ${p.presensi==='Hadir'?'selected':''}>Hadir</option><option value="Alfa" ${p.presensi==='Alfa'?'selected':''}>Alfa</option><option value="Izin" ${p.presensi==='Izin'?'selected':''}>Izin</option></select></div>`;
                     });
                     html += `</div>`;
                 });
-                container.innerHTML += html + `</div></details>`;
+                html += `</div>`;
             });
-        }
+            cont.innerHTML += html + `</div></details>`;
+        });
         document.getElementById('historyModal').style.display = 'block';
     }
-
-    function hapusDokumen(id) { if(confirm("Hapus?")) dbFirestore.collection("wgg_riwayat").doc(id).delete(); }
     function tutupRiwayatModal() { document.getElementById('historyModal').style.display = 'none'; }
+    function hapusDokumen(id) { if(confirm("Hapus permanen?")) db.collection("wgg_riwayat").doc(id).delete(); }
 
-    // --- LOGIKA PLOTING ---
-    function renderKuotaInputs() {
-        let old = {}; document.querySelectorAll('.kuota-grid input').forEach(i => old[i.id] = i.value);
-        let cc = document.getElementById('kuotaContainerCowok'); cc.innerHTML = '';
-        state.tasksCowok.forEach(t => {
-            let id = 'q_cowok_' + t.replace(/[^a-zA-Z0-9]/g, '_');
-            cc.innerHTML += `<div class="kuota-item"><button class="btn-delete-task" onclick="hapusTugas('cowok','${t}')">❌</button><label>${t}</label><input type="number" id="${id}" value="${defaultQuotas[t]||99}"></div>`;
-        });
-        let cw = document.getElementById('kuotaContainerCewek'); cw.innerHTML = '';
-        state.tasksCewek.forEach(t => {
-            let id = 'q_cewek_' + t.replace(/[^a-zA-Z0-9]/g, '_');
-            cw.innerHTML += `<div class="kuota-item"><button class="btn-delete-task" onclick="hapusTugas('cewek','${t}')">❌</button><label>${t}</label><input type="number" id="${id}" value="${defaultQuotas[t]||99}"></div>`;
-        });
-        document.querySelectorAll('.kuota-grid input').forEach(i => { if(old[i.id]) i.value = old[i.id]; });
-    }
-
-    function tambahTugasDinamis() {
-        let n = document.getElementById('customTaskName').value.trim();
-        let g = document.getElementById('customTaskGender').value;
-        if(n) { state[g==='cowok'?'tasksCowok':'tasksCewek'].push(n); renderKuotaInputs(); document.getElementById('customTaskName').value=''; }
-    }
-
-    function hapusTugas(g,t) { state[g==='cowok'?'tasksCowok':'tasksCewek'] = state[g==='cowok'?'tasksCowok':'tasksCewek'].filter(x=>x!==t); renderKuotaInputs(); }
-    function getQuota(g, t) { let e = document.getElementById(`q_${g}_${t.replace(/[^a-zA-Z0-9]/g, '_')}`); return e ? parseInt(e.value) : 99; }
-
-    function cekCooldown(n, t, g) {
-        let look = g === 'cowok' ? 5 : 3;
-        let hist = appHistory.slice(-look);
-        for(let r of hist) { if(r[g] && r[g].find(p => p.nama === n && p.tugas === t)) return false; }
-        return true;
-    }
-
-    function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+    function shuffle(a) { for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
     function prosesSemua() {
         document.getElementById('judulHasil').style.display = 'block';
-        state.cowok = plot('cowok', 'inputCowok');
-        state.cewek = plot('cewek', 'inputCewek');
-        render('outputCowok', state.cowok, state.tasksCowok, 'cowok');
-        render('outputCewek', state.cewek, state.tasksCewek, 'cewek');
-    }
-
-    function plot(gender, inputId) {
-        let lines = document.getElementById(inputId).value.trim().split('\n');
-        let data = {}; lines.forEach(l => { let p = l.split(','); if(p[1]) { let lr = p[0].trim(); if(!data[lr]) data[lr]=[]; data[lr].push(p[1].trim()); } });
-        
-        let res = [], idC = 1;
-        let spotK = state[gender==='cowok'?'tasksCowok':'tasksCewek'].filter(t => !['Membersihkan Lorong','Kamar Mandi','Tangga Cewek'].includes(t));
-        let counts = {}; spotK.forEach(s => counts[s] = 0);
-        let shuffledS = shuffle([...spotK]);
-
-        Object.keys(data).forEach((lorong, idx) => {
-            let names = shuffle([...data[lorong]]);
-            let targetSpot = shuffledS[idx % shuffledS.length];
-
-            // Rule: Membersihkan Lorong (Cowok)
-            if(gender === 'cowok' && state.tasksCowok.includes('Membersihkan Lorong')) {
-                for(let i=0; i<getQuota('cowok','Membersihkan Lorong'); i++) if(names.length) {
-                    let n = names.shift(); res.push({id: idC++, nama: n, lorong, tugas: 'Membersihkan Lorong', terpaksa: !cekCooldown(n,'Membersihkan Lorong','cowok')});
-                }
-            }
-            // Rule: Tangga Cewek (L1 & L2)
-            if(gender === 'cewek' && (lorong==='Lorong 1'||lorong==='Lorong 2') && state.tasksCewek.includes('Tangga Cewek')) {
-                for(let i=0; i<getQuota('cewek','Tangga Cewek'); i++) if(names.length) {
-                    let n = names.shift(); res.push({id: idC++, nama: n, lorong, tugas: 'Tangga Cewek', terpaksa: !cekCooldown(n,'Tangga Cewek','cewek')});
-                }
-            }
-            // Sisa sebar ke Spot Khusus
-            while(names.length) {
-                let t = targetSpot;
-                if(counts[t] >= getQuota(gender, t)) {
-                    let av = spotK.filter(s => counts[s] < getQuota(gender, s));
-                    if(av.length) { av.sort((a,b)=>counts[a]-counts[b]); t = av[0]; }
-                }
-                let n = names.shift();
-                res.push({id: idC++, nama: n, lorong, tugas: t, terpaksa: !cekCooldown(n, t, gender)});
-                if(counts[t] !== undefined) counts[t]++;
-            }
-        });
-        return res;
-    }
-
-    function render(id, data, tasks, g) {
-        let c = document.getElementById(id); c.innerHTML = '';
-        let grouped = {}; tasks.forEach(t => grouped[t] = []);
-        data.forEach(p => { if(!grouped[p.tugas]) grouped[p.tugas]=[]; grouped[p.tugas].push(p); });
-        tasks.forEach(t => {
-            let nms = grouped[t]; if(!nms.length) return;
-            let html = `<div class="list-group"><div class="list-title">${t} (${nms.length})</div><ul class="item-list">`;
-            nms.forEach(m => {
-                let ops = tasks.map(o => `<option value="${o}" ${o===m.tugas?'selected':''}>${o}</option>`).join('');
-                html += `<li class="item-row"><div class="person-info"><span class="person-name">${m.nama} ${m.terpaksa?'⚠️':''}</span><span class="lorong-tag">${m.lorong}</span></div>
-                        <div class="action-edit"><select class="task-select" onchange="editMan('${g}',${m.id},this.value)">${ops}</select></div></li>`;
-            });
-            c.innerHTML += html + '</ul></div>';
+        ['cowok','cewek'].forEach(g => {
+            let pool = []; for(let l in memberData[g]) memberData[g][l].forEach(n => pool.push({nama:n, lorong:l}));
+            shuffle(pool);
+            state[g] = pool.map((p, idx) => ({...p, id:idx, tugas: tasks[g][idx % tasks[g].length]}));
+            renderResult(g);
         });
     }
 
-    function editMan(g, id, v) { let p = state[g].find(x=>x.id===id); if(p){ p.tugas=v; p.terpaksa=false; render(g==='cowok'?'outputCowok':'outputCewek', state[g], state[g==='cowok'?'tasksCowok':'tasksCewek'], g); } }
+    function renderResult(g) {
+        let cont = document.getElementById('out' + g.charAt(0).toUpperCase()+g.slice(1));
+        cont.innerHTML = `<h3>TUGAS ${g.toUpperCase()}</h3>`;
+        let grouped = {}; state[g].forEach(p => { if(!grouped[p.tugas]) grouped[p.tugas]=[]; grouped[p.tugas].push(p); });
+        for(let t in grouped) {
+            let html = `<div class="list-group"><b class="list-title">${t}</b>`;
+            grouped[t].forEach(p => { html += `<div class="item-row"><span><b>${p.nama}</b> <small class="lorong-tag">${p.lorong}</small></span><select onchange="state['${g}'][${p.id}].tugas=this.value; renderResult('${g}')">${tasks[g].map(opt => `<option value="${opt}" ${opt===p.tugas?'selected':''}>${opt}</option>`).join('')}</select></div>`; });
+            cont.innerHTML += html + `</div>`;
+        }
+    }
 </script>
-
 </body>
 </html>
