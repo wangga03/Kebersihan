@@ -14,8 +14,9 @@
         .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;}
         
         .admin-controls { position: absolute; top: 20px; right: 20px; z-index: 1000; }
-        #btnLogin { background: #34495e; padding: 8px 15px; border-radius: 6px; cursor: pointer; color: white; border:none; }
-        #btnLogout { background: #e74c3c; padding: 8px 15px; border-radius: 6px; cursor: pointer; display: none; color: white; border:none; }
+        #btnLogin, #btnLogout { padding: 8px 15px; border-radius: 6px; cursor: pointer; color: white; border:none; font-weight: bold; }
+        #btnLogin { background: #34495e; }
+        #btnLogout { background: #e74c3c; display: none; }
         .admin-only { display: none; }
 
         .ppm-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; background: #eee; padding: 10px; border-radius: 50px; }
@@ -30,30 +31,21 @@
         button { border: none; padding: 10px 15px; font-size: 14px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; color: white; }
         input, select { padding: 8px; border-radius: 5px; border: 1px solid #ccc; outline: none; }
 
-        .lorong-card { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 10px; text-align: left; }
+        .lorong-card { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 10px; text-align: left;}
         .member-chip { display: inline-flex; align-items: center; background: #eef2f3; padding: 5px 12px; border-radius: 20px; margin: 3px; font-size: 0.85em; border: 1px solid #ccc; }
         .btn-del-mini { background: none; color: red; padding: 0 0 0 5px; font-size: 12px; cursor: pointer; border: none;}
 
         .db-section { background: #f3e5f5; border: 1px solid #ce93d8; text-align: center; margin-bottom: 20px; padding: 15px; border-radius: 8px; }
         .kuota-section { background: #e8f8f5; border: 1px solid #1abc9c; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
         .kuota-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin: 10px 0; }
-        .kuota-item { background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #bdc3c7; text-align: center; position: relative;}
+        .kuota-item { background: #fff; padding: 10px; border-radius: 6px; border: 1px solid #bdc3c7; text-align: center; position: relative; display: flex; flex-direction: column; gap: 5px;}
         .btn-del-task { position: absolute; top: 2px; right: 2px; color: red; cursor: pointer; background:none; border:none; font-size: 10px;}
 
-        /* INDIKATOR WARNA PRIORITAS */
-        .prio-indicator { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
-        .prio-tinggi { background-color: #e74c3c; } /* Merah */
-        .prio-sedang { background-color: #f1c40f; } /* Kuning */
-        .prio-rendah { background-color: #2ecc71; } /* Hijau */
-
-        /* Interactive Results UI */
         .list-group { margin-bottom: 15px; background: rgba(255,255,255,0.8); padding: 10px; border-radius: 6px; border: 1px solid #ddd; text-align: left; transition: all 0.3s ease; }
         .list-title { font-weight: bold; border-bottom: 1px dashed #ccc; padding-bottom: 5px; margin-bottom: 10px; display: block; color: #2c3e50; cursor: pointer; transition: 0.2s; }
-        .list-title:hover { color: #3498db; }
         .item-row { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-bottom: 1px solid #eee; background: #fff; margin-bottom: 4px; border-radius: 4px; flex-wrap: wrap; gap: 10px; transition: 0.3s; }
         
         .clickable-name { cursor: pointer; padding: 2px 5px; border-radius: 4px; transition: 0.2s; }
-        .clickable-name:hover { background: #3498db; color: white; }
         .selected-person { background: #2c3e50; color: #fff; font-weight: bold; }
 
         .recommend-safe { background-color: #d4edda !important; border: 2px solid #28a745 !important; }
@@ -63,61 +55,51 @@
         
         .overlap-info { font-size: 0.7em; color: #dc3545; display: block; font-style: italic; font-weight: bold; }
         .quota-warning { font-size: 0.8em; font-weight: normal; margin-left: 10px; padding: 2px 8px; border-radius: 4px; }
-        .quota-kurang { background: #fff3cd; color: #856404; }
-        .quota-kelebihan { background: #f8d7da; color: #721c24; }
+        
+        .prio-indicator { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+        .prio-Tinggi { background-color: #e74c3c; } .prio-Sedang { background-color: #f1c40f; } .prio-Rendah { background-color: #2ecc71; }
 
         .lorong-tag { font-size: 0.75em; padding: 2px 6px; border-radius: 4px; color: white; background: #95a5a6; }
         .badge-presensi { font-size: 0.75em; padding: 4px 10px; border-radius: 12px; font-weight: bold; color: white; min-width: 85px; text-align: center; display: inline-block;}
-        .badge-hadir { background-color: #27ae60; } .badge-alfa { background-color: #e74c3c; } .badge-izin { background-color: #f1c40f; color: #333; } .badge-absen { background-color: #636e72; font-style: italic; opacity: 0.8; }
+        .badge-hadir { background-color: #27ae60 !important; color: white !important; }
+        .badge-alfa { background-color: #e74c3c !important; color: white !important; }
+        .badge-izin { background-color: #f1c40f !important; color: #333 !important; }
+        .badge-absen { background-color: #636e72 !important; color: white !important; opacity: 0.8; font-style: italic; }
 
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
         .modal-content { background: #fff; margin: 2% auto; padding: 20px; border-radius: 8px; width: 95%; max-width: 1000px; max-height: 90vh; overflow-y: auto; position: relative;}
         details.history-month { background: #fdfdfd; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; padding: 15px; }
-        details.history-month summary { font-size: 1.1em; font-weight: bold; color: #2980b9; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none;}
-        .history-task-group { background: #f9f9f9; padding: 10px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee; }
-        .history-task-title { font-weight: bold; color: #e67e22; border-bottom: 1px solid #ddd; margin-bottom: 8px; display: block; font-size: 0.9em;}
-        .sync-status { font-size: 0.8em; font-style: italic; color: #27ae60; margin-top: 5px; display: none;}
-
-        #printHeader { display: none; text-align: center; }
 
         @media print { 
-    @page { margin: 1cm !important; }
-    body { margin: 1.5cm !important; background: white !important; overflow: visible !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-    
-    /* Sembunyikan elemen navigasi dan admin */
-    .no-print, .admin-controls, button, select, .sync-status, .warning-overlap, #viewModeNotice, .quota-warning, .ppm-nav, .db-section, .flex-row:not(.history-data), h1, h2:not(#historyTitle) { 
-        display: none !important; 
-    } 
+            @page { margin: 1cm !important; }
+            body { margin: 1cm !important; background: white !important; overflow: visible !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .no-print, .admin-controls, button, select, #viewModeNotice, .ppm-nav, .db-section, .flex-row:not(.history-data), h1 { display: none !important; } 
+            
+            body * { visibility: hidden; } 
+            #historyModal, #historyModal * { visibility: visible; } 
+            #historyModal { position: relative !important; display: block !important; width: 100% !important; height: auto !important; overflow: visible !important; } 
+            .modal-content { max-height: none !important; overflow: visible !important; border: none !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            
+            #printHeader { display: block !important; margin-bottom: 20px; border-bottom: 2px solid black; text-align: center; }
+            #printHeader h1 { visibility: visible; display: block; font-size: 24px; font-weight: 800; color: black !important; border: none; margin-bottom: 5px;}
+            #printHeader p { visibility: visible; display: block; font-size: 16px; color: #555 !important; margin: 0; }
 
-    /* Pengaturan Modal Riwayat */
-    details.history-month:not(.printing) { display: none !important; }
-    body * { visibility: hidden; } 
-    #historyModal, #historyModal * { visibility: visible; } 
-    #historyModal { position: relative !important; display: block !important; width: 100% !important; height: auto !important; overflow: visible !important; } 
-    .modal-content { max-height: none !important; overflow: visible !important; border: none !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
-    
-    /* Judul Laporan */
-    #printHeader { display: block !important; margin-bottom: 20px; border-bottom: 2px solid black; text-align: center; }
-    #printHeader h1 { display: block !important; text-align: center; border:none; padding:0; font-size: 1.5rem; color: black !important; }
-    
-    .history-data { display: flex !important; flex-wrap: nowrap !important; gap: 20px; align-items: flex-start; }
-    .history-task-group { page-break-inside: avoid; border: 1px solid #eee; margin-bottom: 10px; padding: 10px; }
+            details.history-month:not(.printing) { display: none !important; }
+            details.history-month { border: none !important; }
+            
+            .history-data { display: flex !important; flex-direction: row !important; gap: 20px; align-items: flex-start; visibility: visible; }
+            .history-col { flex: 1; visibility: visible; }
+            .history-col h3 { visibility: visible; border-bottom: 2px solid #eee; margin-top: 0; color: #2c3e50 !important; font-size: 1.1em !important; }
 
-    /* FIX WARNA PRESENSI SAAT PRINT */
-    .badge-presensi { 
-        border: 1px solid #000 !important; 
-        print-color-adjust: exact !important; 
-        -webkit-print-color-adjust: exact !important; 
-        color: white !important; /* Paksa teks warna putih agar kontras dengan background */
-        padding: 4px 10px !important;
-        font-weight: bold !important;
-    } 
-
-    .badge-hadir { background-color: #27ae60 !important; color: white !important; } 
-    .badge-alfa { background-color: #e74c3c !important; color: white !important; } 
-    .badge-izin { background-color: #f1c40f !important; color: #333 !important; } /* Izin teks gelap karena background kuning terang */
-    .badge-absen { border: 1px dashed #777 !important; color: #555 !important; background: #f8f9fa !important; }
-}
+            .history-task-group { visibility: visible; border: 1px solid #e0e0e0 !important; border-radius: 10px !important; margin-bottom: 12px !important; padding: 0 !important; overflow: hidden; page-break-inside: avoid; }
+            .history-task-title { visibility: visible; display: block !important; color: #e67e22 !important; font-weight: bold !important; padding: 6px 10px !important; font-size: 0.9em !important; border-bottom: 1px solid #f0f0f0 !important; background: #fdfdfd !important; text-align: left !important; }
+            .item-row { visibility: visible; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 5px 10px !important; border-bottom: 1px dashed #eee !important; background: white !important; }
+            .badge-presensi { visibility: visible; border: 1px solid #ccc !important; border-radius: 20px !important; padding: 2px 12px !important; font-size: 0.7em !important; background: #f9f9f9 !important; color: #555 !important; }
+            .badge-hadir { border: 1.5px solid #27ae60 !important; color: #27ae60 !important; }
+            .badge-alfa { border: 1.5px solid #e74c3c !important; color: #e74c3c !important; }
+            .badge-izin { border: 1.5px solid #f1c40f !important; color: #a18800 !important; }
+            .badge-absen { border: 1px dashed #95a5a6 !important; color: #7f8c8d !important; }
+        }
     </style>
 </head>
 <body>
@@ -137,14 +119,12 @@
         
         <div class="db-section">
             <div id="dbStatus" style="font-weight:bold; margin-bottom:10px; color:#6a1b9a;">Mode View</div>
-            <div id="autoSyncMsg" class="sync-status">✓ Cloud Sinkron</div>
             <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
                 <button class="admin-only" style="background:#8e44ad;" onclick="simpanRiwayatPenugasan()">📌 Simpan Riwayat</button>
                 <button style="background:#34495e;" onclick="bukaRiwayatModal()">📖 Lihat Riwayat & Presensi</button>
                 <button class="admin-only" style="background:#7f8c8d; font-size: 0.8em;" onclick="resetToDefault()">🔄 Reset Tab Ini</button>
             </div>
         </div>
-        <div id="viewModeNotice" style="text-align:center; color:#888; padding:10px;">Mode View: Login Admin untuk mengedit.</div>
         
         <div class="admin-only">
             <div class="flex-row">
@@ -170,12 +150,15 @@
             <div class="btn-container"><button style="background:#27ae60; font-size:18px; padding:15px 30px; width:100%;" onclick="prosesSemua()">🎲 Acak & Plot Sekarang</button></div>
         </div>
     </div>
-    <div class="flex-row no-print"><div class="box results-cowok" id="outCowok"></div><div class="box results-cewek" id="outCewek"></div></div>
+    <div class="flex-row no-print"><div class="box results-cowok" id="outCowok" style="border:none; background:transparent; padding:0;"></div><div class="box results-cewek" id="outCewek" style="border:none; background:transparent; padding:0;"></div></div>
 </div>
 
 <div id="historyModal" class="modal">
     <div class="modal-content">
-        <div id="printHeader" style="display:none;"><h1>PEMBAGIAN MIMBER PPMRJ</h1></div>
+        <div id="printHeader" style="display:none;">
+            <h1>PEMBAGIAN MIMBER PPMRJ</h1>
+            <p id="pdfSubTitle"></p>
+        </div>
         <span class="no-print" style="float:right; cursor:pointer; font-size:28px; font-weight:bold; color: #aaa;" onclick="tutupRiwayatModal()">&times;</span>
         <h2 id="historyTitle" class="no-print">📖 Riwayat & Presensi</h2>
         <div id="historyContainer"></div>
@@ -188,18 +171,14 @@
     const db = firebase.firestore();
 
     let currentPPM = 1, appHistory = [], memberData = {}, tasks = {}, quotas = {}, priorities = {}, state = { cowok: [], cewek: [] };
-    let isAdmin = localStorage.getItem('ppm_admin') === 'true', selectedPersonId = null, currentGuidanceTask = null, openedDetails = new Set();
+    let isAdmin = localStorage.getItem('ppm_admin') === 'true', selectedPersonId = null, currentGuidanceTask = null, openedDetails = new Set(), editModeBulan = null;
 
     window.onload = () => { checkAdminStatus(); switchPPM(1); };
 
     function startRealtimeSync() {
         db.collection("wgg_settings").doc(`config_ppm${currentPPM}`).onSnapshot(doc => {
             if(doc.exists) {
-                const d = doc.data(); 
-                memberData = d.memberData || {cowok:{}, cewek:{}}; 
-                tasks = d.tasks || {cowok:[], cewek:[]}; 
-                quotas = d.quotas || {};
-                priorities = d.priorities || {};
+                const d = doc.data(); memberData = d.memberData || {}; tasks = d.tasks || {cowok:[], cewek:[]}; quotas = d.quotas || {}; priorities = d.priorities || {};
                 renderManage(); renderKuota();
                 if(state.cowok.length) { renderResult('cowok'); renderResult('cewek'); }
             }
@@ -211,27 +190,33 @@
     }
 
     async function loginAdmin() {
-        let inputPass = prompt("Password Admin:"); if(!inputPass) return;
-        const auth = await db.collection("wgg_auth").doc("admin_pass").get();
-        if(auth.exists && inputPass === auth.data().password) { isAdmin = true; localStorage.setItem('ppm_admin', 'true'); checkAdminStatus(); } else alert("Salah!");
+        let p = prompt("Password Admin:"); if(!p) return;
+        const authDoc = await db.collection("wgg_auth").doc("admin_pass").get();
+        if(authDoc.exists && p === authDoc.data().password) { isAdmin = true; localStorage.setItem('ppm_admin', 'true'); checkAdminStatus(); }
     }
     function logoutAdmin() { isAdmin = false; localStorage.setItem('ppm_admin', 'false'); checkAdminStatus(); }
     function checkAdminStatus() {
         document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? 'block' : 'none');
         document.getElementById('btnLogin').style.display = isAdmin ? 'none' : 'block';
         document.getElementById('btnLogout').style.display = isAdmin ? 'block' : 'none';
-        document.getElementById('viewModeNotice').style.display = isAdmin ? 'none' : 'block';
     }
 
-    async function switchPPM(num) { currentPPM = num; document.querySelectorAll('.labelNav').forEach(el => el.innerText = num); document.getElementById('btnPpm1').classList.toggle('active', num === 1); document.getElementById('btnPpm2').classList.toggle('active', num === 2); startRealtimeSync(); }
-    async function saveToCloud() { if(!isAdmin) return; document.getElementById('autoSyncMsg').style.display = 'block'; await db.collection("wgg_settings").doc(`config_ppm${currentPPM}`).set({ memberData, tasks, quotas, priorities }); setTimeout(() => document.getElementById('autoSyncMsg').style.display = 'none', 2000); }
+    async function switchPPM(num) { 
+        currentPPM = num; 
+        document.querySelectorAll('.labelNav').forEach(el => el.innerText = num); 
+        document.getElementById('btnPpm1').classList.toggle('active', num === 1);
+        document.getElementById('btnPpm2').classList.toggle('active', num === 2);
+        document.getElementById('dbStatus').innerText = `Mode: PPM ${num} ${isAdmin?'(Admin)':'(View)'}`;
+        startRealtimeSync(); 
+    }
+    async function saveToCloud() { if(!isAdmin) return; await db.collection("wgg_settings").doc(`config_ppm${currentPPM}`).set({ memberData, tasks, quotas, priorities }); }
 
     function renderManage() {
         ['cowok', 'cewek'].forEach(g => {
             const container = document.getElementById('manage' + g.charAt(0).toUpperCase() + g.slice(1));
             if(!container) return; container.innerHTML = '';
-            Object.keys(memberData[g]).sort((a,b) => a.localeCompare(b, undefined, {numeric: true})).forEach(l => {
-                let html = `<div class="lorong-card"><div style="display:flex; justify-content:space-between; margin-bottom:8px;"><b>🏠 ${l}</b>${isAdmin?`<button onclick="delLorong('${g}','${l}')" style="background:none; border:none; cursor:pointer;">🗑️</button>`:''}</div><div>`;
+            Object.keys(memberData[g] || {}).sort((a,b) => a.localeCompare(b, undefined, {numeric: true})).forEach(l => {
+                let html = `<div class="lorong-card"><div style="display:flex; justify-content:space-between;"><b>🏠 ${l}</b>${isAdmin?`<button onclick="delLorong('${g}','${l}')">🗑️</button>`:''}</div><div>`;
                 (memberData[g][l] || []).forEach((n, idx) => { html += `<span class="member-chip">${n}${isAdmin?`<button class="btn-del-mini" onclick="delMember('${g}','${l}',${idx})">×</button>`:''}</span>`; });
                 html += `</div>${isAdmin?`<div style="margin-top:8px; display:flex; gap:5px;"><input type="text" id="in-${g}-${l}" placeholder="Nama..."><button style="background:#27ae60;" onclick="addMember('${g}','${l}')">+</button></div>`:''}</div>`;
                 container.innerHTML += html;
@@ -245,29 +230,19 @@
             if(!cont) return; cont.innerHTML = ''; 
             (tasks[g] || []).forEach(t => {
                 let key = `${g}_${t}`, val = quotas[key] || 1, prio = priorities[key] || 'Sedang';
-                let indicator = prio==='Tinggi'?'prio-tinggi':prio==='Rendah'?'prio-rendah':'prio-sedang';
-                cont.innerHTML += `<div class="kuota-item">
-                    ${isAdmin?`<button class="btn-del-task" onclick="delTask('${g}','${t}')">×</button>`:''}
-                    <label style="font-size:0.75em; font-weight:bold; color:#2c3e50;"><span class="prio-indicator ${indicator}"></span>${t}</label>
-                    <input type="number" onchange="updateQuota('${key}', this.value)" value="${val}" style="width:100%;">
-                    <select onchange="updatePriority('${key}', this.value)" style="font-size:0.7em;">
-                        <option value="Tinggi" ${prio==='Tinggi'?'selected':''}>Tinggi</option>
-                        <option value="Sedang" ${prio==='Sedang'?'selected':''}>Sedang</option>
-                        <option value="Rendah" ${prio==='Rendah'?'selected':''}>Rendah</option>
-                    </select>
-                </div>`;
+                cont.innerHTML += `<div class="kuota-item">${isAdmin?`<button class="btn-del-task" onclick="delTask('${g}','${t}')">×</button>`:''}<label style="font-size:0.75em; font-weight:bold;"><span class="prio-indicator prio-${prio}"></span>${t}</label><input type="number" onchange="updateQuota('${key}', this.value)" value="${val}" style="width:100%;"><select onchange="updatePriority('${key}', this.value)" style="font-size:0.7em;"><option value="Tinggi" ${prio==='Tinggi'?'selected':''}>Tinggi</option><option value="Sedang" ${prio==='Sedang'?'selected':''}>Sedang</option><option value="Rendah" ${prio==='Rendah'?'selected':''}>Rendah</option></select></div>`;
             });
         });
     }
 
-    function updateQuota(k, v) { quotas[k] = parseInt(v); saveToCloud(); }
-    function updatePriority(k, v) { priorities[k] = v; saveToCloud(); }
     function addLorong(g) { let i = document.getElementById('newLorong'+g.charAt(0).toUpperCase()+g.slice(1)); if(i.value.trim()){ memberData[g][i.value.trim()] = []; saveToCloud(); i.value=''; } }
     function delLorong(g, l) { if(confirm('Hapus?')) { delete memberData[g][l]; saveToCloud(); } }
     function addMember(g, l) { let i = document.getElementById(`in-${g}-${l}`); if(i.value.trim()){ memberData[g][l].push(i.value.trim()); saveToCloud(); i.value = ''; } }
     function delMember(g, l, idx) { memberData[g][l].splice(idx, 1); saveToCloud(); }
+    function updateQuota(k, v) { quotas[k] = parseInt(v); saveToCloud(); }
+    function updatePriority(k, v) { priorities[k] = v; saveToCloud(); }
     function addCustomTask() { let v = document.getElementById('customTask').value.trim(), gen = document.getElementById('customGender').value; if(v){ tasks[gen].push(v); quotas[`${gen}_${v}`] = 1; priorities[`${gen}_${v}`] = 'Sedang'; saveToCloud(); document.getElementById('customTask').value=''; } }
-    function delTask(g, t) { if(confirm('Hapus?')) { tasks[g] = tasks[g].filter(x => x!==t); delete quotas[`${g}_${t}`]; delete priorities[`${g}_${t}`]; saveToCloud(); } }
+    function delTask(g, t) { if(confirm('Hapus '+t+'?')) { tasks[g] = tasks[g].filter(x => x!==t); delete quotas[`${g}_${t}`]; delete priorities[`${g}_${t}`]; saveToCloud(); } }
 
     function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
@@ -283,14 +258,20 @@
                     let max = quotas[`${g}_${t}`] || 1; counts[t] = 0; let lorongsInTask = new Set();
                     for (let i = 0; i < pool.length; i++) {
                         if (assignedIds.has(i) || counts[t] >= max) continue;
-                        if (!lorongsInTask.has(pool[i].lorong)) { currentPlot.push({ ...pool[i], tugas: t }); lorongsInTask.add(pool[i].lorong); assignedIds.add(i); counts[t]++; }
+                        if (prioLevel === "Tinggi" || !lorongsInTask.has(pool[i].lorong)) {
+                            currentPlot.push({ ...pool[i], tugas: t, presensi: null });
+                            lorongsInTask.add(pool[i].lorong); assignedIds.add(i); counts[t]++;
+                        }
                     }
                     if (counts[t] < max) {
-                        for (let i = 0; i < pool.length; i++) { if (assignedIds.has(i) || counts[t] >= max) continue; currentPlot.push({ ...pool[i], tugas: t }); assignedIds.add(i); counts[t]++; }
+                        for (let i = 0; i < pool.length; i++) {
+                            if (assignedIds.has(i) || counts[t] >= max) continue;
+                            currentPlot.push({ ...pool[i], tugas: t, presensi: null }); assignedIds.add(i); counts[t]++;
+                        }
                     }
                 });
             });
-            pool.forEach((p, idx) => { if (!assignedIds.has(idx)) currentPlot.push({ ...p, tugas: "-" }); });
+            pool.forEach((p, idx) => { if (!assignedIds.has(idx)) currentPlot.push({ ...p, tugas: "-", presensi: null }); });
             state[g] = currentPlot.map((p, idx) => {
                 let found = ""; appHistory.slice(0, (g==='cowok'?5:3)).forEach(h => { let prev = (h[g]||[]).find(old => old.nama === p.nama); if (prev && prev.tugas === p.tugas && p.tugas !== "-") found = h.label; });
                 return { ...p, id: idx, overlapWith: found };
@@ -300,13 +281,11 @@
     }
 
     function triggerGuidanceName(gender, id) { 
-        if (selectedPersonId === id) selectedPersonId = null; 
-        else { selectedPersonId = id; currentGuidanceTask = null; }
+        if (selectedPersonId === id) selectedPersonId = null; else { selectedPersonId = id; currentGuidanceTask = null; }
         renderResult(gender); 
     }
     function triggerGuidanceTask(gender, task) { 
-        if (currentGuidanceTask === task) currentGuidanceTask = null; 
-        else { currentGuidanceTask = task; selectedPersonId = null; }
+        if (currentGuidanceTask === task) currentGuidanceTask = null; else { currentGuidanceTask = task; selectedPersonId = null; }
         renderResult(gender); 
     }
 
@@ -316,13 +295,10 @@
         let sortedTasks = tasks[g].filter(t => t !== "-"); if (tasks[g].includes("-")) sortedTasks.push("-");
         let grouped = {}; sortedTasks.forEach(t => grouped[t] = []);
         state[g].forEach(p => { if(!grouped[p.tugas]) grouped[p.tugas] = []; grouped[p.tugas].push(p); });
-
         sortedTasks.forEach(t => {
             let members = grouped[t]; if (members.length === 0 && t === "Belum dapat") return;
             let max = quotas[`${g}_${t}`] || 0, selisih = members.length - max;
             let warning = (t !== "-") ? (selisih < 0 ? `<span class="quota-warning quota-kurang">Kurang ${Math.abs(selisih)}</span>` : (selisih > 0 ? `<span class="quota-warning quota-kelebihan">Lebih ${selisih}</span>` : "")) : "";
-            
-            // HIGHLIGHT KOTAK (Klik Nama)
             let boxClass = "list-group";
             if (selectedPersonId !== null) {
                 const selP = state[g].find(p => p.id === selectedPersonId);
@@ -330,11 +306,9 @@
                 appHistory.slice(0, (g === 'cowok' ? 5 : 3)).forEach(h => { if((h[g]||[]).find(old => old.nama === selP.nama && old.tugas === t)) history = true; });
                 boxClass += (t !== "-" && history) ? " recommend-danger" : " recommend-safe";
             }
-
             let html = `<div class="${boxClass}"><b class="list-title" onclick="triggerGuidanceTask('${g}', '${t}')">${t} (${members.length}) ${warning}</b>`;
             members.forEach(p => {
-                let rowClass = "item-row";
-                let histMsg = "";
+                let rowClass = "item-row"; let histMsg = "";
                 if (currentGuidanceTask && currentGuidanceTask !== "-") {
                     let hist = false, month = "";
                     appHistory.slice(0, (g==='cowok'?5:3)).forEach(h => { if((h[g]||[]).find(old => old.nama === p.nama && old.tugas === currentGuidanceTask)) { hist = true; month = h.label; } });
@@ -354,53 +328,97 @@
         });
     }
 
-    function manualMove(gender, id, task) { 
-        let person = state[gender].find(p => p.id === id); 
-        if(!person) return; person.tugas = task; 
-        let found = ""; appHistory.slice(0, (gender==='cowok'?5:3)).forEach(h => { let prev = (h[gender]||[]).find(old => old.nama === person.nama); if (prev && prev.tugas === person.tugas && person.tugas !== "-") found = h.label; });
-        person.overlapWith = found; renderResult(gender); 
-    }
+    function manualMove(gender, id, task) { let person = state[gender].find(p => p.id === id); if(!person) return; person.tugas = task; renderResult(gender); }
 
     function bukaRiwayatModal() { document.getElementById('historyModal').style.display = 'block'; renderHistoryUI(); }
-    function tutupRiwayatModal() { document.getElementById('historyModal').style.display = 'none'; openedDetails.clear(); }
+    function tutupRiwayatModal() { document.getElementById('historyModal').style.display = 'none'; openedDetails.clear(); editModeBulan = null; }
     function trackToggle(docId, isOpen) { if (isOpen) openedDetails.add(docId); else openedDetails.delete(docId); }
 
     function renderHistoryUI() {
-        let cont = document.getElementById('historyContainer'); cont.innerHTML = '';
-        if(!appHistory.length) { cont.innerHTML = '<p style="text-align:center;">Belum ada riwayat.</p>'; return; }
+        let cont = document.getElementById('historyContainer'); cont.innerHTML = appHistory.length ? '' : '<p style="text-align:center;">Kosong.</p>';
         appHistory.forEach(record => {
             let isOpen = openedDetails.has(record.docId) ? 'open' : '';
+            let isEditing = (editModeBulan === record.docId);
             let html = `<details class="history-month" id="details-${record.docId}" ${isOpen} ontoggle="trackToggle('${record.docId}', this.open)">
-                <summary><span>${record.label} (PPM ${currentPPM})</span><div class="no-print"><button style="background:#e74c3c; font-size:0.75em; margin-right:5px;" onclick="printSpesifik('${record.docId}')">📄 PDF</button>${isAdmin?`<button style="color:red; background:none; border:none;" onclick="hapusDokumen('${record.docId}')">🗑️</button>`:''}</div></summary>
-                <div class="history-data">`;
+                <summary><span>${record.label} (PPM ${currentPPM})</span>
+                <div class="no-print">
+                    <button style="background:#3498db; font-size:0.75em; margin-right:5px;" onclick="editModeBulan = editModeBulan === '${record.docId}' ? null : '${record.docId}'; renderHistoryUI(); event.preventDefault();">${isEditing?'✅ Simpan':'✏️ Edit'}</button>
+                    <button style="background:#e74c3c; font-size:0.75em; margin-right:5px;" onclick="printSpesifik('${record.docId}')">📄 PDF</button>
+                    ${isAdmin?`<button style="color:red; background:none;" onclick="hapusDokumen('${record.docId}')">🗑️</button>`:''}
+                </div></summary><div class="history-data">`;
+            
             ['cowok','cewek'].forEach(g => {
-                html += `<div style="flex:1; min-width:280px;"><h3>${g.toUpperCase()}</h3>`;
+                html += `<div class="history-col"><h3>${g.toUpperCase()}</h3>`;
                 let grp = {}; (record[g]||[]).forEach((p, idx) => { if(!grp[p.tugas]) grp[p.tugas]=[]; grp[p.tugas].push({...p, oIdx: idx}); });
-                let sortedH = tasks[g].filter(t => t !== "-"); if (tasks[g].includes("-")) sortedH.push("-");
-                sortedH.forEach(t => {
-                    if(!grp[t]) return;
-                    html += `<div class="history-task-group"><span class="history-task-title">${t}</span>`;
-                    grp[t].forEach(p => {
-                        let isNotSet = (!p.presensi || p.presensi === 'absen');
-                        html += `<div style="padding:5px 0; border-bottom:1px dashed #eee; display:flex; justify-content:space-between; align-items:center;">
-                            <span><b>${p.nama}</b> <small>${p.lorong}</small></span>
-                            <div><span class="badge-presensi ${isNotSet?'badge-absen':`badge-${p.presensi.toLowerCase()}`}">${isNotSet ? 'Belum Diinput' : p.presensi}</span>
-                            ${isAdmin?`<select class="no-print" style="margin-left:5px;" onchange="updatePresensi('${record.docId}','${g}',${p.oIdx},this.value)">
-                                <option value="" disabled ${isNotSet?'selected':''}>Set...</option><option value="Hadir" ${p.presensi==='Hadir'?'selected':''}>Hadir</option><option value="Alfa" ${p.presensi==='Alfa'?'selected':''}>Alfa</option><option value="Izin" ${p.presensi==='Izin'?'selected':''}>Izin</option></select>`:''}</div></div>`;
+                let allT = Array.from(new Set([...(record[`tasks_${g}`] || []), ...Object.keys(grp), ...tasks[g]]));
+                allT.sort((a,b) => a === "-" ? 1 : b === "-" ? -1 : 0).forEach(t => {
+                    if(!grp[t] && !isEditing) return;
+                    html += `<div class="history-task-group"><span class="history-task-title">${t} ${isEditing?`<button onclick="hapusPlotinganRiwayat('${record.docId}','${g}','${t}')" style="float:right; border:none; background:none; color:red; cursor:pointer;">🗑️</button>`:''}</span>`;
+                    if(grp[t]) grp[t].forEach(p => {
+                        let pres = p.presensi || 'absen';
+                        html += `<div class="item-row"><span><b>${p.nama}</b> <small>${p.lorong}</small></span><div style="display:flex; gap:5px; align-items:center;">
+                                ${isEditing ? `
+                                    <select style="font-size:0.7em;" onchange="movePersonInHistory('${record.docId}','${g}',${p.oIdx},this.value)">${allT.map(opt => `<option value="${opt}" ${opt===p.tugas?'selected':''}>${opt}</option>`).join('')}</select>
+                                    <button style="background:none; color:red; padding:0; font-size:12px;" onclick="hapusOrangRiwayat('${record.docId}','${g}',${p.oIdx})">🗑️</button>` : `
+                                <span class="badge-presensi badge-${pres.toLowerCase()}">${pres === 'absen' ? 'Belum Diinput' : pres}</span>
+                                ${isAdmin?`<select class="no-print" onchange="updatePresensi('${record.docId}','${g}',${p.oIdx},this.value)">
+                                    <option value="" disabled ${!p.presensi?'selected':''}>Set...</option>
+                                    <option value="Hadir" ${p.presensi==='Hadir'?'selected':''}>Hadir</option>
+                                    <option value="Alfa" ${p.presensi==='Alfa'?'selected':''}>Alfa</option>
+                                    <option value="Izin" ${p.presensi==='Izin'?'selected':''}>Izin</option>
+                                    <option value="absen" ${p.presensi==='absen'?'selected':''}>Reset/Belum Input</option>
+                                </select>`:''}`}
+                            </div></div>`;
                     });
+                    if(isEditing) html += `<button class="no-print" style="background:#2ecc71; font-size:0.6em; width:100%; margin-top:5px;" onclick="tambahOrangRiwayat('${record.docId}','${g}','${t}')">+ Orang</button>`;
                     html += `</div>`;
                 });
+                if(isEditing) html += `<div class="no-print" style="margin-top:10px;"><input type="text" id="newTask-${record.docId}-${g}" placeholder="Spot Baru..."><button style="background:orange;" onclick="tambahPlotinganRiwayat('${record.docId}','${g}')">+</button></div>`;
                 html += `</div>`;
             });
             cont.innerHTML += html + `</div></details>`;
         });
     }
 
-    function printSpesifik(id) { document.querySelectorAll('details.history-month').forEach(el => el.classList.remove('printing')); const target = document.getElementById(`details-${id}`); target.classList.add('printing'); target.open = true; window.print(); }
-    function updatePresensi(docId, g, idx, val) { if(!isAdmin) return; let doc = appHistory.find(d => d.docId === docId); doc[g][idx].presensi = val; db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
-    function simpanRiwayatPenugasan() { if (!state.cowok.length) return alert("Acak dulu!"); let l = prompt(`Label?`); if (l) db.collection(`history_ppm${currentPPM}`).add({ id: Date.now(), label: l, cowok: state.cowok, cewek: state.cewek }); }
+    async function hapusPlotinganRiwayat(docId, g, t) {
+        if(!confirm(`Hapus plotingan ${t}? Orang di dalamnya akan dipindah ke '-'.`)) return;
+        let doc = appHistory.find(d => d.docId === docId);
+        doc[g].forEach(p => { if(p.tugas === t) p.tugas = "-"; });
+        let curT = doc[`tasks_${g}`] || Array.from(new Set(doc[g].map(p => p.tugas)));
+        curT = curT.filter(item => item !== t);
+        await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g], [`tasks_${g}`]: curT });
+    }
+    async function tambahPlotinganRiwayat(docId, g) {
+        let name = document.getElementById(`newTask-${docId}-${g}`).value.trim(); if (!name) return;
+        let doc = appHistory.find(d => d.docId === docId);
+        let curT = doc[`tasks_${g}`] || Array.from(new Set(doc[g].map(p => p.tugas)));
+        if(!curT.includes(name)) curT.push(name);
+        await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [`tasks_${g}`]: curT });
+        document.getElementById(`newTask-${docId}-${g}`).value = "";
+    }
+    async function tambahOrangRiwayat(docId, g, t) {
+        let n = prompt("Nama Member:"), l = prompt("Lorong:"); if(!n || !l) return;
+        let doc = appHistory.find(d => d.docId === docId); doc[g].push({ nama: n, lorong: l, tugas: t, presensi: null });
+        await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] });
+    }
+    async function hapusOrangRiwayat(docId, g, idx) { let doc = appHistory.find(d => d.docId === docId); doc[g].splice(idx, 1); await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
+    function movePersonInHistory(docId, g, pIdx, nT) { let doc = appHistory.find(d => d.docId === docId); doc[g][pIdx].tugas = nT; db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
+    
+    function printSpesifik(id) { 
+        const record = appHistory.find(d => d.docId === id);
+        document.getElementById('pdfSubTitle').innerText = `${record.label} (PPM ${currentPPM})`;
+        document.querySelectorAll('details.history-month').forEach(el => el.classList.remove('printing')); 
+        const target = document.getElementById(`details-${id}`); 
+        target.classList.add('printing'); 
+        target.open = true; 
+        window.print(); 
+    }
+    
+    function updatePresensi(docId, g, idx, val) { let doc = appHistory.find(d => d.docId === docId); doc[g][idx].presensi = val; db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
+    function simpanRiwayatPenugasan() { if (!state.cowok.length) return alert("Acak dulu!"); let l = prompt(`Label Riwayat?`); if (l) db.collection(`history_ppm${currentPPM}`).add({ id: Date.now(), label: l, cowok: state.cowok, cewek: state.cewek }); }
     function hapusDokumen(id) { if (confirm("Hapus?")) db.collection(`history_ppm${currentPPM}`).doc(id).delete(); }
-    function resetToDefault() { if (confirm(`Reset?`)) { memberData = { cowok: {}, cewek: {} }; tasks = {cowok:[], cewek:[]}; quotas = {}; priorities = {}; saveToCloud(); } }
+    function resetToDefault() { if (confirm(`Reset?`)) { memberData = { cowok: {}, cewek: {} }; saveToCloud(); } }
+    function groupBy(arr, key) { return arr.reduce((acc, item) => { (acc[item[key]] = acc[item[key]] || []).push(item); return acc; }, {}); }
 </script>
 </body>
 </html>
