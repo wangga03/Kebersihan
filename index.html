@@ -13,6 +13,7 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 10px; }
         .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;}
         
+        /* Admin Controls */
         .admin-controls { position: absolute; top: 20px; right: 20px; z-index: 1000; }
         #btnLogin, #btnLogout { padding: 8px 15px; border-radius: 6px; cursor: pointer; color: white; border:none; font-weight: bold; }
         #btnLogin { background: #34495e; }
@@ -31,74 +32,85 @@
         button { border: none; padding: 10px 15px; font-size: 14px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; color: white; }
         input, select { padding: 8px; border-radius: 5px; border: 1px solid #ccc; outline: none; }
 
+        /* Panel Admin */
         .lorong-card { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 10px; text-align: left;}
         .member-chip { display: inline-flex; align-items: center; background: #eef2f3; padding: 5px 12px; border-radius: 20px; margin: 3px; font-size: 0.85em; border: 1px solid #ccc; }
         .btn-del-mini { background: none; color: red; padding: 0 0 0 5px; font-size: 12px; cursor: pointer; border: none;}
-
         .db-section { background: #f3e5f5; border: 1px solid #ce93d8; text-align: center; margin-bottom: 20px; padding: 15px; border-radius: 8px; }
         .kuota-section { background: #e8f8f5; border: 1px solid #1abc9c; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
         .kuota-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin: 10px 0; }
         .kuota-item { background: #fff; padding: 10px; border-radius: 6px; border: 1px solid #bdc3c7; text-align: center; position: relative; display: flex; flex-direction: column; gap: 5px;}
         .btn-del-task { position: absolute; top: 2px; right: 2px; color: red; cursor: pointer; background:none; border:none; font-size: 10px;}
 
-        .list-group { margin-bottom: 15px; background: rgba(255,255,255,0.8); padding: 10px; border-radius: 6px; border: 1px solid #ddd; text-align: left; transition: all 0.3s ease; }
-        .list-title { font-weight: bold; border-bottom: 1px dashed #ccc; padding-bottom: 5px; margin-bottom: 10px; display: block; color: #2c3e50; cursor: pointer; transition: 0.2s; }
-        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-bottom: 1px solid #eee; background: #fff; margin-bottom: 4px; border-radius: 4px; flex-wrap: wrap; gap: 10px; transition: 0.3s; }
+        /* Ploting UI - Card Style (Tampilan Layar) */
+        .list-group { border: 1px solid #ddd; border-radius: 12px; margin-bottom: 15px; padding: 0; overflow: hidden; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); background: white; transition: 0.3s; }
+        .list-title { display: block; color: #e67e22; font-weight: bold; padding: 8px 12px; font-size: 0.95em; border-bottom: 1px solid #eee; background: #fafafa; text-align: left; cursor: pointer; }
+        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 12px; border-bottom: 1px dashed #eee; background: white; transition: 0.3s; }
+        
+        /* Highlight States (Border Only) */
+        .recommend-safe { border: 3px solid #28a745 !important; }
+        .recommend-danger { border: 3px solid #dc3545 !important; }
+        .highlight-safe { border-left: 5px solid #28a745 !important; }
+        .highlight-danger { border-left: 5px solid #dc3545 !important; }
         
         .clickable-name { cursor: pointer; padding: 2px 5px; border-radius: 4px; transition: 0.2s; }
-        .selected-person { background: #2c3e50; color: #fff; font-weight: bold; }
+        .selected-person { background: #2c3e50 !important; color: #fff !important; }
 
-        .recommend-safe { background-color: #d4edda !important; border: 2px solid #28a745 !important; }
-        .recommend-danger { background-color: #f8d7da !important; border: 1px solid #dc3545 !important; opacity: 0.8; }
-        .highlight-safe { background-color: #d4edda !important; border-left: 5px solid #28a745 !important; }
-        .highlight-danger { background-color: #f8d7da !important; border-left: 5px solid #dc3545 !important; }
-        
         .overlap-info { font-size: 0.7em; color: #dc3545; display: block; font-style: italic; font-weight: bold; }
-        .quota-warning { font-size: 0.8em; font-weight: normal; margin-left: 10px; padding: 2px 8px; border-radius: 4px; }
-        
-        .prio-indicator { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
-        .prio-Tinggi { background-color: #e74c3c; } .prio-Sedang { background-color: #f1c40f; } .prio-Rendah { background-color: #2ecc71; }
-
         .lorong-tag { font-size: 0.75em; padding: 2px 6px; border-radius: 4px; color: white; background: #95a5a6; }
+        .km-no-badge { background: #34495e; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.7em; margin-left: 5px; font-weight: bold; }
+
         .badge-presensi { font-size: 0.75em; padding: 4px 10px; border-radius: 12px; font-weight: bold; color: white; min-width: 85px; text-align: center; display: inline-block;}
-        .badge-hadir { background-color: #27ae60 !important; color: white !important; }
-        .badge-alfa { background-color: #e74c3c !important; color: white !important; }
+        .badge-hadir { background-color: #27ae60 !important; }
+        .badge-alfa { background-color: #e74c3c !important; }
         .badge-izin { background-color: #f1c40f !important; color: #333 !important; }
-        .badge-absen { background-color: #636e72 !important; color: white !important; opacity: 0.8; font-style: italic; }
+        .badge-absen { background-color: #636e72 !important; opacity: 0.8; font-style: italic; }
 
+        /* Modal History Styling */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-        .modal-content { background: #fff; margin: 2% auto; padding: 20px; border-radius: 8px; width: 95%; max-width: 1000px; max-height: 90vh; overflow-y: auto; position: relative;}
+        .modal-content { background: #fff; margin: 2% auto; padding: 20px; border-radius: 8px; width: 95%; max-width: 1100px; max-height: 90vh; overflow-y: auto; position: relative;}
         details.history-month { background: #fdfdfd; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; padding: 15px; }
+        .history-km-input { width: 50px !important; min-width: 50px !important; text-align: center; }
+        
+        /* Sembunyikan Tabel di Layar Monitor */
+        .pdf-only-table { display: none; }
 
+        /* ========================================= */
+        /* PRINT STYLE - PDF TABEL, 2 HALAMAN PAKSA  */
+        /* ========================================= */
         @media print { 
-            @page { margin: 1cm !important; }
-            body { margin: 1cm !important; background: white !important; overflow: visible !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            .no-print, .admin-controls, button, select, #viewModeNotice, .ppm-nav, .db-section, .flex-row:not(.history-data), h1 { display: none !important; } 
+            @page { size: portrait; margin: 1cm; }
             
-            body * { visibility: hidden; } 
-            #historyModal, #historyModal * { visibility: visible; } 
-            #historyModal { position: relative !important; display: block !important; width: 100% !important; height: auto !important; overflow: visible !important; } 
-            .modal-content { max-height: none !important; overflow: visible !important; border: none !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            /* Sembunyikan segala sesuatu selain modal riwayat yang sedang dicetak */
+            body { margin: 0 !important; background: white !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body > *:not(#historyModal) { display: none !important; }
             
-            #printHeader { display: block !important; margin-bottom: 20px; border-bottom: 2px solid black; text-align: center; }
-            #printHeader h1 { visibility: visible; display: block; font-size: 24px; font-weight: 800; color: black !important; border: none; margin-bottom: 5px;}
-            #printHeader p { visibility: visible; display: block; font-size: 16px; color: #555 !important; margin: 0; }
+            #historyModal { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; display: block !important; background: transparent !important;} 
+            .modal-content { border: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; max-height: none !important; overflow: visible !important; background: transparent !important;}
+            
+            /* Tampilkan Header PDF */
+            #printHeader { display: block !important; width: 100% !important; margin: 0 auto 20px auto !important; border-bottom: 2px solid black; text-align: center !important; padding-bottom: 10px; }
+            #printHeader h1 { visibility: visible !important; display: block !important; width: 100% !important; text-align: center !important; font-size: 15pt !important; font-weight: 800; color: black !important; border: none; margin: 0 auto 5px auto !important; text-transform: uppercase;}
+            
+            /* Menyembunyikan tombol layar, filter, dll */
+            .no-print, .admin-controls, button, select, details summary, .history-screen-view { display: none !important; } 
+            
+            details.history-month { display: none !important; border: none !important; margin: 0 !important; padding: 0 !important; }
+            details.history-month.printing { display: block !important; }
+            
+            /* MENGATUR HALAMAN: COWOK HALAMAN 1, CEWEK HALAMAN 2 */
+            .history-data { display: block !important; width: 100% !important; visibility: visible; }
+            .history-col { display: block !important; width: 100% !important; visibility: visible; margin-bottom: 20px; }
+            .history-col:nth-child(2) { page-break-before: always !important; } /* PAKSA CEWEK PINDAH KE HALAMAN BARU */
+            
+            .history-col h3 { visibility: visible; border-bottom: 2px solid #3498db; margin: 0 0 15px 0; color: #2c3e50 !important; font-size: 14pt !important; text-align: center; }
 
-            details.history-month:not(.printing) { display: none !important; }
-            details.history-month { border: none !important; }
+            /* MENGAKTIFKAN TABEL PDF (Tanpa Header Nama/Presensi) */
+            .pdf-only-table { display: table !important; width: 100%; border-collapse: collapse; visibility: visible; margin-bottom: 10px; table-layout: fixed; }
+            .pdf-only-table th, .pdf-only-table td { border: 1px solid #aaa !important; padding: 6px 10px !important; text-align: left; visibility: visible; font-size: 11pt !important; color: black !important; }
+            .pdf-only-table .spot-header { background-color: #f2f2f2 !important; font-weight: bold; color: #000 !important; text-align: center; font-size: 11pt !important; }
             
-            .history-data { display: flex !important; flex-direction: row !important; gap: 20px; align-items: flex-start; visibility: visible; }
-            .history-col { flex: 1; visibility: visible; }
-            .history-col h3 { visibility: visible; border-bottom: 2px solid #eee; margin-top: 0; color: #2c3e50 !important; font-size: 1.1em !important; }
-
-            .history-task-group { visibility: visible; border: 1px solid #e0e0e0 !important; border-radius: 10px !important; margin-bottom: 12px !important; padding: 0 !important; overflow: hidden; page-break-inside: avoid; }
-            .history-task-title { visibility: visible; display: block !important; color: #e67e22 !important; font-weight: bold !important; padding: 6px 10px !important; font-size: 0.9em !important; border-bottom: 1px solid #f0f0f0 !important; background: #fdfdfd !important; text-align: left !important; }
-            .item-row { visibility: visible; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 5px 10px !important; border-bottom: 1px dashed #eee !important; background: white !important; }
-            .badge-presensi { visibility: visible; border: 1px solid #ccc !important; border-radius: 20px !important; padding: 2px 12px !important; font-size: 0.7em !important; background: #f9f9f9 !important; color: #555 !important; }
-            .badge-hadir { border: 1.5px solid #27ae60 !important; color: #27ae60 !important; }
-            .badge-alfa { border: 1.5px solid #e74c3c !important; color: #e74c3c !important; }
-            .badge-izin { border: 1.5px solid #f1c40f !important; color: #a18800 !important; }
-            .badge-absen { border: 1px dashed #95a5a6 !important; color: #7f8c8d !important; }
+            .badge-presensi { border: 1px solid #999 !important; font-size: 9pt !important; min-width: 80px !important; color: #000 !important; font-weight: bold !important; display: inline-block; padding: 2px 8px; border-radius: 12px; background: transparent !important; }
         }
     </style>
 </head>
@@ -106,7 +118,7 @@
 
 <div class="container">
     <div class="admin-controls no-print">
-        <button id="btnLogin" onclick="loginAdmin()">🔒 Login Admin</button>
+        <button id="btnLogin" onclick="loginAdmin()">🔒 Admin</button>
         <button id="btnLogout" onclick="logoutAdmin()">🔓 Logout</button>
     </div>
 
@@ -125,7 +137,7 @@
                 <button class="admin-only" style="background:#7f8c8d; font-size: 0.8em;" onclick="resetToDefault()">🔄 Reset Tab Ini</button>
             </div>
         </div>
-        
+
         <div class="admin-only">
             <div class="flex-row">
                 <div class="box manage-section" style="background: #f8fbff; border: 1px solid #3498db;">
@@ -150,15 +162,29 @@
             <div class="btn-container"><button style="background:#27ae60; font-size:18px; padding:15px 30px; width:100%;" onclick="prosesSemua()">🎲 Acak & Plot Sekarang</button></div>
         </div>
     </div>
-    <div class="flex-row no-print"><div class="box results-cowok" id="outCowok" style="border:none; background:transparent; padding:0;"></div><div class="box results-cewek" id="outCewek" style="border:none; background:transparent; padding:0;"></div></div>
+
+    <div class="no-print" style="text-align:center; margin:15px 0;">
+        <label style="font-weight:bold;">Urutkan Ploting:</label>
+        <select onchange="currentSort=this.value; renderResult('cowok'); renderResult('cewek');" style="padding:5px 15px; border-radius:20px;">
+            <option value="default">Default</option>
+            <option value="asc">Nama Spot (A-Z)</option>
+            <option value="desc">Nama Spot (Z-A)</option>
+            <option value="count">Jumlah Anggota</option>
+        </select>
+    </div>
+
+    <div class="flex-row no-print">
+        <div class="box results-cowok" id="outCowok" style="border:none; background:transparent; padding:0;"></div>
+        <div class="box results-cewek" id="outCewek" style="border:none; background:transparent; padding:0;"></div>
+    </div>
 </div>
 
 <div id="historyModal" class="modal">
     <div class="modal-content">
         <div id="printHeader" style="display:none;">
-            <h1>PEMBAGIAN MIMBER PPMRJ</h1>
-            <p id="pdfSubTitle"></p>
+            <h1 id="pdfMainTitle">PEMBAGIAN MIMBER</h1>
         </div>
+        
         <span class="no-print" style="float:right; cursor:pointer; font-size:28px; font-weight:bold; color: #aaa;" onclick="tutupRiwayatModal()">&times;</span>
         <h2 id="historyTitle" class="no-print">📖 Riwayat & Presensi</h2>
         <div id="historyContainer"></div>
@@ -172,13 +198,18 @@
 
     let currentPPM = 1, appHistory = [], memberData = {}, tasks = {}, quotas = {}, priorities = {}, state = { cowok: [], cewek: [] };
     let isAdmin = localStorage.getItem('ppm_admin') === 'true', selectedPersonId = null, currentGuidanceTask = null, openedDetails = new Set(), editModeBulan = null;
+    let currentSort = 'default', historySorts = {};
 
     window.onload = () => { checkAdminStatus(); switchPPM(1); };
 
     function startRealtimeSync() {
         db.collection("wgg_settings").doc(`config_ppm${currentPPM}`).onSnapshot(doc => {
             if(doc.exists) {
-                const d = doc.data(); memberData = d.memberData || {}; tasks = d.tasks || {cowok:[], cewek:[]}; quotas = d.quotas || {}; priorities = d.priorities || {};
+                const d = doc.data(); 
+                memberData = d.memberData || {cowok:{}, cewek:{}}; 
+                tasks = d.tasks || {cowok:[], cewek:[]}; 
+                quotas = d.quotas || {}; 
+                priorities = d.priorities || {};
                 renderManage(); renderKuota();
                 if(state.cowok.length) { renderResult('cowok'); renderResult('cewek'); }
             }
@@ -199,13 +230,14 @@
         document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? 'block' : 'none');
         document.getElementById('btnLogin').style.display = isAdmin ? 'none' : 'block';
         document.getElementById('btnLogout').style.display = isAdmin ? 'block' : 'none';
+        if(document.getElementById('historyModal').style.display === 'block') renderHistoryUI();
     }
 
     async function switchPPM(num) { 
         currentPPM = num; 
         document.querySelectorAll('.labelNav').forEach(el => el.innerText = num); 
-        document.getElementById('btnPpm1').classList.toggle('active', num === 1);
-        document.getElementById('btnPpm2').classList.toggle('active', num === 2);
+        document.getElementById('btnPpm1').className = (num === 1) ? "nav-btn active" : "nav-btn";
+        document.getElementById('btnPpm2').className = (num === 2) ? "nav-btn active" : "nav-btn";
         document.getElementById('dbStatus').innerText = `Mode: PPM ${num} ${isAdmin?'(Admin)':'(View)'}`;
         startRealtimeSync(); 
     }
@@ -235,13 +267,13 @@
         });
     }
 
-    function addLorong(g) { let i = document.getElementById('newLorong'+g.charAt(0).toUpperCase()+g.slice(1)); if(i.value.trim()){ memberData[g][i.value.trim()] = []; saveToCloud(); i.value=''; } }
+    function addLorong(g) { let i = document.getElementById('newLorong'+g.charAt(0).toUpperCase()+g.slice(1)); if(i.value.trim()){ if(!memberData[g]) memberData[g]={}; memberData[g][i.value.trim()] = []; saveToCloud(); i.value=''; } }
     function delLorong(g, l) { if(confirm('Hapus?')) { delete memberData[g][l]; saveToCloud(); } }
     function addMember(g, l) { let i = document.getElementById(`in-${g}-${l}`); if(i.value.trim()){ memberData[g][l].push(i.value.trim()); saveToCloud(); i.value = ''; } }
     function delMember(g, l, idx) { memberData[g][l].splice(idx, 1); saveToCloud(); }
     function updateQuota(k, v) { quotas[k] = parseInt(v); saveToCloud(); }
     function updatePriority(k, v) { priorities[k] = v; saveToCloud(); }
-    function addCustomTask() { let v = document.getElementById('customTask').value.trim(), gen = document.getElementById('customGender').value; if(v){ tasks[gen].push(v); quotas[`${gen}_${v}`] = 1; priorities[`${gen}_${v}`] = 'Sedang'; saveToCloud(); document.getElementById('customTask').value=''; } }
+    function addCustomTask() { let v = document.getElementById('customTask').value.trim(), gen = document.getElementById('customGender').value; if(v){ if(!tasks[gen]) tasks[gen]=[]; tasks[gen].push(v); quotas[`${gen}_${v}`] = 1; priorities[`${gen}_${v}`] = 'Sedang'; saveToCloud(); document.getElementById('customTask').value=''; } }
     function delTask(g, t) { if(confirm('Hapus '+t+'?')) { tasks[g] = tasks[g].filter(x => x!==t); delete quotas[`${g}_${t}`]; delete priorities[`${g}_${t}`]; saveToCloud(); } }
 
     function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
@@ -253,20 +285,20 @@
             shuffle(pool);
             let assignedIds = new Set(), currentPlot = [], counts = {}, prioOrder = ['Tinggi', 'Sedang', 'Rendah'];
             prioOrder.forEach(prioLevel => {
-                const tasksInLevel = tasks[g].filter(t => t !== "-" && (priorities[`${g}_${t}`] || 'Sedang') === prioLevel);
+                const tasksInLevel = (tasks[g]||[]).filter(t => t !== "-" && (priorities[`${g}_${t}`] || 'Sedang') === prioLevel);
                 tasksInLevel.forEach(t => {
                     let max = quotas[`${g}_${t}`] || 1; counts[t] = 0; let lorongsInTask = new Set();
                     for (let i = 0; i < pool.length; i++) {
                         if (assignedIds.has(i) || counts[t] >= max) continue;
                         if (prioLevel === "Tinggi" || !lorongsInTask.has(pool[i].lorong)) {
-                            currentPlot.push({ ...pool[i], tugas: t, presensi: null });
+                            currentPlot.push({ ...pool[i], tugas: t, presensi: null, kmNo: 1 });
                             lorongsInTask.add(pool[i].lorong); assignedIds.add(i); counts[t]++;
                         }
                     }
                     if (counts[t] < max) {
                         for (let i = 0; i < pool.length; i++) {
                             if (assignedIds.has(i) || counts[t] >= max) continue;
-                            currentPlot.push({ ...pool[i], tugas: t, presensi: null }); assignedIds.add(i); counts[t]++;
+                            currentPlot.push({ ...pool[i], tugas: t, presensi: null, kmNo: 1 }); assignedIds.add(i); counts[t]++;
                         }
                     }
                 });
@@ -292,43 +324,56 @@
     function renderResult(g) {
         let cont = document.getElementById('out' + g.charAt(0).toUpperCase() + g.slice(1));
         if(!cont) return; cont.innerHTML = `<h3>TUGAS ${g.toUpperCase()}</h3>`;
-        let sortedTasks = tasks[g].filter(t => t !== "-"); if (tasks[g].includes("-")) sortedTasks.push("-");
-        let grouped = {}; sortedTasks.forEach(t => grouped[t] = []);
+        let sList = (tasks[g]||[]).filter(t => t !== "-"); if ((tasks[g]||[]).includes("-")) sList.push("-");
+        let grouped = {}; sList.forEach(t => grouped[t] = []);
         state[g].forEach(p => { if(!grouped[p.tugas]) grouped[p.tugas] = []; grouped[p.tugas].push(p); });
-        sortedTasks.forEach(t => {
-            let members = grouped[t]; if (members.length === 0 && t === "Belum dapat") return;
-            let max = quotas[`${g}_${t}`] || 0, selisih = members.length - max;
-            let warning = (t !== "-") ? (selisih < 0 ? `<span class="quota-warning quota-kurang">Kurang ${Math.abs(selisih)}</span>` : (selisih > 0 ? `<span class="quota-warning quota-kelebihan">Lebih ${selisih}</span>` : "")) : "";
+
+        if(currentSort === 'asc') sList.sort((a,b) => a.localeCompare(b));
+        else if(currentSort === 'desc') sList.sort((a,b) => b.localeCompare(a));
+        else if(currentSort === 'count') sList.sort((a,b) => (grouped[b]?.length || 0) - (grouped[a]?.length || 0));
+
+        sList.forEach(t => {
+            let members = grouped[t]; if (!members || (members.length === 0 && t === "Belum dapat")) return;
+            let isKM = t.toLowerCase().includes("kamar mandi");
+            
             let boxClass = "list-group";
             if (selectedPersonId !== null) {
                 const selP = state[g].find(p => p.id === selectedPersonId);
                 let history = false;
                 appHistory.slice(0, (g === 'cowok' ? 5 : 3)).forEach(h => { if((h[g]||[]).find(old => old.nama === selP.nama && old.tugas === t)) history = true; });
-                boxClass += (t !== "-" && history) ? " recommend-danger" : " recommend-safe";
+                boxClass += (history) ? " recommend-danger" : " recommend-safe";
             }
-            let html = `<div class="${boxClass}"><b class="list-title" onclick="triggerGuidanceTask('${g}', '${t}')">${t} (${members.length}) ${warning}</b>`;
+
+            let html = `<div class="${boxClass}"><b class="list-title" onclick="triggerGuidanceTask('${g}', '${t}')">${t} (${members.length})</b>`;
             members.forEach(p => {
-                let rowClass = "item-row"; let histMsg = "";
+                let histMsg = "";
                 if (currentGuidanceTask && currentGuidanceTask !== "-") {
-                    let hist = false, month = "";
-                    appHistory.slice(0, (g==='cowok'?5:3)).forEach(h => { if((h[g]||[]).find(old => old.nama === p.nama && old.tugas === currentGuidanceTask)) { hist = true; month = h.label; } });
-                    rowClass += hist ? " highlight-danger" : " highlight-safe";
-                    if(hist) histMsg = `<span class="overlap-info">Pernah di sini bln ${month}</span>`;
+                    let foundMonth = ""; appHistory.slice(0, (g==='cowok'?5:3)).forEach(h => { if((h[g]||[]).some(o => o.nama === p.nama && o.tugas === currentGuidanceTask)) foundMonth = h.label; });
+                    if(foundMonth) histMsg = `<span class="overlap-info">Pernah di sini bln ${foundMonth}</span>`;
                 }
-                html += `<div class="${rowClass}">
+                
+                let highlightClass = "";
+                if (currentGuidanceTask && currentGuidanceTask !== "-") highlightClass = histMsg ? 'highlight-danger' : 'highlight-safe';
+
+                html += `<div class="item-row ${highlightClass}">
                     <span class="clickable-name ${selectedPersonId===p.id?'selected-person':''}" onclick="triggerGuidanceName('${g}', ${p.id})">
                         <b>${p.nama}</b> <small class="lorong-tag">${p.lorong}</small>
+                        ${isKM ? `<span class="km-no-badge">KM ${p.kmNo||1}</span>` : ''}
                         ${p.overlapWith?`<br><small style="color:red; font-weight:bold;">Sama dgn ${p.overlapWith}</small>`:''}
                         ${histMsg}
-                    </span>`;
-                if (isAdmin) { html += `<select onchange="manualMove('${g}', ${p.id}, this.value)">${tasks[g].map(opt => `<option value="${opt}" ${opt===p.tugas?'selected':''}>${opt}</option>`).join('')}</select>`; }
-                html += `</div>`;
+                    </span>
+                    <div style="display:flex; gap:5px; align-items:center;">
+                        ${isKM ? `<input type="number" min="1" max="12" value="${p.kmNo||1}" style="width:45px; height:30px; text-align:center;" onchange="updateKMNo('${g}', ${p.id}, this.value)">` : ''}
+                        ${isAdmin ? `<select onchange="manualMove('${g}', ${p.id}, this.value)">${(tasks[g]||[]).map(opt => `<option value="${opt}" ${opt===p.tugas?'selected':''}>${opt}</option>`).join('')}</select>` : ''}
+                    </div>
+                </div>`;
             });
             cont.innerHTML += html + `</div>`;
         });
     }
 
-    function manualMove(gender, id, task) { let person = state[gender].find(p => p.id === id); if(!person) return; person.tugas = task; renderResult(gender); }
+    function updateKMNo(g, id, val) { state[g].find(p => p.id === id).kmNo = parseInt(val); renderResult(g); }
+    function manualMove(gender, id, task) { let person = state[gender].find(p => p.id === id); if(!person) return; person.tugas = task; let found = ""; appHistory.slice(0, (gender==='cowok'?5:3)).forEach(h => { let prev = (h[gender]||[]).find(old => old.nama === person.nama); if (prev && prev.tugas === task && task !== "-") found = h.label; }); person.overlapWith = found; renderResult(gender); }
 
     function bukaRiwayatModal() { document.getElementById('historyModal').style.display = 'block'; renderHistoryUI(); }
     function tutupRiwayatModal() { document.getElementById('historyModal').style.display = 'none'; openedDetails.clear(); editModeBulan = null; }
@@ -339,35 +384,60 @@
         appHistory.forEach(record => {
             let isOpen = openedDetails.has(record.docId) ? 'open' : '';
             let isEditing = (editModeBulan === record.docId);
+            let sType = historySorts[record.docId] || 'default';
+            
             let html = `<details class="history-month" id="details-${record.docId}" ${isOpen} ontoggle="trackToggle('${record.docId}', this.open)">
                 <summary><span>${record.label} (PPM ${currentPPM})</span>
                 <div class="no-print">
-                    <button style="background:#3498db; font-size:0.75em; margin-right:5px;" onclick="editModeBulan = editModeBulan === '${record.docId}' ? null : '${record.docId}'; renderHistoryUI(); event.preventDefault();">${isEditing?'✅ Simpan':'✏️ Edit'}</button>
+                    ${isAdmin ? `<button style="background:#3498db; font-size:0.75em; margin-right:5px;" onclick="editModeBulan = editModeBulan === '${record.docId}' ? null : '${record.docId}'; renderHistoryUI(); event.preventDefault();">${isEditing?'✅ Simpan':'✏️ Edit'}</button>` : ''}
                     <button style="background:#e74c3c; font-size:0.75em; margin-right:5px;" onclick="printSpesifik('${record.docId}')">📄 PDF</button>
                     ${isAdmin?`<button style="color:red; background:none;" onclick="hapusDokumen('${record.docId}')">🗑️</button>`:''}
-                </div></summary><div class="history-data">`;
+                </div></summary>
+                
+                <div class="no-print" style="margin:10px 0; text-align:left; border-bottom:1px solid #eee; padding-bottom:10px;">
+                    <label style="font-size:0.8em; font-weight:bold;">Urutkan Riwayat Ini:</label>
+                    <select onchange="historySorts['${record.docId}']=this.value; renderHistoryUI();" style="font-size:0.7em;">
+                        <option value="default" ${sType==='default'?'selected':''}>Default</option>
+                        <option value="asc" ${sType==='asc'?'selected':''}>A-Z</option>
+                        <option value="desc" ${sType==='desc'?'selected':''}>Z-A</option>
+                        <option value="count" ${sType==='count'?'selected':''}>Jumlah Terbanyak</option>
+                    </select>
+                </div>
+
+                <div class="history-data">`;
             
             ['cowok','cewek'].forEach(g => {
                 html += `<div class="history-col"><h3>${g.toUpperCase()}</h3>`;
                 let grp = {}; (record[g]||[]).forEach((p, idx) => { if(!grp[p.tugas]) grp[p.tugas]=[]; grp[p.tugas].push({...p, oIdx: idx}); });
-                let allT = Array.from(new Set([...(record[`tasks_${g}`] || []), ...Object.keys(grp), ...tasks[g]]));
-                allT.sort((a,b) => a === "-" ? 1 : b === "-" ? -1 : 0).forEach(t => {
+                let allT = Array.from(new Set([...(record[`tasks_${g}`] || []), ...Object.keys(grp), ...(tasks[g]||[])]));
+                
+                if(sType === 'asc') allT.sort((a,b) => a.localeCompare(b));
+                else if(sType === 'desc') allT.sort((a,b) => b.localeCompare(a));
+                else if(sType === 'count') allT.sort((a,b) => (grp[b]?.length || 0) - (grp[a]?.length || 0));
+
+                // 1. TAMPILAN LAYAR (CARD)
+                html += `<div class="history-screen-view">`;
+                allT.forEach(t => {
                     if(!grp[t] && !isEditing) return;
-                    html += `<div class="history-task-group"><span class="history-task-title">${t} ${isEditing?`<button onclick="hapusPlotinganRiwayat('${record.docId}','${g}','${t}')" style="float:right; border:none; background:none; color:red; cursor:pointer;">🗑️</button>`:''}</span>`;
+                    let isKM = t.toLowerCase().includes("kamar mandi");
+                    html += `<div class="list-group"><b class="list-title">${t} ${isEditing?`<button class="no-print" onclick="hapusPlotinganRiwayat('${record.docId}','${g}','${t}')" style="float:right; border:none; background:none; color:red; cursor:pointer;">🗑️</button>`:''}</b>`;
                     if(grp[t]) grp[t].forEach(p => {
                         let pres = p.presensi || 'absen';
-                        html += `<div class="item-row"><span><b>${p.nama}</b> <small>${p.lorong}</small></span><div style="display:flex; gap:5px; align-items:center;">
+                        html += `<div class="item-row">
+                            <span><b>${p.nama}</b> <small class="lorong-tag">${p.lorong}</small> ${isKM ? `<span class="km-no-badge">KM ${p.kmNo||1}</span>` : ''}</span>
+                            <div style="display:flex; gap:5px; align-items:center;">
                                 ${isEditing ? `
-                                    <select style="font-size:0.7em;" onchange="movePersonInHistory('${record.docId}','${g}',${p.oIdx},this.value)">${allT.map(opt => `<option value="${opt}" ${opt===p.tugas?'selected':''}>${opt}</option>`).join('')}</select>
-                                    <button style="background:none; color:red; padding:0; font-size:12px;" onclick="hapusOrangRiwayat('${record.docId}','${g}',${p.oIdx})">🗑️</button>` : `
+                                    ${isKM ? `<input type="number" min="1" max="12" value="${p.kmNo||1}" class="history-km-input no-print" onchange="updateKMNoRiwayat('${record.docId}','${g}',${p.oIdx},this.value)">` : ''}
+                                    <select class="no-print" style="font-size:0.7em;" onchange="movePersonInHistory('${record.docId}','${g}',${p.oIdx},this.value)">${allT.map(opt => `<option value="${opt}" ${opt===p.tugas?'selected':''}>${opt}</option>`).join('')}</select>
+                                    <button class="no-print" style="background:none; color:red; padding:0; font-size:12px;" onclick="hapusOrangRiwayat('${record.docId}','${g}',${p.oIdx})">🗑️</button>` : `
                                 <span class="badge-presensi badge-${pres.toLowerCase()}">${pres === 'absen' ? 'Belum Diinput' : pres}</span>
                                 ${isAdmin?`<select class="no-print" onchange="updatePresensi('${record.docId}','${g}',${p.oIdx},this.value)">
-                                    <option value="" disabled ${!p.presensi?'selected':''}>Set...</option>
+                                    <option value="absen" ${pres==='absen'?'selected':''}>Reset/Belum Input</option>
                                     <option value="Hadir" ${p.presensi==='Hadir'?'selected':''}>Hadir</option>
                                     <option value="Alfa" ${p.presensi==='Alfa'?'selected':''}>Alfa</option>
                                     <option value="Izin" ${p.presensi==='Izin'?'selected':''}>Izin</option>
-                                    <option value="absen" ${p.presensi==='absen'?'selected':''}>Reset/Belum Input</option>
-                                </select>`:''}`}
+                                </select>`:''}
+                                `}
                             </div></div>`;
                     });
                     if(isEditing) html += `<button class="no-print" style="background:#2ecc71; font-size:0.6em; width:100%; margin-top:5px;" onclick="tambahOrangRiwayat('${record.docId}','${g}','${t}')">+ Orang</button>`;
@@ -375,50 +445,57 @@
                 });
                 if(isEditing) html += `<div class="no-print" style="margin-top:10px;"><input type="text" id="newTask-${record.docId}-${g}" placeholder="Spot Baru..."><button style="background:orange;" onclick="tambahPlotinganRiwayat('${record.docId}','${g}')">+</button></div>`;
                 html += `</div>`;
+
+                // 2. TAMPILAN PDF (TABLE) - DENGAN COLGROUP AGAR TIDAK ADA HEADER "NAMA" & "PRESENSI"
+                html += `<table class="pdf-only-table">
+                            <colgroup>
+                                <col style="width: 75%;">
+                                <col style="width: 25%;">
+                            </colgroup>
+                            <tbody>`;
+                allT.forEach(t => {
+                    if(!grp[t]) return;
+                    let isKM = t.toLowerCase().includes("kamar mandi");
+                    html += `<tr><td colspan="2" class="spot-header">${t}</td></tr>`;
+                    grp[t].forEach(p => {
+                        let pres = p.presensi || 'absen';
+                        let presText = pres === 'absen' ? 'Belum Input' : pres;
+                        html += `<tr>
+                                    <td><b>${p.nama}</b> <span style="font-size:0.9em; color:#555;">(${p.lorong})</span> ${isKM ? `<b>[KM ${p.kmNo||1}]</b>` : ''}</td>
+                                    <td style="text-align:center;"><span class="badge-presensi">${presText}</span></td>
+                                 </tr>`;
+                    });
+                });
+                html += `</tbody></table></div>`;
             });
             cont.innerHTML += html + `</div></details>`;
         });
     }
 
-    async function hapusPlotinganRiwayat(docId, g, t) {
-        if(!confirm(`Hapus plotingan ${t}? Orang di dalamnya akan dipindah ke '-'.`)) return;
-        let doc = appHistory.find(d => d.docId === docId);
-        doc[g].forEach(p => { if(p.tugas === t) p.tugas = "-"; });
-        let curT = doc[`tasks_${g}`] || Array.from(new Set(doc[g].map(p => p.tugas)));
-        curT = curT.filter(item => item !== t);
-        await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g], [`tasks_${g}`]: curT });
-    }
-    async function tambahPlotinganRiwayat(docId, g) {
-        let name = document.getElementById(`newTask-${docId}-${g}`).value.trim(); if (!name) return;
-        let doc = appHistory.find(d => d.docId === docId);
-        let curT = doc[`tasks_${g}`] || Array.from(new Set(doc[g].map(p => p.tugas)));
-        if(!curT.includes(name)) curT.push(name);
-        await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [`tasks_${g}`]: curT });
-        document.getElementById(`newTask-${docId}-${g}`).value = "";
-    }
-    async function tambahOrangRiwayat(docId, g, t) {
-        let n = prompt("Nama Member:"), l = prompt("Lorong:"); if(!n || !l) return;
-        let doc = appHistory.find(d => d.docId === docId); doc[g].push({ nama: n, lorong: l, tugas: t, presensi: null });
-        await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] });
-    }
+    async function updateKMNoRiwayat(docId, g, idx, val) { let doc = appHistory.find(d => d.docId === docId); doc[g][idx].kmNo = parseInt(val); await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
+    async function hapusPlotinganRiwayat(docId, g, t) { if(!confirm(`Hapus ${t}?`)) return; let doc = appHistory.find(d => d.docId === docId); doc[g].forEach(p => { if(p.tugas === t) p.tugas = "-"; }); let curT = doc[`tasks_${g}`] || Array.from(new Set(doc[g].map(p => p.tugas))); curT = curT.filter(item => item !== t); await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g], [`tasks_${g}`]: curT }); }
+    async function tambahPlotinganRiwayat(docId, g) { let name = document.getElementById(`newTask-${docId}-${g}`).value.trim(); if (!name) return; let doc = appHistory.find(d => d.docId === docId); let curT = doc[`tasks_${g}`] || Array.from(new Set(doc[g].map(p => p.tugas))); if(!curT.includes(name)) curT.push(name); await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [`tasks_${g}`]: curT }); }
+    async function tambahOrangRiwayat(docId, g, t) { let n = prompt("Nama:"); let l = prompt("Lorong:"); if(!n || !l) return; let doc = appHistory.find(d => d.docId === docId); if(!doc[g]) doc[g]=[]; doc[g].push({ nama: n, lorong: l, tugas: t, presensi: null, kmNo: 1 }); await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
     async function hapusOrangRiwayat(docId, g, idx) { let doc = appHistory.find(d => d.docId === docId); doc[g].splice(idx, 1); await db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
     function movePersonInHistory(docId, g, pIdx, nT) { let doc = appHistory.find(d => d.docId === docId); doc[g][pIdx].tugas = nT; db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
+    function updatePresensi(docId, g, idx, val) { let doc = appHistory.find(d => d.docId === docId); doc[g][idx].presensi = val; db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
     
     function printSpesifik(id) { 
         const record = appHistory.find(d => d.docId === id);
-        document.getElementById('pdfSubTitle').innerText = `${record.label} (PPM ${currentPPM})`;
+        document.getElementById('pdfMainTitle').innerText = "PEMBAGIAN MIMBER " + record.label.toUpperCase();
+        
+        // Tutup semua yang lain, buka yang mau di print
         document.querySelectorAll('details.history-month').forEach(el => el.classList.remove('printing')); 
         const target = document.getElementById(`details-${id}`); 
         target.classList.add('printing'); 
         target.open = true; 
+        
         window.print(); 
     }
     
-    function updatePresensi(docId, g, idx, val) { let doc = appHistory.find(d => d.docId === docId); doc[g][idx].presensi = val; db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] }); }
     function simpanRiwayatPenugasan() { if (!state.cowok.length) return alert("Acak dulu!"); let l = prompt(`Label Riwayat?`); if (l) db.collection(`history_ppm${currentPPM}`).add({ id: Date.now(), label: l, cowok: state.cowok, cewek: state.cewek }); }
     function hapusDokumen(id) { if (confirm("Hapus?")) db.collection(`history_ppm${currentPPM}`).doc(id).delete(); }
-    function resetToDefault() { if (confirm(`Reset?`)) { memberData = { cowok: {}, cewek: {} }; saveToCloud(); } }
-    function groupBy(arr, key) { return arr.reduce((acc, item) => { (acc[item[key]] = acc[item[key]] || []).push(item); return acc; }, {}); }
+    function resetToDefault() { if (confirm(`Reset?`)) { memberData = { cowok: {}, cewek: {} }; tasks = {cowok:[], cewek:[]}; quotas = {}; saveToCloud(); } }
 </script>
 </body>
 </html>
