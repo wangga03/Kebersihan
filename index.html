@@ -12,8 +12,15 @@
         * { box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; margin: 0; padding: 10px; }
         .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative;}
-        h1, h2, h3 { text-align: center; color: #2c3e50; }
+        
+        /* Navigation PPM Tab */
+        .ppm-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; background: #eee; padding: 10px; border-radius: 50px; }
+        .nav-btn { background: #95a5a6; border-radius: 25px; padding: 10px 30px; font-size: 1.1em; color: white; cursor: pointer; transition: 0.3s; border: none; }
+        .nav-btn.active { background: #3498db; box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4); transform: scale(1.05); }
+
+        h1, h2, h3 { text-align: center; color: #2c3e50; margin-bottom: 20px;}
         h1 { border-bottom: 2px solid #3498db; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; font-size: 1.5rem; margin-top: 0; }
+        
         .flex-row { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
         .box { flex: 1; min-width: 300px; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; background: #fdfdfd; }
         button { border: none; padding: 10px 15px; font-size: 14px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; color: white; }
@@ -31,7 +38,7 @@
         .kuota-item { background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #bdc3c7; text-align: center; position: relative;}
         .btn-del-task { position: absolute; top: 2px; right: 2px; color: red; font-size: 12px; cursor: pointer; background:none; border:none;}
 
-        /* Results Area */
+        /* Results Area UI */
         .results-cowok { background-color: #e8f4fd; border: 1px solid #3498db; }
         .results-cewek { background-color: #fdf2f9; border: 1px solid #e91e63; }
         .list-group { margin-bottom: 15px; background: rgba(255,255,255,0.7); padding: 10px; border-radius: 6px; border: 1px solid #ddd; text-align: left; }
@@ -39,14 +46,14 @@
         .item-row { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-bottom: 1px solid #eee; background: #fff; margin-bottom: 4px; border-radius: 4px; flex-wrap: wrap; gap: 10px; }
         .lorong-tag { font-size: 0.75em; padding: 2px 6px; border-radius: 4px; color: white; background: #95a5a6; }
 
-        /* Status Presensi */
+        /* Presensi Tags */
         .badge-presensi { font-size: 0.75em; padding: 4px 10px; border-radius: 12px; font-weight: bold; color: white; min-width: 70px; text-align: center; display: inline-block;}
         .badge-hadir { background-color: #27ae60; }
         .badge-alfa { background-color: #e74c3c; }
         .badge-izin { background-color: #f1c40f; color: #333; }
-        .badge-absen { background-color: #95a5a6; }
+        .badge-null { background-color: #95a5a6; }
 
-        /* Modal */
+        /* Modal History */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
         .modal-content { background: #fff; margin: 2% auto; padding: 20px; border-radius: 8px; width: 95%; max-width: 1000px; max-height: 90vh; overflow-y: auto; }
         details.history-month { background: #fdfdfd; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; padding: 15px; }
@@ -60,57 +67,76 @@
         .sync-status { font-size: 0.8em; font-style: italic; color: #27ae60; margin-top: 5px; display: none;}
 
         @media (max-width: 600px) { .flex-row { flex-direction: column; } .item-row { flex-direction: column; align-items: stretch; } }
+
+        /* ========================================= */
+        /* PRINT STYLES - PENYEMPURNAAN LAPORAN PDF  */
+        /* ========================================= */
         @media print {
-            .no-print { display: none !important; }
-            .modal { position: relative; display: block; background: none; }
-            .modal-content { box-shadow: none; margin: 0; padding: 0; width: 100%; max-height: none; }
-            details.history-month { border: none; padding: 0; }
-            details.history-month summary { border-bottom: 2px solid #000; padding-bottom: 5px; }
-            .badge-presensi { border: 1px solid #000; color: #000 !important; background: none !important; }
-            select { display: none !important; }
-            .history-task-group { border: 1px solid #ccc; background: none; }
+            /* Sembunyikan SEMUA elemen kecuali isi modal riwayat */
+            body * { visibility: hidden; }
+            #historyModal, #historyModal * { visibility: visible; }
+            #historyModal { position: absolute; left: 0; top: 0; width: 100%; display: block !important; background: white; }
+            .modal-content { border: none; margin: 0; padding: 0; width: 100%; max-height: none; }
+            
+            /* Sembunyikan tombol UI di dalam riwayat */
+            .no-print, .close-btn, button, select, .sync-status { display: none !important; }
+            
+            /* Tampilan Laporan Bersih */
+            details.history-month { border: none; padding: 0; display: block !important; margin-bottom: 40px; }
+            details.history-month summary { border-bottom: 2px solid #000; padding-bottom: 5px; margin-bottom: 20px; font-size: 1.5em; }
+            details.history-month summary span::after { content: " - LAPORAN KEBERSIHAN PPMRJ"; font-size: 0.6em; margin-left: 10px; color: #555;}
+            
+            .history-data { display: flex !important; flex-direction: row !important; gap: 30px; flex-wrap: nowrap !important;}
+            .history-col { min-width: 0; flex: 1; }
+            .history-task-group { border: 1px solid #ddd; background: none; page-break-inside: avoid; }
+            .badge-presensi { border: 1px solid #000; color: #000 !important; background: none !important; padding: 2px 5px; min-width: 50px; }
+            .lorong-tag { color: #000; border: 1px solid #ccc; background: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="no-print">
-        <h1>KEBERSIHAN PPMRJ</h1>
-        <div class="db-section">
-            <div id="dbStatus" style="font-weight:bold; margin-bottom:10px; color:#6a1b9a;">Menghubungkan ke Cloud...</div>
-            <div id="autoSyncMsg" class="sync-status">✓ Sinkronisasi Cloud Berhasil</div>
-            <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
-                <button style="background:#8e44ad;" onclick="simpanRiwayatPenugasan()">📌 Simpan Riwayat</button>
-                <button style="background:#34495e;" onclick="bukaRiwayatModal()">📖 Lihat Riwayat & Presensi</button>
-                <button style="background:#7f8c8d; font-size: 0.8em;" onclick="resetToDefault()">🔄 Reset ke Default</button>
-            </div>
-        </div>
-
-        <div class="flex-row">
-            <div class="box manage-section">
-                <h3>Kelola Anggota Cowok</h3>
-                <div id="manageCowok"></div>
-                <div style="display:flex; gap:5px; margin-top:10px;"><input type="text" id="newLorongCowok" placeholder="Lorong Baru..." style="flex:1;"><button style="background:#2980b9;" onclick="addLorong('cowok')">+</button></div>
-            </div>
-            <div class="box manage-section" style="border-color: #e91e63;">
-                <h3>Kelola Anggota Cewek</h3>
-                <div id="manageCewek"></div>
-                <div style="display:flex; gap:5px; margin-top:10px;"><input type="text" id="newLorongCewek" placeholder="Lorong Baru..." style="flex:1;"><button style="background:#e91e63;" onclick="addLorong('cewek')">+</button></div>
-            </div>
-        </div>
-
-        <div class="kuota-section">
-            <h3 style="margin-top:0; color:#16a085;">⚙️ Edit Kuota & Spot</h3>
-            <div class="kuota-grid" id="kuotaCowok"></div>
-            <div class="kuota-grid" id="kuotaCewek"></div>
-            <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
-                <input type="text" id="customTask" placeholder="Nama Spot Baru..."><select id="customGender"><option value="cowok">Cowok</option><option value="cewek">Cewek</option></select><button style="background:#3498db;" onclick="addCustomTask()">+ Spot</button>
-            </div>
-        </div>
-
-        <div class="btn-container"><button class="btn-utama" style="background:#27ae60; font-size:18px; padding:15px 30px; width:100%;" onclick="prosesSemua()">🎲 Acak & Plot Sekarang</button></div>
+<div class="container no-print">
+    <h1>KEBERSIHAN PPMRJ</h1>
+    
+    <div class="ppm-nav">
+        <div id="btnPpm1" class="nav-btn active" onclick="switchPPM(1)">PPM 1</div>
+        <div id="btnPpm2" class="nav-btn" onclick="switchPPM(2)">PPM 2</div>
     </div>
+    
+    <div class="db-section">
+        <div id="dbStatus" style="font-weight:bold; margin-bottom:10px; color:#6a1b9a;">Mode: PPM 1 - Cloud Aktif</div>
+        <div id="autoSyncMsg" class="sync-status">✓ Sinkronisasi Cloud Berhasil</div>
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+            <button style="background:#8e44ad;" onclick="simpanRiwayatPenugasan()">📌 Simpan Riwayat</button>
+            <button style="background:#34495e;" onclick="bukaRiwayatModal()">📖 Lihat Riwayat & Presensi</button>
+            <button style="background:#7f8c8d; font-size: 0.8em;" onclick="resetToDefault()">🔄 Reset Anggota Tab Ini</button>
+        </div>
+    </div>
+
+    <div class="flex-row">
+        <div class="box manage-section">
+            <h3>Kelola Anggota Cowok (PPM <span id="labelNav1">1</span>)</h3>
+            <div id="manageCowok"></div>
+            <div style="display:flex; gap:5px; margin-top:10px;"><input type="text" id="newLorongCowok" placeholder="Lorong Baru..." style="flex:1;"><button style="background:#2980b9;" onclick="addLorong('cowok')">+</button></div>
+        </div>
+        <div class="box manage-section" style="border-color: #e91e63;">
+            <h3>Kelola Anggota Cewek (PPM <span id="labelNav2">1</span>)</h3>
+            <div id="manageCewek"></div>
+            <div style="display:flex; gap:5px; margin-top:10px;"><input type="text" id="newLorongCewek" placeholder="Lorong Baru..." style="flex:1;"><button style="background:#e91e63;" onclick="addLorong('cewek')">+</button></div>
+        </div>
+    </div>
+
+    <div class="kuota-section">
+        <h3 style="margin-top:0; color:#16a085;">⚙️ Edit Kuota & Spot (PPM <span id="labelNav3">1</span>)</h3>
+        <div class="kuota-grid" id="kuotaCowok"></div>
+        <div class="kuota-grid" id="kuotaCewek"></div>
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+            <input type="text" id="customTask" placeholder="Nama Spot Baru..."><select id="customGender"><option value="cowok">Cowok</option><option value="cewek">Cewek</option></select><button style="background:#3498db;" onclick="addCustomTask()">+ Spot</button>
+        </div>
+    </div>
+
+    <div class="btn-container"><button class="btn-utama" style="background:#27ae60; font-size:18px; padding:15px 30px; width:100%;" onclick="prosesSemua()">🎲 Acak & Plot PPM Sekarang</button></div>
 
     <h2 id="judulHasil" style="display:none; margin-top:30px;">Hasil Ploting Bulan Ini</h2>
     <div class="flex-row">
@@ -121,14 +147,14 @@
 
 <div id="historyModal" class="modal">
     <div class="modal-content">
-        <span class="no-print" style="float:right; cursor:pointer; font-size:28px; font-weight:bold;" onclick="tutupRiwayatModal()">&times;</span>
-        <h2>📖 Riwayat & Presensi Bulanan</h2>
+        <span class="no-print" style="float:right; cursor:pointer; font-size:28px; font-weight:bold; color: #aaa;" onclick="tutupRiwayatModal()">&times;</span>
+        <h2 id="historyTitle" class="no-print">📖 Riwayat & Presensi Bulanan</h2>
         <div id="historyContainer"></div>
     </div>
 </div>
 
 <script>
-    // --- FIREBASE CONFIG (DIBUAT OLEH USER) ---
+    // --- FIREBASE CONFIG (Sesuai milikmu) ---
     const firebaseConfig = {
         apiKey: "AIzaSyB9d5uK44dBsEmEsmtT5zHOA5NaPbNFiLY",
         authDomain: "project-iot2-a1c92.firebaseapp.com",
@@ -140,7 +166,7 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // --- INITIAL DATA ---
+    // Data Awal
     const initialMembers = {
         cowok: {
             "Lorong 1": ["Faiz", "Fariz", "Aris", "Royan", "Rasya"],
@@ -160,110 +186,105 @@
         cewek: ['Tangga Cewek', 'Masjid Lantai 1', 'Masjid Lantai 2', 'Dapur Cewek', 'Ruang Wifi Cewek']
     };
 
-    let appHistory = [], memberData = {}, tasks = {}, quotas = {}, state = { cowok: [], cewek: [] };
+    let currentPPM = 1, appHistory = [], memberData = {}, tasks = {}, quotas = {}, state = { cowok: [], cewek: [] };
 
-    window.onload = () => { loadAllFromCloud(); muatHistory(); };
+    window.onload = () => { switchPPM(1); };
+
+    async function switchPPM(num) {
+        currentPPM = num;
+        document.getElementById('btnPpm1').classList.toggle('active', num === 1);
+        document.getElementById('btnPpm2').classList.toggle('active', num === 2);
+        document.getElementById('dbStatus').innerText = `Mode: PPM ${num} - Cloud Aktif`;
+        document.getElementById('labelNav1').innerText = num;
+        document.getElementById('labelNav2').innerText = num;
+        document.getElementById('labelNav3').innerText = num;
+        document.getElementById('historyTitle').innerText = `📖 Riwayat PPM ${num}`;
+        document.getElementById('judulHasil').style.display = 'none';
+        document.getElementById('outCowok').innerHTML = '';
+        document.getElementById('outCewek').innerHTML = '';
+        await loadAllFromCloud(); muatHistory();
+    }
 
     async function loadAllFromCloud() {
-        try {
-            const doc = await db.collection("wgg_settings").doc("main_config").get();
-            if (doc.exists) {
-                const cloud = doc.data();
-                memberData = cloud.memberData; tasks = cloud.tasks; quotas = cloud.quotas;
-                document.getElementById('dbStatus').innerText = "Cloud Aktif ☁️";
-            } else {
-                memberData = initialMembers; tasks = initialTasks;
-                tasks.cowok.forEach(t => quotas[`cowok_${t}`] = 99);
-                tasks.cewek.forEach(t => quotas[`cewek_${t}`] = 99);
-                await saveToCloud();
-            }
-            renderManage(); renderKuota();
-        } catch (e) {
-            memberData = initialMembers; tasks = initialTasks; renderManage(); renderKuota();
+        const doc = await db.collection("wgg_settings").doc(`config_ppm${currentPPM}`).get();
+        if (doc.exists) {
+            const cloud = doc.data(); memberData = cloud.memberData; tasks = cloud.tasks; quotas = cloud.quotas;
+        } else {
+            memberData = (currentPPM === 1) ? JSON.parse(JSON.stringify(initialMembers)) : { cowok: {}, cewek: {} };
+            tasks = JSON.parse(JSON.stringify(initialTasks)); quotas = {};
+            tasks.cowok.forEach(t => quotas[`cowok_${t}`] = 99); tasks.cewek.forEach(t => quotas[`cewek_${t}`] = 99);
+            await saveToCloud();
         }
+        renderManage(); renderKuota();
     }
 
     async function saveToCloud() {
         document.getElementById('autoSyncMsg').style.display = 'block';
-        await db.collection("wgg_settings").doc("main_config").set({ memberData, tasks, quotas });
+        await db.collection("wgg_settings").doc(`config_ppm${currentPPM}`).set({ memberData, tasks, quotas });
         setTimeout(() => document.getElementById('autoSyncMsg').style.display = 'none', 2000);
     }
 
-    function resetToDefault() {
-        if(confirm("Reset semua anggota ke data awal?")) {
-            memberData = JSON.parse(JSON.stringify(initialMembers));
-            tasks = JSON.parse(JSON.stringify(initialTasks));
-            saveToCloud().then(() => { renderManage(); renderKuota(); });
-        }
-    }
+    function resetToDefault() { if(confirm(`Reset data PPM ${currentPPM}?`)) { memberData = JSON.parse(JSON.stringify(initialMembers)); saveToCloud().then(() => renderManage()); } }
 
     function renderManage() {
         ['cowok', 'cewek'].forEach(g => {
             const container = document.getElementById('manage' + g.charAt(0).toUpperCase() + g.slice(1));
             container.innerHTML = '';
-            for (let lorong in memberData[g]) {
-                let html = `<div class="lorong-card"><div class="lorong-header"><b>${lorong}</b><button class="btn-del-mini" onclick="delLorong('${g}','${lorong}')">🗑️</button></div><div>`;
-                memberData[g][lorong].forEach((name, idx) => { html += `<span class="member-chip">${name}<button class="btn-del-mini" onclick="delMember('${g}','${lorong}',${idx})">×</button></span>`; });
-                html += `</div><div style="margin-top:8px; display:flex; gap:5px;"><input type="text" id="in-${g}-${lorong}" placeholder="Nama baru..." style="flex:1; font-size:0.8em;"><button style="background:#27ae60; padding:2px 8px;" onclick="addMember('${g}','${lorong}')">+</button></div></div>`;
+            const sorted = Object.keys(memberData[g] || {}).sort((a,b) => a.localeCompare(b, undefined, {numeric: true}));
+            sorted.forEach(l => {
+                let html = `<div class="lorong-card"><div class="lorong-header"><b>${l}</b><button class="btn-del-mini" onclick="delLorong('${g}','${l}')">🗑️</button></div><div>`;
+                (memberData[g][l] || []).forEach((n, idx) => { html += `<span class="member-chip">${n}<button class="btn-del-mini" onclick="delMember('${g}','${l}',${idx})">×</button></span>`; });
+                html += `</div><div style="margin-top:8px; display:flex; gap:5px;"><input type="text" id="in-${g}-${l}" placeholder="Nama baru..." style="flex:1; font-size:0.8em;"><button style="background:#27ae60; padding:2px 8px;" onclick="addMember('${g}','${l}')">+</button></div></div>`;
                 container.innerHTML += html;
-            }
+            });
         });
     }
 
-    function addLorong(g) { let input = document.getElementById('newLorong'+g.charAt(0).toUpperCase()+g.slice(1)); if(input.value.trim()) { memberData[g][input.value.trim()] = []; renderManage(); input.value=''; saveToCloud(); } }
+    function addLorong(g) { let i = document.getElementById('newLorong'+g.charAt(0).toUpperCase()+g.slice(1)); if(i.value.trim()){ memberData[g][i.value.trim()] = []; renderManage(); i.value=''; saveToCloud(); } }
     function delLorong(g, l) { if(confirm('Hapus '+l+'?')) { delete memberData[g][l]; renderManage(); saveToCloud(); } }
-    function addMember(g, l) { let input = document.getElementById(`in-${g}-${l}`); if(input.value.trim()) { memberData[g][l].push(input.value.trim()); renderManage(); input.value=''; saveToCloud(); } }
+    function addMember(g, l) { let i = document.getElementById(`in-${g}-${l}`); if(i.value.trim()){ memberData[g][l].push(i.value.trim()); renderManage(); i.value=''; saveToCloud(); } }
     function delMember(g, l, idx) { memberData[g][l].splice(idx, 1); renderManage(); saveToCloud(); }
 
     function renderKuota() {
         ['cowok','cewek'].forEach(g => {
             let cont = document.getElementById('kuota'+g.charAt(0).toUpperCase()+g.slice(1));
-            cont.innerHTML = '';
-            tasks[g].forEach(t => {
+            cont.innerHTML = ''; (tasks[g] || []).forEach(t => {
                 let key = `${g}_${t}`, val = quotas[key] || 99;
                 cont.innerHTML += `<div class="kuota-item"><button class="btn-del-task" onclick="delTask('${g}','${t}')">×</button><label style="font-size:0.7em; display:block;">${t}</label><input type="number" onchange="updateQuota('${key}', this.value)" value="${val}" style="width:50px;"></div>`;
             });
         });
     }
-    function updateQuota(key, val) { quotas[key] = parseInt(val); saveToCloud(); }
-    function addCustomTask() { let val = document.getElementById('customTask').value.trim(), g = document.getElementById('customGender').value; if(val) { tasks[g].push(val); quotas[`${g}_${val}`] = 99; renderKuota(); document.getElementById('customTask').value=''; saveToCloud(); } }
-    function delTask(g, t) { if(confirm('Hapus spot '+t+'?')) { tasks[g] = tasks[g].filter(x => x!==t); delete quotas[`${g}_${t}`]; renderKuota(); saveToCloud(); } }
+    function updateQuota(k, v) { quotas[k] = parseInt(v); saveToCloud(); }
+    function addCustomTask() { let v = document.getElementById('customTask').value.trim(), g = document.getElementById('customGender').value; if(v){ tasks[g].push(v); quotas[`${g}_${v}`] = 99; renderKuota(); document.getElementById('customTask').value=''; saveToCloud(); } }
+    function delTask(g, t) { if(confirm('Hapus '+t+'?')) { tasks[g] = tasks[g].filter(x => x!==t); delete quotas[`${g}_${t}`]; renderKuota(); saveToCloud(); } }
 
-    function muatHistory() { db.collection("wgg_riwayat").orderBy("id", "asc").onSnapshot(snap => { appHistory = snap.docs.map(doc => ({ docId: doc.id, ...doc.data() })); document.getElementById('dbStatus').innerText = `Cloud Aktif ☁️ | Riwayat: ${appHistory.length} Bulan`; }); }
+    function muatHistory() { db.collection(`history_ppm${currentPPM}`).orderBy("id", "asc").onSnapshot(snap => { appHistory = snap.docs.map(doc => ({ docId: doc.id, ...doc.data() })); }); }
     
     function simpanRiwayatPenugasan() {
-        if(!state.cowok.length) return alert("Acak plotingan dulu!");
-        let label = prompt("Nama periode (Misal: Mei 2026):"); if(!label) return;
-        db.collection("wgg_riwayat").add({ id: Date.now(), label, cowok: state.cowok.map(p => ({...p, presensi: null})), cewek: state.cewek.map(p => ({...p, presensi: null})) }).then(() => alert("Riwayat Tersimpan!"));
+        if(!state.cowok.length) return alert("Acak dulu!");
+        let label = prompt(`Label Riwayat PPM ${currentPPM}?`, "April 2026"); if(!label) return;
+        db.collection(`history_ppm${currentPPM}`).add({ id: Date.now(), label, cowok: state.cowok.map(p => ({...p, presensi: null})), cewek: state.cewek.map(p => ({...p, presensi: null})) }).then(() => alert("Berhasil disimpan!"));
     }
 
-    function updatePresensi(docId, gender, personIdx, val) {
-        let doc = appHistory.find(d => d.docId === docId); doc[gender][personIdx].presensi = val;
-        const badge = document.getElementById(`badge-${docId}-${gender}-${personIdx}`);
-        if(badge) { badge.className = `badge-presensi badge-${val.toLowerCase()}`; badge.innerText = val; }
-        db.collection("wgg_riwayat").doc(docId).update({ [gender]: doc[gender] });
+    function updatePresensi(docId, g, idx, val) {
+        let doc = appHistory.find(d => d.docId === docId); doc[g][idx].presensi = val;
+        const b = document.getElementById(`badge-${docId}-${g}-${idx}`); if(b){ b.className = `badge-presensi badge-${val.toLowerCase()}`; b.innerText = val; }
+        db.collection(`history_ppm${currentPPM}`).doc(docId).update({ [g]: doc[g] });
     }
 
     function bukaRiwayatModal() {
         let cont = document.getElementById('historyContainer'); cont.innerHTML = appHistory.length ? '' : '<p>Kosong.</p>';
         [...appHistory].reverse().forEach(record => {
-            let html = `<details class="history-month" open><summary><span>${record.label}</span><div class="no-print"><button style="background:#e74c3c; font-size:0.75em; margin-right:5px;" onclick="window.print()">📄 PDF</button><button style="background:#7f8c8d; font-size:0.75em;" onclick="hapusDokumen('${record.docId}')">🗑️ Hapus</button></div></summary><div class="history-data">`;
-            
+            let html = `<details class="history-month" open><summary><span>${record.label} (PPM ${currentPPM})</span><div class="no-print"><button style="background:#e74c3c; font-size:0.75em; margin-right:5px;" onclick="window.print()">📄 Cetak PDF Laporan</button><button style="background:#7f8c8d; font-size:0.75em;" onclick="hapusDokumen('${record.docId}')">🗑️ Hapus</button></div></summary><div class="history-data">`;
             ['cowok','cewek'].forEach(g => {
                 html += `<div class="history-col"><h3>${g.toUpperCase()}</h3>`;
-                
-                // PENGELOMPOKAN PER PLOTINGAN (TUGAS)
-                let grouped = {};
-                (record[g] || []).forEach((p, idx) => {
-                    if(!grouped[p.tugas]) grouped[p.tugas] = [];
-                    grouped[p.tugas].push({...p, originalIdx: idx});
-                });
-
-                Object.keys(grouped).forEach(tugas => {
-                    html += `<div class="history-task-group"><span class="history-task-title">${tugas}</span>`;
-                    grouped[tugas].forEach(p => {
+                let grouped = {}; (record[g]||[]).forEach((p, idx) => { if(!grouped[p.tugas]) grouped[p.tugas]=[]; grouped[p.tugas].push({...p, oIdx: idx}); });
+                (tasks[g] || []).forEach(t => {
+                    if(!grouped[t] || grouped[t].length === 0) return;
+                    html += `<div class="history-task-group"><span class="history-task-title">${t}</span>`;
+                    grouped[t].forEach(p => {
                         let pres = p.presensi || 'absen';
-                        html += `<div class="history-person"><div style="display:flex; justify-content:space-between; align-items:center;"><span><b>${p.nama}</b> <small class="lorong-tag">${p.lorong}</small></span><span id="badge-${record.docId}-${g}-${p.originalIdx}" class="badge-presensi badge-${pres.toLowerCase()}">${p.presensi || 'Belum Absen'}</span></div><select class="no-print" style="margin-top:5px;" onchange="updatePresensi('${record.docId}','${g}',${p.originalIdx},this.value)"><option value="" disabled ${!p.presensi?'selected':''}>Set Presensi...</option><option value="Hadir" ${p.presensi==='Hadir'?'selected':''}>Hadir</option><option value="Alfa" ${p.presensi==='Alfa'?'selected':''}>Alfa</option><option value="Izin" ${p.presensi==='Izin'?'selected':''}>Izin</option></select></div>`;
+                        html += `<div class="history-person"><div style="display:flex; justify-content:space-between; align-items:center;"><span><b>${p.nama}</b> <small class="lorong-tag">${p.lorong}</small></span><span id="badge-${record.docId}-${g}-${p.oIdx}" class="badge-presensi badge-${pres.toLowerCase()}">${p.presensi || 'Absen'}</span></div><select class="no-print" style="margin-top:5px;" onchange="updatePresensi('${record.docId}','${g}',${p.oIdx},this.value)"><option value="" disabled ${!p.presensi?'selected':''}>Set...</option><option value="Hadir" ${p.presensi==='Hadir'?'selected':''}>Hadir</option><option value="Alfa" ${p.presensi==='Alfa'?'selected':''}>Alfa</option><option value="Izin" ${p.presensi==='Izin'?'selected':''}>Izin</option></select></div>`;
                     });
                     html += `</div>`;
                 });
@@ -274,16 +295,16 @@
         document.getElementById('historyModal').style.display = 'block';
     }
     function tutupRiwayatModal() { document.getElementById('historyModal').style.display = 'none'; }
-    function hapusDokumen(id) { if(confirm("Hapus permanen?")) db.collection("wgg_riwayat").doc(id).delete(); }
+    function hapusDokumen(id) { if(confirm("Hapus?")) db.collection(`history_ppm${currentPPM}`).doc(id).delete(); }
 
     function shuffle(a) { for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
     function prosesSemua() {
+        if(!memberData.cowok || Object.keys(memberData.cowok).length === 0) return alert("Data PPM kosong!");
         document.getElementById('judulHasil').style.display = 'block';
         ['cowok','cewek'].forEach(g => {
             let pool = []; for(let l in memberData[g]) memberData[g][l].forEach(n => pool.push({nama:n, lorong:l}));
-            shuffle(pool);
-            state[g] = pool.map((p, idx) => ({...p, id:idx, tugas: tasks[g][idx % tasks[g].length]}));
+            shuffle(pool); state[g] = pool.map((p, idx) => ({...p, id:idx, tugas: tasks[g][idx % tasks[g].length]}));
             renderResult(g);
         });
     }
