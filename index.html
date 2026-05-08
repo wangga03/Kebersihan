@@ -689,11 +689,32 @@
             const authDoc = await db.collection("wgg_auth").doc("admin_pass").get();
             if (authDoc.exists && p === authDoc.data().password) { isAdmin = true; localStorage.setItem('ppm_admin', 'true'); checkAdminStatus(); }
         }
-        function logoutAdmin() { isAdmin = false; localStorage.setItem('ppm_admin', 'false'); checkAdminStatus(); }
+                function logoutAdmin() { 
+            isAdmin = false; 
+            localStorage.setItem('ppm_admin', 'false'); 
+            state.cowok = []; 
+            state.cewek = []; 
+            document.getElementById('outCowok').innerHTML = '';
+            document.getElementById('outCewek').innerHTML = '';
+            checkAdminStatus(); 
+        }
         function checkAdminStatus() {
             document.querySelectorAll('.admin-only').forEach(el => el.style.display = isAdmin ? 'block' : 'none');
             document.getElementById('btnLogin').style.display = isAdmin ? 'none' : 'block';
             document.getElementById('btnLogout').style.display = isAdmin ? 'block' : 'none';
+            
+            // Update status text
+            const statusEl = document.getElementById('dbStatus');
+            if (statusEl) {
+                statusEl.innerText = `Mode: PPM ${currentPPM} ${isAdmin ? '(Admin)' : '(View)'}`;
+            }
+
+            // Re-render results to update admin-only controls inside the list
+            if (state.cowok && state.cowok.length > 0) {
+                renderResult('cowok');
+                renderResult('cewek');
+            }
+
             if (document.getElementById('historyModal').style.display === 'block') renderHistoryUI();
         }
 
